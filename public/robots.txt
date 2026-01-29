@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Allow: /?view=recipes
+Allow: /?view=about
+
+# חסימת ניסיונות סריקה של פרמטרים של ניהול (ליתר ביטחון)
+Disallow: /?view=admin
+Disallow: /?view=login
+
+Sitemap: https://liorbenmoshe.vercel.app/sitemap.xml
