@@ -8,8 +8,8 @@ import {
   Cookie, Snowflake, Navigation, ArrowRight, Database, LayoutGrid, List, Trophy, Gift, Leaf, Award, GripVertical, PlusCircle, Printer, Type, ShoppingCart, Copy, Info, BarChart3, Users, Calendar, KeyRound, Camera, User, ExternalLink, Layers, ShoppingBag, PartyPopper, Wand2, Ticket, RefreshCw, BookOpen
 } from 'lucide-react';
 
-const SUPABASE_URL = 'https://rxjnfvmejinbmuyidbvr.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_WFo_8EQzvTwnr0X-T9ISPg_8eiASzph';
+const SUPABASE_URL = 'https://gmeplxcpzparmhszuwcl.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_yk-zMdlVuFuJdM8XiUMDnQ_B9XzHZtj';
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const WHATSAPP_NUMBER = "972547741436";
