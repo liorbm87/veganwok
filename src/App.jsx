@@ -8,8 +8,8 @@ import {
   Cookie, Snowflake, Navigation, ArrowRight, Database, LayoutGrid, List, Trophy, Gift, Leaf, Award, GripVertical, PlusCircle, Printer, Type, ShoppingCart, Copy, Info, BarChart3, Users, Calendar, KeyRound, Camera, User, ExternalLink, Layers, ShoppingBag, PartyPopper, Wand2, Ticket, RefreshCw, BookOpen
 } from 'lucide-react';
 
-const SUPABASE_URL = 'https://rxjnfvmejinbmuyidbvr.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_WFo_8EQzvTwnr0X-T9ISPg_8eiASzph';
+const SUPABASE_URL = 'https://gmeplxcpzparmhszuwcl.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_yk-zMdlVuFuJdM8XiUMDnQ_B9XzHZtj';
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const WHATSAPP_NUMBER = "972547741436";
@@ -228,7 +228,6 @@ const [showVariantModal, setShowVariantModal] = useState(false);
   const [showDiscountModal, setShowDiscountModal] = useState(false);
   const [showAlreadyActiveModal, setShowAlreadyActiveModal] = useState(false);
     const [pendingWhatsappLink, setPendingWhatsappLink] = useState(""); // קישור ממתין לזוכים
-const [descModalProduct, setDescModalProduct] = useState(null);
 
   const [showCompassion, setShowCompassion] = useState(false); 
   const [showNavModal, setShowNavModal] = useState(false);
@@ -303,6 +302,7 @@ const [showSaleStockModal, setShowSaleStockModal] = useState(false);
   const [pendingOrders, setPendingOrders] = useState([]);
   const [selectedPendingOrder, setSelectedPendingOrder] = useState(null);
 const [dismissedOrderId, setDismissedOrderId] = useState(null);
+const [descModalProduct, setDescModalProduct] = useState(null);
 
   const [editingRecipe, setEditingRecipe] = useState(null);
   const [editingRecipeCat, setEditingRecipeCat] = useState(null);
@@ -319,11 +319,11 @@ const [aboutStats, setAboutStats] = useState({ direct_link: 0, internal_click: 0
 
   const [siteSettings, setSiteSettings] = useState({
     id: 1,   
-seo_description: "המאפים של ליאור בן משה - קונדיטוריה טבעונית ופטיסרי ברמה גבוהה. קראנץ' שמרים, עוגות וקינוחים בעבודת יד. הזמינו מראש לאיסוף מהיריד הטבעוני.",
-seo_keywords: "ליאור בן משה, קונדיטוריה טבעונית, פטיסרי טבעוני, עוגות שמרים טבעוניות, מאפים טבעוניים, יריד טבעוני דיזנגוף סנטר, טבעונות",
-seo_title: "ליאור בן משה - קונדיטוריה טבעונית",
-whatsapp_recipient_name: "ליאור",
-reminder_brand_name: "ליאור בן משה", // ערך ברירת מחדל
+seo_description: "תיאור העסק.",
+seo_keywords: "מילות מפתח",
+seo_title: "כותרת העסק",
+whatsapp_recipient_name: "שם של איש קשר בוואטסאפ",
+reminder_brand_name: "הווק הטבעוני", // ערך ברירת מחדל
 payment_details: "0547741436",
 whatsapp_group_url: "https://chat.whatsapp.com/FQPk9GkRx0s6jKJXQzU0hT",
     main_title: "היריד הטבעוני בדיזנגוף סנטר",
@@ -343,7 +343,7 @@ whatsapp_group_url: "https://chat.whatsapp.com/FQPk9GkRx0s6jKJXQzU0hT",
     coupon_discount_percent: 10,
     urgent_message: "",
     whatsapp_number: "972547741436",
-    logo_url: "https://i.postimg.cc/FRQ5cTVN/1000099532-removebg-preview.png",
+    logo_url: "https://i.postimg.cc/ncJMXLt2/LOGO.png",
     instagram_url: "https://www.instagram.com/liorbenmoshe.veganpatisserie",
     facebook_url: "https://www.facebook.com/LiorBenMoshe",
     extra_button_active: true,
@@ -755,10 +755,10 @@ const isSaleActiveNow = siteSettings.sale_active && (new Date().getHours().toStr
     const url = new URL(window.location.origin + window.location.pathname);
     url.searchParams.set('view', 'recipes');
     const shareUrl = url.toString();
-    const shareText = `כל המתכונים של ליאור בן משה במקום אחד! 🥐📖`;
+    const shareText = `כל המתכונים של איריס גוסלר בן משה במקום אחד! 📖`;
     
     if (navigator.share) {
-      try { await navigator.share({ title: 'המתכונים של ליאור', text: shareText, url: shareUrl }); }
+      try { await navigator.share({ title: 'המתכונים של איריס גוסלר', text: shareText, url: shareUrl }); }
       catch (err) { window.open(`https://wa.me/?text=${encodeURIComponent(shareText + " " + shareUrl)}`, '_blank'); }
     } else {
       window.open(`https://wa.me/?text=${encodeURIComponent(shareText + " " + shareUrl)}`, '_blank');
@@ -1006,7 +1006,7 @@ const isSaleActiveNow = siteSettings.sale_active && (new Date().getHours().toStr
   };
 
   const handleSiteShare = async () => {
-    const shareText = `היי, תראו איזה מאפים מעולים ב-${siteSettings.main_title}! 🥐✨`;
+    const shareText = `היי, תראו איזה אוכל מטורף של הווק הטבעוני ב-${siteSettings.main_title}! ✨`;
     const shareUrl = window.location.href;
     if (navigator.share) {
       try { await navigator.share({ title: siteSettings.main_title, text: shareText, url: shareUrl }); }
@@ -1162,7 +1162,7 @@ setSelectedGiftItem(null);
                     }
                   });
                   if (pastryPrices.length >= 6) {
-                     msg += `*הופעלה הטבה: מאפה שישי במתנה! 🥐✨*\n`;
+                     msg += `*הופעלה הטבה: מאפה שישי במתנה! ✨*\n`;
                      const freeCount = Math.floor(pastryPrices.length / 6);
                      const discount = pastryPrices.sort((a, b) => a - b).slice(0, freeCount).reduce((sum, price) => sum + price, 0);
                      finalCalcTotal -= discount;
@@ -1807,7 +1807,7 @@ const handleSaveProduct = async (e) => {
     const catData = {
       name: formData.get('name'),
       slug: editingCategory ? editingCategory.slug : `cat_${Date.now()}`,
-      icon: formData.get('icon'),
+      icon: formData.get('null'),
       display_order: Number(formData.get('display_order')),
       is_visible: formData.get('is_visible') === 'on'
     };
@@ -1899,7 +1899,7 @@ const handleSaveProduct = async (e) => {
     const secondDayLabel = daysOfWeek.find(d => d.value === lastDayValue)?.label || firstDayLabel;
     
     const openHour = siteSettings.opening_hour || "12:00";
-    const brandName = siteSettings.reminder_brand_name || "ליאור בן משה";
+    const brandName = siteSettings.reminder_brand_name || "הווק הטבעוני";
 
     // בניית הכותרת לפי הנוסח החדש שביקשת
     const titleText = `לבצע הזמנה מהאתר של ${brandName} החל מהשעה ${openHour} ביום ${firstDayLabel} לאיסוף מ${siteSettings.main_title} ביום ${secondDayLabel}`;
@@ -2052,7 +2052,7 @@ const handleRandomizer = (overrideBudget = null) => {
     showSaleStockModal;
 
   return (
-    <div className={`min-h-screen text-white text-right scroll-smooth ${isSaleActiveNow && !isAdmin ? 'bg-transparent' : 'bg-[#0f172a]'}`} dir="rtl">
+    <div className={`min-h-screen text-slate-900 text-right scroll-smooth ${isSaleActiveNow && !isAdmin ? 'bg-transparent' : 'bg-white'}`} dir="rtl">
 
         {/* שכבת להבות וניצוצות - מופיע רק בזמן מבצע */}
       {isSaleActiveNow && !isAdmin && (
@@ -2197,10 +2197,10 @@ const handleRandomizer = (overrideBudget = null) => {
       `}</style>
 
       {loading && (
-        <div className={`fixed inset-0 z-[1000] bg-[#0f172a] flex flex-col items-center justify-center p-6 text-center ${fadeLoading ? 'fade-out' : ''}`}>
+        <div className={`fixed inset-0 z-[1000] bg-white flex flex-col items-center justify-center p-6 text-center ${fadeLoading ? 'fade-out' : ''}`}>
          <img src={siteSettings.logo_url} className="w-48 md:w-64 animate-pulse" alt="Logo" />
-          <h2 className="text-amber-500 font-black text-3xl mb-2 text-center">ברוכים הבאים</h2>
-          <p className="text-slate-400 font-bold text-lg tracking-widest text-center">אנא המתינו</p>
+          <h2 className="text-amber-600 font-black text-3xl mb-2 text-center">ברוכים הבאים</h2>
+          <p className="text-slate-600 font-bold text-lg tracking-widest text-center">אנא המתינו</p>
         </div>
       )}
 
@@ -2224,7 +2224,7 @@ onClick={(e) => {
   >
     <div className={`backdrop-blur-md py-1 px-2.5 rounded-xl shadow-[0_0_15px_rgba(0,0,0,0.3)] flex items-center gap-1.5 border transition-all active:scale-95 
       ${socialProof.isUrgent ? 'bg-red-600/95 border-white/50' : 
-        socialProof.isFomo ? 'bg-amber-600/95 border-white/40' : 'bg-slate-900/90 border-amber-500/50'}`}>
+        socialProof.isFomo ? 'bg-amber-600/95 border-white/40' : 'bg-white/90 border-amber-500/50'}`}>
 
        {/* אייקון מוקטן */}
        <div className={`${(socialProof.isUrgent || socialProof.isFomo) ? 'bg-white text-amber-600' : 'bg-amber-500 text-[#0f172a]'} p-0.5 rounded-full shadow-lg shrink-0`}>
@@ -2233,11 +2233,11 @@ onClick={(e) => {
        </div>
 
        <div className="text-right flex-1 min-w-0">
-          <p className="text-[11px] font-bold text-white leading-[1.1] whitespace-pre-line">
+          <p className="text-[11px] font-bold text-slate-900 leading-[1.1] whitespace-pre-line">
             {socialProof.isUrgent ? (
               <>עדכון: {socialProof.main_item}</>
             ) : socialProof.isFomo ? (
-              <span className="text-white">{socialProof.main_item}</span>
+              <span className="text-slate-900">{socialProof.main_item}</span>
             ) : (
               <>
                 <span className="text-amber-400">{(socialProof.customer_name || "").split(' ')[0]}</span>
@@ -2245,7 +2245,7 @@ onClick={(e) => {
               </>
             )}
           </p>
-          <p className="text-[7px] text-white/40 mt-0 font-medium uppercase tracking-tighter">לחץ להסתרה עד לריענון</p>
+          <p className="text-[7px] text-slate-900/40 mt-0 font-medium uppercase tracking-tighter">לחץ להסתרה עד לריענון</p>
        </div>
     </div>
   </div>
@@ -2258,8 +2258,8 @@ onClick={(e) => {
       {isAdmin ? (
         <div className="p-4 max-w-2xl mx-auto animate-in fade-in pb-32 text-right">
           <div className="flex justify-between items-center mb-8 text-right">
-            <h1 className="text-2xl font-black text-amber-500 flex items-center gap-2 text-right"><LayoutDashboard /> ניהול</h1>
-            <button onClick={() => setIsAdmin(false)} className="bg-slate-800 text-slate-400 px-4 py-2 rounded-full font-bold text-xs text-center">יציאה</button>
+            <h1 className="text-2xl font-black text-amber-600 flex items-center gap-2 text-right"><LayoutDashboard /> ניהול</h1>
+            <button onClick={() => setIsAdmin(false)} className="bg-slate-50 text-slate-600 px-4 py-2 rounded-full font-bold text-xs text-center">יציאה</button>
           </div>
 
           <div className="grid grid-cols-3 md:grid-cols-6 gap-2 mb-8 text-center px-1">
@@ -2268,25 +2268,25 @@ onClick={(e) => {
     setSettingsSnapshot(JSON.parse(JSON.stringify(siteSettings))); 
     setShowSettingsModal(true); 
   }} 
-  className="bg-slate-800 border border-slate-700 py-4 px-1 rounded-2xl flex flex-col items-center gap-2 hover:bg-slate-700 transition-all shadow-xl text-center"
+  className="bg-slate-50 border border-slate-200 py-4 px-1 rounded-2xl flex flex-col items-center gap-2 hover:bg-slate-700 transition-all shadow-xl text-center"
 >
-  <Settings className="text-amber-500" size={20} />
+  <Settings className="text-amber-600" size={20} />
   <span className="font-black text-[11px] text-center">הגדרות אתר</span>
 </button>
 
-             <button onClick={() => { setSettingsSnapshot(JSON.parse(JSON.stringify(siteSettings))); setShowExtraSettingsModal(true); }} className="bg-slate-800 border border-slate-700 py-4 px-1 rounded-2xl flex flex-col items-center gap-2 hover:bg-slate-700 transition-all shadow-xl text-center">
+             <button onClick={() => { setSettingsSnapshot(JSON.parse(JSON.stringify(siteSettings))); setShowExtraSettingsModal(true); }} className="bg-slate-50 border border-slate-200 py-4 px-1 rounded-2xl flex flex-col items-center gap-2 hover:bg-slate-700 transition-all shadow-xl text-center">
                 <Edit2 className="text-green-400" size={20} />
                 <span className="font-black text-[11px] text-center">עריכה אישית</span>
              </button>
-             <button onClick={() => { fetchVisits(); setShowStatsModal(true); }} className="bg-slate-800 border border-slate-700 py-4 px-1 rounded-2xl flex flex-col items-center gap-2 hover:bg-slate-700 transition-all shadow-xl text-center">
+             <button onClick={() => { fetchVisits(); setShowStatsModal(true); }} className="bg-slate-50 border border-slate-200 py-4 px-1 rounded-2xl flex flex-col items-center gap-2 hover:bg-slate-700 transition-all shadow-xl text-center">
                 <BarChart3 className="text-blue-400" size={20} />
                 <span className="font-black text-[11px] text-center">סטטיסטיקה</span>
              </button>
-             <button onClick={() => setShowCategoryManager(true)} className="bg-slate-800 border border-slate-700 py-4 px-1 rounded-2xl flex flex-col items-center gap-2 hover:bg-slate-700 transition-all shadow-xl text-center">
+             <button onClick={() => setShowCategoryManager(true)} className="bg-slate-50 border border-slate-200 py-4 px-1 rounded-2xl flex flex-col items-center gap-2 hover:bg-slate-700 transition-all shadow-xl text-center">
                 <Layers className="text-purple-400" size={20} />
                 <span className="font-black text-[11px] text-center">קטגוריות</span>
              </button>
-             <button onClick={() => setShowRecipeManager(true)} className="bg-slate-800 border border-slate-700 py-4 px-1 rounded-2xl flex flex-col items-center gap-2 hover:bg-slate-700 transition-all shadow-xl text-center">
+             <button onClick={() => setShowRecipeManager(true)} className="bg-slate-50 border border-slate-200 py-4 px-1 rounded-2xl flex flex-col items-center gap-2 hover:bg-slate-700 transition-all shadow-xl text-center">
                 <BookOpen className="text-pink-400" size={20} />
                 <span className="font-black text-[11px] text-center">מתכונים</span>
              </button>
@@ -2299,32 +2299,32 @@ onClick={(e) => {
               }} 
               className="bg-amber-600 py-4 px-1 rounded-2xl flex flex-col items-center gap-2 hover:bg-amber-500 transition-all shadow-xl text-center"
             >
-              <PlusCircle className="text-white" size={20} />
-              <span className="font-black text-[11px] text-white text-center">הוספה</span>
+              <PlusCircle className="text-slate-900" size={20} />
+              <span className="font-black text-[11px] text-slate-900 text-center">הוספה</span>
             </button>
           </div>
 
 
 
-          <div className="sticky top-0 z-40 bg-[#0f172a]/95 backdrop-blur-md pt-2 pb-4">
+          <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-md pt-2 pb-4">
             <div className="relative mb-4">
-              <Search className="absolute right-4 top-3.5 text-amber-500/50" size={18} />
-              <input type="text" placeholder="חיפוש מוצר..." className="w-full bg-slate-900 border border-slate-700 p-3 pr-11 rounded-2xl text-right text-white outline-none focus:border-amber-500 font-bold" value={adminSearch} onChange={(e) => setAdminSearch(e.target.value)} />
+              <Search className="absolute right-4 top-3.5 text-amber-600/50" size={18} />
+              <input type="text" placeholder="חיפוש מוצר..." className="w-full bg-white border border-slate-200 p-3 pr-11 rounded-2xl text-right text-slate-900 outline-none focus:border-amber-500 font-bold" value={adminSearch} onChange={(e) => setAdminSearch(e.target.value)} />
             </div>
             {/* תצוגת תוצאות חיפוש מהירה */}
 {adminSearch.trim() !== "" && (
   <div className="mb-8 animate-in fade-in slide-in-from-top-2">
-    <h3 className="text-amber-500 font-black text-xs mb-3 pr-2 flex items-center gap-2">
+    <h3 className="text-amber-600 font-black text-xs mb-3 pr-2 flex items-center gap-2">
       <Search size={14} /> תוצאות חיפוש ל-"{adminSearch}"
     </h3>
     <div className="space-y-2">
       {products.filter(p => p.name.toLowerCase().includes(adminSearch.toLowerCase())).map((p) => (
         <div key={p.id} className="p-3 rounded-2xl border-2 border-amber-500/30 bg-amber-500/5 flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <img src={p.image} className="w-10 h-10 rounded-lg object-cover bg-slate-900" />
+            <img src={p.image} className="w-10 h-10 rounded-lg object-cover bg-white" />
             <div className="flex flex-col text-right">
-              <span className="font-bold text-xs text-white">{p.name}</span>
-              <span className="text-[10px] text-amber-500">₪{p.price}</span>
+              <span className="font-bold text-xs text-slate-900">{p.name}</span>
+              <span className="text-[10px] text-amber-600">₪{p.price}</span>
             </div>
           </div>
           <button 
@@ -2339,19 +2339,19 @@ onClick={(e) => {
         <p className="text-center text-slate-500 text-xs py-4">לא נמצאו מוצרים תואמים</p>
       )}
     </div>
-    <div className="h-[1px] bg-slate-800 my-6 w-full"></div>
+    <div className="h-[1px] bg-slate-50 my-6 w-full"></div>
   </div>
 )}
 
-<div className="grid grid-cols-3 gap-2 bg-slate-900/50 p-2 rounded-2xl border border-slate-800 mb-6">
+<div className="grid grid-cols-3 gap-2 bg-white/50 p-2 rounded-2xl border border-slate-800 mb-6">
     {categories.map(c => (
       <button 
         key={c.id} 
         onClick={() => setActiveAdminCatModal(c)} 
-        className="bg-slate-800 hover:bg-slate-700 border border-slate-700 p-4 rounded-xl flex flex-col items-center gap-3 transition-all active:scale-95 shadow-lg min-h-[110px]"
+        className="bg-slate-50 hover:bg-slate-700 border border-slate-200 p-4 rounded-xl flex flex-col items-center gap-3 transition-all active:scale-95 shadow-lg min-h-[110px]"
       >
         <span className="text-sm">{c.icon}</span>
-        <span className="text-sm font-black text-amber-500 uppercase tracking-tight">{c.name}</span>
+        <span className="text-sm font-black text-amber-600 uppercase tracking-tight">{c.name}</span>
       </button>
     ))}
 </div>
@@ -2361,12 +2361,12 @@ onClick={(e) => {
 {/* חלונית מוצרים לפי קטגוריה */}
 {activeAdminCatModal && (
   <div className="fixed inset-0 z-[600] flex items-center justify-center px-4 bg-black/95 backdrop-blur-xl animate-in fade-in">
-    <div className="bg-slate-900 border-2 border-amber-500 p-6 rounded-[2.5rem] shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar">
-      <div className="flex justify-between items-center mb-6 sticky top-0 bg-slate-900 z-10 pb-4 border-b border-slate-800">
-        <h3 className="text-xl font-black text-white flex items-center gap-2">
+    <div className="bg-white border-2 border-amber-500 p-6 rounded-[2.5rem] shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar">
+      <div className="flex justify-between items-center mb-6 sticky top-0 bg-white z-10 pb-4 border-b border-slate-800">
+        <h3 className="text-xl font-black text-slate-900 flex items-center gap-2">
           {activeAdminCatModal.icon} ניהול {activeAdminCatModal.name}
         </h3>
-        <button onClick={() => setActiveAdminCatModal(null)} className="text-slate-500 hover:text-white"><X size={24}/></button>
+        <button onClick={() => setActiveAdminCatModal(null)} className="text-slate-500 hover:text-slate-900"><X size={24}/></button>
       </div>
 
       <div className="space-y-3">
@@ -2374,20 +2374,20 @@ onClick={(e) => {
           const globalIndex = products.findIndex(item => item.id === p.id);
           return (
             <div key={p.id} draggable={!adminSearch} onDragStart={() => onDragStart(globalIndex)} onDragOver={onDragOver} onDrop={() => onDrop(globalIndex)}
-              className={`p-3 rounded-2xl border-2 flex justify-between items-center transition-all ${draggedItemIndex === globalIndex ? 'dragging' : ''} ${p.is_sold_out ? 'bg-slate-900 grayscale opacity-40' : p.is_visible ? 'bg-slate-800/40 border-slate-700' : 'bg-red-900/10 border-red-500/20'}`}>
+              className={`p-3 rounded-2xl border-2 flex justify-between items-center transition-all ${draggedItemIndex === globalIndex ? 'dragging' : ''} ${p.is_sold_out ? 'bg-white grayscale opacity-40' : p.is_visible ? 'bg-slate-50/40 border-slate-200' : 'bg-red-900/10 border-red-500/20'}`}>
               <div className="flex items-center gap-3">
                 <GripVertical className="text-slate-700 cursor-grab" size={18} />
-                <img src={p.image} className="w-12 h-12 rounded-xl object-cover bg-slate-900 border border-slate-700" />
+                <img src={p.image} className="w-12 h-12 rounded-xl object-cover bg-white border border-slate-200" />
                 <div className="flex flex-col text-right">
                   <span className="font-bold text-xs">{p.name} {p.is_gluten_free && "🌾"}</span>
-                  <span className="text-[9px] font-bold text-amber-500/70">₪{p.price}</span>
+                  <span className="text-[9px] font-bold text-amber-600/70">₪{p.price}</span>
                 </div>
               </div>
               <div className="flex gap-1.5 items-center">
-                <button onClick={() => toggleSoldOut(p)} className={`px-3 py-1.5 rounded-full text-[9px] font-black ${p.is_sold_out ? 'bg-red-600 text-white' : 'bg-slate-700 text-slate-300'}`}>אזל</button>
-                <button onClick={() => toggleFomo(p)} className={`px-3 py-1.5 rounded-full text-[9px] font-black ${p.is_fomo ? 'bg-amber-500 text-[#0f172a] animate-pulse' : 'bg-slate-700 text-slate-300'}`}>fomo</button>
+                <button onClick={() => toggleSoldOut(p)} className={`px-3 py-1.5 rounded-full text-[9px] font-black ${p.is_sold_out ? 'bg-red-600 text-slate-900' : 'bg-slate-700 text-slate-600'}`}>אזל</button>
+                <button onClick={() => toggleFomo(p)} className={`px-3 py-1.5 rounded-full text-[9px] font-black ${p.is_fomo ? 'bg-amber-500 text-[#0f172a] animate-pulse' : 'bg-slate-700 text-slate-600'}`}>fomo</button>
                 <button onClick={() => { setEditingProduct(p); setFormCategory(p.category || 'pastries'); setTempVariants(p.variants?.map(vName => ({ name: vName, stock: p.variant_stock?.[vName] ?? "" })) || []); setShowAddItemModal(true); }} className="p-2 bg-blue-600/20 text-blue-400 rounded-xl"><Edit2 size={14}/></button>
-                <button onClick={() => toggleVisible(p)} className={`p-2 rounded-xl ${p.is_visible ? 'bg-green-600/20 text-green-400' : 'bg-slate-700 text-slate-400'}`}>{p.is_visible ? <Eye size={14}/> : <EyeOff size={14}/>}</button>
+                <button onClick={() => toggleVisible(p)} className={`p-2 rounded-xl ${p.is_visible ? 'bg-green-600/20 text-green-400' : 'bg-slate-700 text-slate-600'}`}>{p.is_visible ? <Eye size={14}/> : <EyeOff size={14}/>}</button>
               </div>
             </div>
           );
@@ -2400,25 +2400,25 @@ onClick={(e) => {
           {/* Category Management Modal */}
           {showCategoryManager && (
             <div className="fixed inset-0 z-[600] flex items-center justify-center px-4 bg-black/90 backdrop-blur-xl animate-in fade-in">
-              <div className="bg-slate-900 border-2 border-purple-500 p-6 rounded-[2.5rem] shadow-2xl max-w-md w-full max-h-[85vh] overflow-y-auto">
+              <div className="bg-white border-2 border-purple-500 p-6 rounded-[2.5rem] shadow-2xl max-w-md w-full max-h-[85vh] overflow-y-auto">
                 <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-xl font-black text-white flex items-center gap-2"><Layers className="text-purple-400" /> ניהול קטגוריות</h3>
-                  <button onClick={() => setShowCategoryManager(false)} className="text-slate-500 hover:text-white"><X size={24}/></button>
+                  <h3 className="text-xl font-black text-slate-900 flex items-center gap-2"><Layers className="text-purple-400" /> ניהול קטגוריות</h3>
+                  <button onClick={() => setShowCategoryManager(false)} className="text-slate-500 hover:text-slate-900"><X size={24}/></button>
                 </div>
 
-                <form onSubmit={handleSaveCategory} className="space-y-4 mb-8 bg-slate-800/50 p-4 rounded-3xl border border-slate-700">
+                <form onSubmit={handleSaveCategory} className="space-y-4 mb-8 bg-slate-50/50 p-4 rounded-3xl border border-slate-200">
                   <div className="grid grid-cols-1 gap-3">
-                    <input name="name" className="bg-slate-800 border border-slate-700 p-3 rounded-xl text-center text-sm font-bold outline-none focus:border-purple-500" placeholder="שם קטגוריה" defaultValue={editingCategory?.name || ''} required />
+                    <input name="name" className="bg-slate-50 border border-slate-200 p-3 rounded-xl text-center text-sm font-bold outline-none focus:border-purple-500" placeholder="שם קטגוריה" defaultValue={editingCategory?.name || ''} required />
                   </div>
                   <div className="grid grid-cols-3 gap-3">
-                    <input name="icon" className="bg-slate-800 border border-slate-700 p-3 rounded-xl text-center text-lg outline-none focus:border-purple-500" placeholder="אימוג'י" defaultValue={editingCategory?.icon || ''} />
-                    <input name="display_order" type="number" readOnly className="bg-slate-900/50 border border-slate-800 p-3 rounded-xl text-center text-sm font-bold text-slate-500 outline-none" placeholder="סדר" value={editingCategory ? editingCategory.display_order : nextCatOrder} />
-                    <div className="flex items-center justify-center gap-2 bg-slate-800 border border-slate-700 rounded-xl p-2">
-                      <span className="text-[10px] font-bold text-slate-400">מוצג?</span>
+                    <input name="icon" className="bg-slate-50 border border-slate-200 p-3 rounded-xl text-center text-lg outline-none focus:border-purple-500" placeholder="אימוג'י" defaultValue={editingCategory?.icon || ''} />
+                    <input name="display_order" type="number" readOnly className="bg-white/50 border border-slate-800 p-3 rounded-xl text-center text-sm font-bold text-slate-500 outline-none" placeholder="סדר" value={editingCategory ? editingCategory.display_order : nextCatOrder} />
+                    <div className="flex items-center justify-center gap-2 bg-slate-50 border border-slate-200 rounded-xl p-2">
+                      <span className="text-[10px] font-bold text-slate-600">מוצג?</span>
                       <input name="is_visible" type="checkbox" className="accent-purple-500 w-4 h-4" defaultChecked={editingCategory ? editingCategory.is_visible : true} />
                     </div>
                   </div>
-                  <button type="submit" className="w-full bg-purple-600 text-white py-3 rounded-xl font-black shadow-lg hover:bg-purple-500 transition-all">{editingCategory ? 'עדכן קטגוריה' : 'הוסף קטגוריה חדשה'}</button>
+                  <button type="submit" className="w-full bg-purple-600 text-slate-900 py-3 rounded-xl font-black shadow-lg hover:bg-purple-500 transition-all">{editingCategory ? 'עדכן קטגוריה' : 'הוסף קטגוריה חדשה'}</button>
                   {editingCategory && <button type="button" onClick={() => setEditingCategory(null)} className="w-full text-slate-500 text-xs font-bold py-1">ביטול עריכה</button>}
                 </form>
 
@@ -2430,7 +2430,7 @@ onClick={(e) => {
                          onDragStart={() => onCatDragStart(idx)} 
                          onDragOver={(e) => e.preventDefault()} 
                          onDrop={() => onCatDrop(idx)}
-                         className={`bg-slate-800/40 p-3 rounded-2xl flex items-center justify-between border border-slate-700/50 transition-all ${draggedCatIndex === idx ? 'dragging' : ''}`}>
+                         className={`bg-slate-50/40 p-3 rounded-2xl flex items-center justify-between border border-slate-200/50 transition-all ${draggedCatIndex === idx ? 'dragging' : ''}`}>
                       <div className="flex items-center gap-3">
                         <GripVertical className="text-slate-700 cursor-grab" size={18} />
                         <span className="text-xl">{cat.icon}</span>
@@ -2440,8 +2440,8 @@ onClick={(e) => {
                         </div>
                       </div>
                       <div className="flex gap-2">
-                        <button onClick={() => setEditingCategory(cat)} className="p-2 bg-blue-600/20 text-blue-400 rounded-lg hover:bg-blue-600 hover:text-white transition-all"><Edit2 size={14}/></button>
-                        <button onClick={() => startDeleteCategory(cat)} className="p-2 bg-red-600/20 text-red-500 rounded-lg hover:bg-red-600 hover:text-white transition-all"><Trash2 size={14}/></button>
+                        <button onClick={() => setEditingCategory(cat)} className="p-2 bg-blue-600/20 text-blue-400 rounded-lg hover:bg-blue-600 hover:text-slate-900 transition-all"><Edit2 size={14}/></button>
+                        <button onClick={() => startDeleteCategory(cat)} className="p-2 bg-red-600/20 text-red-500 rounded-lg hover:bg-red-600 hover:text-slate-900 transition-all"><Trash2 size={14}/></button>
                       </div>
                     </div>
                   ))}
@@ -2453,23 +2453,23 @@ onClick={(e) => {
           {/* Recipe Manager Modal (Admin) - גלילה אחידה לכל החלונית */}
           {showRecipeManager && (
             <div className="fixed inset-0 z-[600] flex items-center justify-center px-4 bg-black/90 backdrop-blur-xl animate-in fade-in">
-              <div className="bg-slate-900 border-2 border-pink-500 p-6 rounded-[2.5rem] shadow-2xl max-w-md w-full max-h-[85vh] overflow-y-auto custom-scrollbar">
+              <div className="bg-white border-2 border-pink-500 p-6 rounded-[2.5rem] shadow-2xl max-w-md w-full max-h-[85vh] overflow-y-auto custom-scrollbar">
                 <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-xl font-black text-white flex items-center gap-2"><BookOpen className="text-pink-400" /> ניהול מתכונים</h3>
-                  <button onClick={() => setShowRecipeManager(false)} className="text-slate-500 hover:text-white"><X size={24}/></button>
+                  <h3 className="text-xl font-black text-slate-900 flex items-center gap-2"><BookOpen className="text-pink-400" /> ניהול מתכונים</h3>
+                  <button onClick={() => setShowRecipeManager(false)} className="text-slate-500 hover:text-slate-900"><X size={24}/></button>
                 </div>
 
                 {/* כפתורי פעולה למנהל */}
                 <div className="grid grid-cols-2 gap-3 mb-8">
                    <button 
                       onClick={() => { setEditingRecipe(null); setShowRecipeFormModal(true); }}
-                      className="bg-pink-600 text-white py-3 rounded-2xl font-black flex items-center justify-center gap-2 shadow-lg active:scale-95 transition-all"
+                      className="bg-pink-600 text-slate-900 py-3 rounded-2xl font-black flex items-center justify-center gap-2 shadow-lg active:scale-95 transition-all"
                    >
                       <Plus size={18} /> מתכון חדש
                    </button>
                    <button 
                       onClick={() => setShowRecipeCatManager(true)}
-                      className="bg-slate-800 border border-slate-700 text-slate-300 py-3 rounded-2xl font-black flex items-center justify-center gap-2 shadow-lg active:scale-95 transition-all"
+                      className="bg-slate-50 border border-slate-200 text-slate-600 py-3 rounded-2xl font-black flex items-center justify-center gap-2 shadow-lg active:scale-95 transition-all"
                    >
                       <Layers size={18} /> קטגוריות
                    </button>
@@ -2490,7 +2490,7 @@ onClick={(e) => {
                     if (catRecipes.length === 0) return null;
 
                     return (
-                      <div key={cat.id} className="bg-slate-800/30 p-3 rounded-3xl border border-slate-700/50">
+                      <div key={cat.id} className="bg-slate-50/30 p-3 rounded-3xl border border-slate-200/50">
                         <h4 className="text-pink-400 font-black text-xs mb-3 pr-2 flex items-center gap-2">
                            <Layers size={12}/> {cat.name}
                         </h4>
@@ -2506,16 +2506,16 @@ onClick={(e) => {
                                   onDragStart={() => onRecipeDragStart(globalIndex)} 
                                   onDragOver={(e) => e.preventDefault()} 
                                   onDrop={() => onRecipeDrop(globalIndex)}
-                                  className={`bg-slate-900 p-2 rounded-2xl flex items-center justify-between border border-slate-700 transition-all ${draggedRecipeIndex === globalIndex ? 'opacity-50 border-pink-500 border-dashed' : ''}`}
+                                  className={`bg-white p-2 rounded-2xl flex items-center justify-between border border-slate-200 transition-all ${draggedRecipeIndex === globalIndex ? 'opacity-50 border-pink-500 border-dashed' : ''}`}
                               >
                                 <div className="flex items-center gap-3 overflow-hidden">
-                                   <GripVertical className="text-slate-600 cursor-grab hover:text-slate-400 shrink-0" size={18} />
-                                   <img src={r.image} className="w-10 h-10 rounded-lg object-cover bg-slate-800 shrink-0" />
-                                   <span className="font-bold text-sm text-white truncate">{r.title}</span>
+                                   <GripVertical className="text-slate-600 cursor-grab hover:text-slate-600 shrink-0" size={18} />
+                                   <img src={r.image} className="w-10 h-10 rounded-lg object-cover bg-slate-50 shrink-0" />
+                                   <span className="font-bold text-sm text-slate-900 truncate">{r.title}</span>
                                 </div>
                                 <div className="flex gap-2 shrink-0">
-                                  <button onClick={() => { setEditingRecipe(r); setShowRecipeFormModal(true); }} className="p-2 bg-blue-600/20 text-blue-400 rounded-lg hover:bg-blue-600 hover:text-white transition-all"><Edit2 size={14}/></button>
-                                  <button onClick={() => deleteRecipe(r.id)} className="p-2 bg-red-600/20 text-red-500 rounded-lg hover:bg-red-600 hover:text-white transition-all"><Trash2 size={14}/></button>
+                                  <button onClick={() => { setEditingRecipe(r); setShowRecipeFormModal(true); }} className="p-2 bg-blue-600/20 text-blue-400 rounded-lg hover:bg-blue-600 hover:text-slate-900 transition-all"><Edit2 size={14}/></button>
+                                  <button onClick={() => deleteRecipe(r.id)} className="p-2 bg-red-600/20 text-red-500 rounded-lg hover:bg-red-600 hover:text-slate-900 transition-all"><Trash2 size={14}/></button>
                                 </div>
                               </div>
                             );
@@ -2535,23 +2535,23 @@ onClick={(e) => {
           {/* מודל הוספה/עריכת מתכון */}
           {showRecipeFormModal && (
             <div className="fixed inset-0 z-[700] flex items-center justify-center px-4 bg-black/95 backdrop-blur-xl animate-in zoom-in">
-              <div className="bg-slate-900 border-2 border-pink-500 p-8 rounded-[2.5rem] shadow-2xl max-w-sm w-full">
-                <h3 className="text-xl font-black text-white text-center mb-6">{editingRecipe ? 'עריכת מתכון' : 'מתכון חדש'}</h3>
+              <div className="bg-white border-2 border-pink-500 p-8 rounded-[2.5rem] shadow-2xl max-w-sm w-full">
+                <h3 className="text-xl font-black text-slate-900 text-center mb-6">{editingRecipe ? 'עריכת מתכון' : 'מתכון חדש'}</h3>
                 <form onSubmit={handleSaveRecipe} className="space-y-4">
-                  <input name="title" className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-center font-bold text-white" placeholder="כותרת המתכון" defaultValue={editingRecipe?.title} required />
+                  <input name="title" className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-center font-bold text-slate-900" placeholder="כותרת המתכון" defaultValue={editingRecipe?.title} required />
                   
                   {/* שדה חדש: שם הכותב */}
-                  <input name="author_name" className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-center font-bold text-amber-500 placeholder:text-slate-600" placeholder="שם כותב המתכון (אופציונלי)" defaultValue={editingRecipe?.author_name} />
+                  <input name="author_name" className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-center font-bold text-amber-600 placeholder:text-slate-600" placeholder="שם כותב המתכון (אופציונלי)" defaultValue={editingRecipe?.author_name} />
 
-                  <input name="image" className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-center text-white" placeholder="URL תמונה" defaultValue={editingRecipe?.image} required />
-                  <select name="category_slug" className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-center font-bold text-pink-400 outline-none" defaultValue={editingRecipe?.category_slug || 'all'}>
+                  <input name="image" className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-center text-slate-900" placeholder="URL תמונה" defaultValue={editingRecipe?.image} required />
+                  <select name="category_slug" className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-center font-bold text-pink-400 outline-none" defaultValue={editingRecipe?.category_slug || 'all'}>
                     <option value="all">בחר קטגוריה...</option>
                     {recipeCats.map(c => <option key={c.id} value={c.slug}>{c.name}</option>)}
                   </select>
-                  <textarea name="content" rows={6} className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-right text-white" placeholder="תוכן המתכון..." defaultValue={editingRecipe?.content} required />
+                  <textarea name="content" rows={6} className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-right text-slate-900" placeholder="תוכן המתכון..." defaultValue={editingRecipe?.content} required />
                   <div className="flex gap-2">
-                    <button type="submit" className="flex-1 bg-pink-600 text-white py-3 rounded-xl font-black">שמור</button>
-                    <button type="button" onClick={() => setShowRecipeFormModal(false)} className="flex-1 bg-slate-700 text-slate-300 py-3 rounded-xl font-bold">ביטול</button>
+                    <button type="submit" className="flex-1 bg-pink-600 text-slate-900 py-3 rounded-xl font-black">שמור</button>
+                    <button type="button" onClick={() => setShowRecipeFormModal(false)} className="flex-1 bg-slate-700 text-slate-600 py-3 rounded-xl font-bold">ביטול</button>
                   </div>
                 </form>
               </div>
@@ -2561,10 +2561,10 @@ onClick={(e) => {
           {/* מודל ניהול קטגוריות מתכונים */}
           {showRecipeCatManager && (
             <div className="fixed inset-0 z-[700] flex items-center justify-center px-4 bg-black/95 backdrop-blur-xl animate-in zoom-in">
-              <div className="bg-slate-900 border-2 border-pink-500 p-6 rounded-[2.5rem] shadow-2xl max-w-sm w-full max-h-[80vh] overflow-y-auto">
-                <h3 className="text-xl font-black text-white text-center mb-6">קטגוריות מתכונים</h3>
+              <div className="bg-white border-2 border-pink-500 p-6 rounded-[2.5rem] shadow-2xl max-w-sm w-full max-h-[80vh] overflow-y-auto">
+                <h3 className="text-xl font-black text-slate-900 text-center mb-6">קטגוריות מתכונים</h3>
                 <form onSubmit={handleSaveRecipeCat} className="mb-6 space-y-2">
-                   <h4 className="text-center text-sm font-bold text-slate-400">
+                   <h4 className="text-center text-sm font-bold text-slate-600">
                       {editingRecipeCat ? 'עריכת שם קטגוריה' : 'הוספת קטגוריה חדשה'}
                    </h4>
                    <div className="flex gap-2">
@@ -2572,7 +2572,7 @@ onClick={(e) => {
                          // ה-key הזה קריטי כדי שהשם יתעדכן כשלוחצים על עריכה
                          key={editingRecipeCat ? editingRecipeCat.id : 'new'}
                          name="name" 
-                         className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-center text-white font-bold outline-none focus:border-pink-500" 
+                         className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-center text-slate-900 font-bold outline-none focus:border-pink-500" 
                          placeholder="שם הקטגוריה" 
                          defaultValue={editingRecipeCat?.name || ''} 
                          required 
@@ -2581,13 +2581,13 @@ onClick={(e) => {
                          <button 
                            type="button" 
                            onClick={() => setEditingRecipeCat(null)} 
-                           className="bg-slate-700 text-slate-300 px-4 rounded-xl font-bold"
+                           className="bg-slate-700 text-slate-600 px-4 rounded-xl font-bold"
                          >
                            ביטול
                          </button>
                        )}
                    </div>
-                   <button type="submit" className="w-full bg-pink-600 text-white py-2 rounded-xl font-black shadow-lg">
+                   <button type="submit" className="w-full bg-pink-600 text-slate-900 py-2 rounded-xl font-black shadow-lg">
                       {editingRecipeCat ? 'עדכן שמירה' : 'הוסף קטגוריה'}
                    </button>
                 </form>
@@ -2595,10 +2595,10 @@ onClick={(e) => {
                 <div className="space-y-2">
                   {recipeCats.map((c, idx) => (
                     <div key={c.id} draggable onDragStart={() => onRecipeCatDragStart(idx)} onDragOver={(e) => e.preventDefault()} onDrop={() => onRecipeCatDrop(idx)}
-                         className="bg-slate-800 p-3 rounded-xl flex items-center justify-between border border-slate-700">
+                         className="bg-slate-50 p-3 rounded-xl flex items-center justify-between border border-slate-200">
                        <div className="flex items-center gap-2">
                           <GripVertical size={16} className="text-slate-600" />
-                          <span className="text-white font-bold">{c.name}</span>
+                          <span className="text-slate-900 font-bold">{c.name}</span>
                        </div>
                        <div className="flex gap-1">
                           <button onClick={() => setEditingRecipeCat(c)} className="p-1.5 text-blue-400"><Edit2 size={14}/></button>
@@ -2616,13 +2616,13 @@ onClick={(e) => {
           {/* Delete Category Confirmation with Product Migration or Auto-Deletion */}
           {showDeleteCategoryModal && (
             <div className="fixed inset-0 z-[700] flex items-center justify-center px-4 bg-black/95 backdrop-blur-md">
-              <div className="bg-slate-900 border-2 border-red-500 p-8 rounded-[2.5rem] shadow-2xl max-w-sm w-full text-center">
+              <div className="bg-white border-2 border-red-500 p-8 rounded-[2.5rem] shadow-2xl max-w-sm w-full text-center">
                 <AlertCircle className="mx-auto text-red-500 mb-4" size={48} />
-                <h3 className="text-xl font-black mb-2 text-white">מחיקת קטגוריית "{categoryToDelete?.name}"</h3>
-                <p className="text-slate-400 text-sm mb-6">מה תרצה לעשות עם המוצרים שבתוך הקטגוריה?</p>
+                <h3 className="text-xl font-black mb-2 text-slate-900">מחיקת קטגוריית "{categoryToDelete?.name}"</h3>
+                <p className="text-slate-600 text-sm mb-6">מה תרצה לעשות עם המוצרים שבתוך הקטגוריה?</p>
 
                 <select 
-                  className="w-full bg-slate-800 border border-slate-700 p-4 rounded-2xl text-white font-bold outline-none mb-6 text-center"
+                  className="w-full bg-slate-50 border border-slate-200 p-4 rounded-2xl text-slate-900 font-bold outline-none mb-6 text-center"
                   value={moveProductsTo}
                   onChange={(e) => setMoveProductsTo(e.target.value)}
                 >
@@ -2637,11 +2637,11 @@ onClick={(e) => {
                   <button 
                     disabled={!moveProductsTo}
                     onClick={() => confirmDeleteCategory(categoryToDelete.id, categoryToDelete.slug, moveProductsTo)} 
-                    className={`w-full py-4 rounded-full font-black text-lg transition-all ${moveProductsTo === 'DELETE_ALL' ? 'bg-red-600 text-white animate-pulse' : moveProductsTo ? 'bg-amber-600 text-white' : 'bg-slate-800 text-slate-600'}`}
+                    className={`w-full py-4 rounded-full font-black text-lg transition-all ${moveProductsTo === 'DELETE_ALL' ? 'bg-red-600 text-slate-900 animate-pulse' : moveProductsTo ? 'bg-amber-600 text-slate-900' : 'bg-slate-50 text-slate-600'}`}
                   >
                     {moveProductsTo === 'DELETE_ALL' ? 'מחק הכל לצמיתות!' : 'בצע ומחק קטגוריה'}
                   </button>
-                  <button onClick={() => {setShowDeleteCategoryModal(false); setCategoryToDelete(null);}} className="w-full bg-slate-700 text-white py-3 rounded-full font-bold">ביטול</button>
+                  <button onClick={() => {setShowDeleteCategoryModal(false); setCategoryToDelete(null);}} className="w-full bg-slate-700 text-slate-900 py-3 rounded-full font-bold">ביטול</button>
                 </div>
               </div>
             </div>
@@ -2649,10 +2649,10 @@ onClick={(e) => {
 
           {showStatsModal && (
             <div className="fixed inset-0 z-[600] flex items-center justify-center px-4 bg-black/90 backdrop-blur-xl animate-in fade-in text-right">
-              <div className="bg-slate-900 border-2 border-blue-500 p-6 rounded-[2.5rem] shadow-2xl max-md w-full animate-in zoom-in overflow-y-auto max-h-[85vh] text-right">
+              <div className="bg-white border-2 border-blue-500 p-6 rounded-[2.5rem] shadow-2xl max-md w-full animate-in zoom-in overflow-y-auto max-h-[85vh] text-right">
                 <div className="flex justify-between items-center mb-6 text-right">
-                  <h3 className="text-xl font-black text-white flex items-center gap-2 text-center w-full text-right"><BarChart3 className="text-blue-400" /> סטטיסטיקה</h3>
-                  <button onClick={() => setShowStatsModal(false)} className="text-slate-500 hover:text-white"><X size={24}/></button>
+                  <h3 className="text-xl font-black text-slate-900 flex items-center gap-2 text-center w-full text-right"><BarChart3 className="text-blue-400" /> סטטיסטיקה</h3>
+                  <button onClick={() => setShowStatsModal(false)} className="text-slate-500 hover:text-slate-900"><X size={24}/></button>
                 </div>
                
                {/* כרטיס גולשים באתר כרגע */}
@@ -2660,14 +2660,14 @@ onClick={(e) => {
  <div className="flex items-center gap-3">
     {/* כפתור ירוק מהבהב */}
     <div className="relative">
-      <div className="bg-green-500 p-2 rounded-full text-white shadow-lg animate-pulse-green">
+      <div className="bg-green-500 p-2 rounded-full text-slate-900 shadow-lg animate-pulse-green">
         <Users size={20} />
       </div>
       <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full border-2 border-slate-900 animate-pulse"></div>
     </div>
     <div className="text-right">
       <div className="text-[10px] font-black text-green-400 uppercase tracking-tighter">גולשים כרגע באתר</div>
-      <div className="text-2xl font-black text-white leading-none">{onlineUsers}</div>
+      <div className="text-2xl font-black text-slate-900 leading-none">{onlineUsers}</div>
     </div>
   </div>
 </div>
@@ -2678,10 +2678,10 @@ onClick={(e) => {
                   className="bg-blue-600/10 border-2 border-blue-500/30 p-4 rounded-3xl flex items-center justify-between hover:bg-blue-600/20 transition-all active:scale-[0.98] text-center"
                   >
                     <div className="flex items-center gap-3">
-                        <div className="bg-blue-500 p-2 rounded-full text-white shadow-lg text-center"><Users size={20} /></div>
+                        <div className="bg-blue-500 p-2 rounded-full text-slate-900 shadow-lg text-center"><Users size={20} /></div>
                         <div className="text-right">
                             <div className="text-[10px] font-black text-blue-400 uppercase tracking-tighter text-right">כניסות היום (ייחודי)</div>
-                            <div className="text-2xl font-black text-white leading-none text-right">{getVisitStats().today}</div>
+                            <div className="text-2xl font-black text-slate-900 leading-none text-right">{getVisitStats().today}</div>
                         </div>
                     </div>
                     <div className="text-blue-500"><Info size={20} /></div>
@@ -2695,10 +2695,10 @@ onClick={(e) => {
   className="bg-orange-600/10 border-2 border-orange-500/30 p-4 rounded-3xl flex items-center justify-between hover:bg-orange-600/20 transition-all active:scale-[0.98]"
 >
   <div className="flex items-center gap-3">
-    <div className="bg-orange-500 p-2 rounded-full text-white shadow-lg"><ShoppingCart size={20} /></div>
+    <div className="bg-orange-500 p-2 rounded-full text-slate-900 shadow-lg"><ShoppingCart size={20} /></div>
     <div className="text-right">
         <div className="text-[10px] font-black text-orange-400 uppercase tracking-tighter">הזמנות בתהליך</div>
-        <div className="text-2xl font-black text-white leading-none">חי</div>
+        <div className="text-2xl font-black text-slate-900 leading-none">חי</div>
     </div>
   </div>
   <div className="text-orange-500"><Eye size={20} /></div>
@@ -2706,10 +2706,10 @@ onClick={(e) => {
 
                                     <div className="bg-purple-600/10 border-2 border-purple-500/30 p-4 rounded-3xl flex items-center justify-between transition-all text-center">
                     <div className="flex items-center gap-3">
-                        <div className="bg-purple-500 p-2 rounded-full text-white shadow-lg text-center"><BellRing size={20} /></div>
+                        <div className="bg-purple-500 p-2 rounded-full text-slate-900 shadow-lg text-center"><BellRing size={20} /></div>
                         <div className="text-right">
                             <div className="text-[10px] font-black text-purple-400 uppercase tracking-tighter text-right">לחיצות על "תתזכר אותי"</div>
-                            <div className="text-2xl font-black text-white leading-none text-right">{reminderCount}</div>
+                            <div className="text-2xl font-black text-slate-900 leading-none text-right">{reminderCount}</div>
                         </div>
                     </div>
                     <button 
@@ -2719,7 +2719,7 @@ onClick={(e) => {
                             fetchVisits();
                           }
                         }}
-                        className="p-2 bg-red-600/20 text-red-500 rounded-xl hover:bg-red-600 hover:text-white transition-all"
+                        className="p-2 bg-red-600/20 text-red-500 rounded-xl hover:bg-red-600 hover:text-slate-900 transition-all"
                     >
                       <RotateCcw size={16} />
                     </button>
@@ -2728,14 +2728,14 @@ onClick={(e) => {
 
                   <div className="bg-amber-600/10 border-2 border-amber-500/30 p-4 rounded-3xl flex items-center justify-between transition-all text-center">
                     <div className="flex items-center gap-3">
-                        <div className="bg-amber-500 p-2 rounded-full text-white shadow-lg text-center"><Trophy size={20} /></div>
+                        <div className="bg-amber-500 p-2 rounded-full text-slate-900 shadow-lg text-center"><Trophy size={20} /></div>
                         <div className="text-right">
-                            <div className="text-[10px] font-black text-amber-500 uppercase tracking-tighter text-right">מונה מאפה מוזהב</div>
-                            <div className="text-2xl font-black text-white leading-none text-right">{siteSettings.golden_pastry_counter} / {siteSettings.golden_pastry_target}</div>
+                            <div className="text-[10px] font-black text-amber-600 uppercase tracking-tighter text-right">מונה מאפה מוזהב</div>
+                            <div className="text-2xl font-black text-slate-900 leading-none text-right">{siteSettings.golden_pastry_counter} / {siteSettings.golden_pastry_target}</div>
                         </div>
                     </div>
                     {/* New Reset Button for Golden Counter */}
-                    <button onClick={handleResetGoldenCounter} className="p-2 bg-red-600/20 text-red-500 rounded-xl hover:bg-red-600 hover:text-white transition-all"><RefreshCw size={16} /></button>
+                    <button onClick={handleResetGoldenCounter} className="p-2 bg-red-600/20 text-red-500 rounded-xl hover:bg-red-600 hover:text-slate-900 transition-all"><RefreshCw size={16} /></button>
                   </div>
                   
 <button 
@@ -2743,10 +2743,10 @@ onClick={(e) => {
   className="bg-indigo-600/10 border-2 border-indigo-500/30 p-4 rounded-3xl flex items-center justify-between hover:bg-indigo-600/20 transition-all active:scale-[0.98]"
 >
   <div className="flex items-center gap-3">
-    <div className="bg-indigo-500 p-2 rounded-full text-white shadow-lg"><BarChart3 size={20} /></div>
+    <div className="bg-indigo-500 p-2 rounded-full text-slate-900 shadow-lg"><BarChart3 size={20} /></div>
     <div className="text-right">
         <div className="text-[10px] font-black text-indigo-400 uppercase tracking-tighter">פירוט מכירות</div>
-        <div className="text-xl font-black text-white leading-none">סטטיסטיקת מוצרים</div>
+        <div className="text-xl font-black text-slate-900 leading-none">סטטיסטיקת מוצרים</div>
     </div>
   </div>
   <div className="text-indigo-500"><ExternalLink size={20} /></div>
@@ -2761,10 +2761,10 @@ onClick={(e) => {
   className="bg-pink-600/10 border-2 border-pink-500/30 p-4 rounded-3xl flex items-center justify-between hover:bg-pink-600/20 transition-all active:scale-[0.98]"
 >
   <div className="flex items-center gap-3">
-    <div className="bg-pink-500 p-2 rounded-full text-white shadow-lg"><User size={20} /></div>
+    <div className="bg-pink-500 p-2 rounded-full text-slate-900 shadow-lg"><User size={20} /></div>
     <div className="text-right">
         <div className="text-[10px] font-black text-pink-400 uppercase tracking-tighter">סטטיסטיקת "מי אני"</div>
-        <div className="text-xl font-black text-white leading-none">צפיות בסיפור</div>
+        <div className="text-xl font-black text-slate-900 leading-none">צפיות בסיפור</div>
     </div>
   </div>
   <div className="text-pink-500"><ExternalLink size={20} /></div>
@@ -2780,10 +2780,10 @@ onClick={(e) => {
   className="bg-pink-600/10 border-2 border-pink-500/30 p-4 rounded-3xl flex items-center justify-between hover:bg-pink-600/20 transition-all active:scale-[0.98]"
 >
   <div className="flex items-center gap-3">
-    <div className="bg-pink-500 p-2 rounded-full text-white shadow-lg"><BookOpen size={20} /></div>
+    <div className="bg-pink-500 p-2 rounded-full text-slate-900 shadow-lg"><BookOpen size={20} /></div>
     <div className="text-right">
         <div className="text-[10px] font-black text-pink-400 uppercase tracking-tighter">פופולריות מתכונים</div>
-        <div className="text-xl font-black text-white leading-none">סטטיסטיקת מתכונים</div>
+        <div className="text-xl font-black text-slate-900 leading-none">סטטיסטיקת מתכונים</div>
     </div>
   </div>
   <div className="text-pink-500"><ExternalLink size={20} /></div>
@@ -2795,28 +2795,28 @@ onClick={(e) => {
 
                   {showVisitorDetails && (
                     <div className="col-span-full mt-4 grid grid-cols-1 gap-3 animate-in slide-in-from-top-4 duration-300 text-center">
-                        <div className="bg-slate-800/80 p-4 rounded-3xl border border-slate-700 shadow-inner text-right">
+                        <div className="bg-slate-50/80 p-4 rounded-3xl border border-slate-200 shadow-inner text-right">
                             <div className="flex justify-around mb-6 text-center">
                                 <div className="flex flex-col text-center">
                                   <span className="text-blue-400 font-black text-xl text-center">{getVisitStats().today}</span>
-                                  <button onClick={() => openSourceModal('today')} className="text-[9px] font-bold text-slate-500 text-center hover:text-amber-500 transition-colors uppercase">היום</button>
+                                  <button onClick={() => openSourceModal('today')} className="text-[9px] font-bold text-slate-500 text-center hover:text-amber-600 transition-colors uppercase">היום</button>
                                 </div>
                                 <div className="w-[1px] bg-slate-700 h-8 self-center"></div>
                                 <div className="flex flex-col text-center">
                                   <span className="text-blue-400 font-black text-xl text-center">{getVisitStats().week}</span>
-                                  <button onClick={() => openSourceModal('week')} className="text-[9px] font-bold text-slate-500 text-center hover:text-amber-500 transition-colors uppercase">השבוע</button>
+                                  <button onClick={() => openSourceModal('week')} className="text-[9px] font-bold text-slate-500 text-center hover:text-amber-600 transition-colors uppercase">השבוע</button>
                                 </div>
                                 <div className="w-[1px] bg-slate-700 h-8 self-center"></div>
                                 <div className="flex flex-col text-center">
                                   <span className="text-blue-400 font-black text-xl text-center">{getVisitStats().month}</span>
-                                  <button onClick={() => openSourceModal('month')} className="text-[9px] font-bold text-slate-500 text-center hover:text-amber-500 transition-colors uppercase">החודש</button>
+                                  <button onClick={() => openSourceModal('month')} className="text-[9px] font-bold text-slate-500 text-center hover:text-amber-600 transition-colors uppercase">החודש</button>
                                 </div>
                             </div>
                             <div className="space-y-2 text-right">
-                                <h4 className="text-[10px] font-black text-slate-400 mb-2 uppercase border-b border-slate-700 pb-1 text-right">פירוט יומי (שבוע אחרון)</h4>
+                                <h4 className="text-[10px] font-black text-slate-600 mb-2 uppercase border-b border-slate-200 pb-1 text-right">פירוט יומי (שבוע אחרון)</h4>
                                 {getVisitStats().dailyBreakdown.map((d, i) => (
                                     <div key={i} className="flex justify-between items-center text-right">
-                                        <span className="text-[11px] font-bold text-slate-300">{d.label}</span>
+                                        <span className="text-[11px] font-bold text-slate-600">{d.label}</span>
                                         <div className="flex items-center gap-2 flex-1 mx-4 text-center">
                                             <div className="h-1.5 bg-blue-500/20 rounded-full flex-1 overflow-hidden text-center">
                                                 <div className="h-full bg-blue-500 rounded-full text-center" style={{ width: `${Math.min(100, (d.count / (Math.max(...getVisitStats().dailyBreakdown.map(x=>x.count)) || 1)) * 100)}%` }}></div>
@@ -2830,13 +2830,13 @@ onClick={(e) => {
                             <div className="mt-6 flex gap-2">
                                 <button 
                                     onClick={handleResetTodayVisits}
-                                    className="flex-1 py-2 bg-slate-900/50 border border-slate-700 rounded-xl text-[9px] font-black text-slate-400 hover:text-red-400 hover:border-red-500/30 transition-all text-center"
+                                    className="flex-1 py-2 bg-white/50 border border-slate-200 rounded-xl text-[9px] font-black text-slate-600 hover:text-red-400 hover:border-red-500/30 transition-all text-center"
                                 >
                                     איפוס היום
                                 </button>
                                 <button 
                                     onClick={handleResetAllVisits}
-                                    className="flex-1 py-2 bg-slate-900/50 border border-slate-700 rounded-xl text-[9px] font-black text-slate-400 hover:text-red-400 hover:border-red-500/30 transition-all text-center"
+                                    className="flex-1 py-2 bg-white/50 border border-slate-200 rounded-xl text-[9px] font-black text-slate-600 hover:text-red-400 hover:border-red-500/30 transition-all text-center"
                                 >
                                     איפוס כל הזמנים
                                 </button>
@@ -2855,41 +2855,41 @@ onClick={(e) => {
          
          {showVisitsModal && (
   <div className="fixed inset-0 z-[1100] flex items-center justify-center px-4 bg-black/90 backdrop-blur-xl animate-in fade-in">
-    <div className="bg-slate-900 border-2 border-blue-500 p-6 rounded-[2.5rem] shadow-2xl max-w-md w-full animate-in zoom-in text-right">
+    <div className="bg-white border-2 border-blue-500 p-6 rounded-[2.5rem] shadow-2xl max-w-md w-full animate-in zoom-in text-right">
       <div className="flex justify-between items-center mb-6 border-b border-slate-800 pb-4">
-        <h3 className="text-xl font-black text-white flex items-center gap-2">
+        <h3 className="text-xl font-black text-slate-900 flex items-center gap-2">
           <Users className="text-blue-400" /> פירוט כניסות לאתר
         </h3>
-        <button onClick={() => setShowVisitsModal(false)} className="text-slate-500 hover:text-white transition-colors">
+        <button onClick={() => setShowVisitsModal(false)} className="text-slate-500 hover:text-slate-900 transition-colors">
           <X size={24}/>
         </button>
       </div>
 
-      <div className="bg-slate-800/80 p-5 rounded-3xl border border-slate-700 shadow-inner">
+      <div className="bg-slate-50/80 p-5 rounded-3xl border border-slate-200 shadow-inner">
         <div className="flex justify-around mb-8">
           <div className="flex flex-col items-center">
             <span className="text-blue-400 font-black text-2xl">{getVisitStats().today}</span>
-            <button onClick={() => openSourceModal('today')} className="text-[10px] font-black text-slate-500 hover:text-amber-500 transition-colors uppercase">היום</button>
+            <button onClick={() => openSourceModal('today')} className="text-[10px] font-black text-slate-500 hover:text-amber-600 transition-colors uppercase">היום</button>
           </div>
           <div className="w-[1px] bg-slate-700 h-10 self-center"></div>
           <div className="flex flex-col items-center">
             <span className="text-blue-400 font-black text-2xl">{getVisitStats().week}</span>
-            <button onClick={() => openSourceModal('week')} className="text-[10px] font-black text-slate-500 hover:text-amber-500 transition-colors uppercase">השבוע</button>
+            <button onClick={() => openSourceModal('week')} className="text-[10px] font-black text-slate-500 hover:text-amber-600 transition-colors uppercase">השבוע</button>
           </div>
           <div className="w-[1px] bg-slate-700 h-10 self-center"></div>
           <div className="flex flex-col items-center">
             <span className="text-blue-400 font-black text-2xl">{getVisitStats().month}</span>
-            <button onClick={() => openSourceModal('month')} className="text-[10px] font-black text-slate-500 hover:text-amber-500 transition-colors uppercase">החודש</button>
+            <button onClick={() => openSourceModal('month')} className="text-[10px] font-black text-slate-500 hover:text-amber-600 transition-colors uppercase">החודש</button>
           </div>
         </div>
 
         <div className="space-y-3 mb-6">
-          <h4 className="text-[11px] font-black text-slate-400 uppercase border-b border-slate-700 pb-2">גרף שבוע אחרון</h4>
+          <h4 className="text-[11px] font-black text-slate-600 uppercase border-b border-slate-200 pb-2">גרף שבוע אחרון</h4>
           {getVisitStats().dailyBreakdown.map((d, i) => (
             <div key={i} className="flex justify-between items-center">
-              <span className="text-[11px] font-bold text-slate-300 w-16">{d.label}</span>
+              <span className="text-[11px] font-bold text-slate-600 w-16">{d.label}</span>
               <div className="flex-1 mx-4">
-                <div className="h-2 bg-slate-900 rounded-full overflow-hidden border border-slate-700">
+                <div className="h-2 bg-white rounded-full overflow-hidden border border-slate-200">
                   <div 
                     className="h-full bg-blue-500 rounded-full transition-all duration-1000" 
                     style={{ width: `${Math.min(100, (d.count / (Math.max(...getVisitStats().dailyBreakdown.map(x=>x.count)) || 1)) * 100)}%` }}
@@ -2902,12 +2902,12 @@ onClick={(e) => {
         </div>
 
         <div className="grid grid-cols-2 gap-3 mt-6">
-          <button onClick={handleResetTodayVisits} className="py-3 bg-slate-900 border border-slate-700 rounded-xl text-[10px] font-black text-slate-400 hover:text-red-400 hover:border-red-500/30 transition-all">איפוס היום</button>
-          <button onClick={handleResetAllVisits} className="py-3 bg-slate-900 border border-slate-700 rounded-xl text-[10px] font-black text-slate-400 hover:text-red-400 hover:border-red-500/30 transition-all">איפוס הכל</button>
+          <button onClick={handleResetTodayVisits} className="py-3 bg-white border border-slate-200 rounded-xl text-[10px] font-black text-slate-600 hover:text-red-400 hover:border-red-500/30 transition-all">איפוס היום</button>
+          <button onClick={handleResetAllVisits} className="py-3 bg-white border border-slate-200 rounded-xl text-[10px] font-black text-slate-600 hover:text-red-400 hover:border-red-500/30 transition-all">איפוס הכל</button>
         </div>
       </div>
 
-      <button onClick={() => setShowVisitsModal(false)} className="w-full mt-6 bg-blue-600 text-white py-4 rounded-2xl font-black shadow-lg active:scale-95 transition-all">סגור פירוט</button>
+      <button onClick={() => setShowVisitsModal(false)} className="w-full mt-6 bg-blue-600 text-slate-900 py-4 rounded-2xl font-black shadow-lg active:scale-95 transition-all">סגור פירוט</button>
     </div>
   </div>
 )}
@@ -2916,12 +2916,12 @@ onClick={(e) => {
 {/* חלונית סטטיסטיקת מכירת מוצרים החדשה */}
 {showProductSalesModal && (
   <div className="fixed inset-0 z-[700] flex items-center justify-center px-4 bg-black/90 backdrop-blur-xl animate-in fade-in">
-    <div className="bg-slate-900 border-2 border-indigo-500 p-6 rounded-[2.5rem] shadow-2xl max-w-md w-full animate-in zoom-in overflow-y-auto max-h-[85vh] text-right">
+    <div className="bg-white border-2 border-indigo-500 p-6 rounded-[2.5rem] shadow-2xl max-w-md w-full animate-in zoom-in overflow-y-auto max-h-[85vh] text-right">
       <div className="flex justify-between items-center mb-6 border-b border-slate-800 pb-4">
-        <h3 className="text-xl font-black text-white flex items-center gap-2">
+        <h3 className="text-xl font-black text-slate-900 flex items-center gap-2">
           <BarChart3 className="text-indigo-400" /> סטטיסטיקת מכירת מוצרים
         </h3>
-        <button onClick={() => setShowProductSalesModal(false)} className="text-slate-500 hover:text-white transition-colors">
+        <button onClick={() => setShowProductSalesModal(false)} className="text-slate-500 hover:text-slate-900 transition-colors">
           <X size={24}/>
         </button>
       </div>
@@ -2930,13 +2930,13 @@ onClick={(e) => {
         {[...products]
           .sort((a, b) => (b.sales_count || 0) - (a.sales_count || 0))
           .map((p, idx) => (
-            <div key={p.id} className="bg-slate-800/40 p-3 rounded-2xl flex items-center justify-between border border-slate-700/50 hover:bg-slate-800/60 transition-all">
+            <div key={p.id} className="bg-slate-50/40 p-3 rounded-2xl flex items-center justify-between border border-slate-200/50 hover:bg-slate-50/60 transition-all">
               <div className="flex items-center gap-3">
-                <span className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black ${idx < 3 ? 'bg-indigo-600 text-white' : 'bg-slate-700 text-slate-400'}`}>
+                <span className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black ${idx < 3 ? 'bg-indigo-600 text-slate-900' : 'bg-slate-700 text-slate-600'}`}>
                   {idx + 1}
                 </span>
                 <div className="flex flex-col text-right">
-                  <span className="font-bold text-sm leading-tight text-white">{p.name}</span>
+                  <span className="font-bold text-sm leading-tight text-slate-900">{p.name}</span>
                   <span className="text-[10px] text-slate-500 font-bold">
                     {categories.find(c => c.slug === p.category)?.name || 'כללי'}
                   </span>
@@ -2949,16 +2949,16 @@ onClick={(e) => {
           ))}
       </div>
 
-      <div className="sticky bottom-0 bg-slate-900 pt-4 space-y-3">
+      <div className="sticky bottom-0 bg-white pt-4 space-y-3">
         <button 
           onClick={resetStats} 
-          className="w-full bg-red-600/20 text-red-500 border border-red-500/30 py-4 rounded-2xl font-black text-sm hover:bg-red-600 hover:text-white transition-all flex items-center justify-center gap-2 shadow-lg"
+          className="w-full bg-red-600/20 text-red-500 border border-red-500/30 py-4 rounded-2xl font-black text-sm hover:bg-red-600 hover:text-slate-900 transition-all flex items-center justify-center gap-2 shadow-lg"
         >
           <RotateCcw size={16} /> איפוס כל נתוני המכירות
         </button>
         <button 
           onClick={() => setShowProductSalesModal(false)} 
-          className="w-full bg-slate-800 text-slate-400 py-3 rounded-2xl font-bold text-xs"
+          className="w-full bg-slate-50 text-slate-600 py-3 rounded-2xl font-bold text-xs"
         >
           חזרה לסטטיסטיקה כללית
         </button>
@@ -2969,71 +2969,71 @@ onClick={(e) => {
 
           {showSourceModal && (
             <div className="fixed inset-0 z-[1200] flex items-center justify-center px-4 bg-black/95 backdrop-blur-xl animate-in zoom-in text-right">
-              <div className="bg-slate-900 border-2 border-amber-500 p-6 rounded-[2.5rem] shadow-2xl max-md w-full text-right">
+              <div className="bg-white border-2 border-amber-500 p-6 rounded-[2.5rem] shadow-2xl max-md w-full text-right">
                 <div className="flex justify-between items-center mb-6 text-right">
-                  <h3 className="text-xl font-black text-white flex items-center gap-2 text-right">
-                    <ExternalLink className="text-amber-500" /> 
+                  <h3 className="text-xl font-black text-slate-900 flex items-center gap-2 text-right">
+                    <ExternalLink className="text-amber-600" /> 
                     {sourceTimeframe === 'today' ? 'מאיפה הגיעו היום?' : sourceTimeframe === 'week' ? 'מאיפה הגיעו השבוע?' : 'מאיפה הגיעו החודש?'}
                   </h3>
-                  <button onClick={() => setShowSourceModal(false)} className="text-slate-500 hover:text-white"><X size={24}/></button>
+                  <button onClick={() => setShowSourceModal(false)} className="text-slate-500 hover:text-slate-900"><X size={24}/></button>
                 </div>
                 <div className="space-y-4 text-right overflow-y-auto max-h-[50vh]">
                     {getVisitStats().sources[sourceTimeframe].length > 0 ? getVisitStats().sources[sourceTimeframe].map(([src, count], idx) => (
-                      <div key={idx} className="flex justify-between items-center bg-slate-800/40 p-4 rounded-2xl border border-slate-700/50">
+                      <div key={idx} className="flex justify-between items-center bg-slate-50/40 p-4 rounded-2xl border border-slate-200/50">
                          <span className="font-bold text-slate-200">{src}</span>
-                         <span className="font-black text-amber-500 text-xl">{count}</span>
+                         <span className="font-black text-amber-600 text-xl">{count}</span>
                       </div>
                     )) : <p className="text-center text-slate-500 py-8">אין נתוני מקורות לתקופה זו</p>}
                 </div>
-                <button onClick={() => setShowSourceModal(false)} className="w-full mt-8 bg-amber-600 text-white py-4 rounded-2xl font-black text-center">סגור</button>
+                <button onClick={() => setShowSourceModal(false)} className="w-full mt-8 bg-amber-600 text-slate-900 py-4 rounded-2xl font-black text-center">סגור</button>
               </div>
             </div>
           )}
 
 {showSettingsModal && (
   <div className="fixed inset-0 z-[1500] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl">
-    <div className="bg-slate-900 border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-sm w-full animate-in zoom-in relative max-h-[90vh] overflow-y-auto custom-scrollbar">
+    <div className="bg-white border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-sm w-full animate-in zoom-in relative max-h-[90vh] overflow-y-auto custom-scrollbar">
       <button 
   onClick={() => { 
     setSiteSettings(settingsSnapshot); // מחזיר את ההגדרות למה שהיו לפני השינויים
     setShowSettingsModal(false); 
     setActiveSettingsTab(null); 
   }} 
-  className="absolute top-6 left-6 text-slate-500 hover:text-white transition-colors"
+  className="absolute top-6 left-6 text-slate-500 hover:text-slate-900 transition-colors"
 >
   <X size={20}/>
 </button>
-      <Settings className="mx-auto text-amber-500 mb-4" size={40} />
-      <h3 className="text-xl font-black mb-6 text-white text-center">הגדרות אתר</h3>
+      <Settings className="mx-auto text-amber-600 mb-4" size={40} />
+      <h3 className="text-xl font-black mb-6 text-slate-900 text-center">הגדרות אתר</h3>
 
       {/* תפריט 3 כפתורים ראשיים */}
       {!activeSettingsTab ? (
         <div className="grid grid-cols-1 gap-3 mb-8">
-          <button onClick={() => setActiveSettingsTab('titles')} className="w-full bg-slate-800 border border-slate-700 p-5 rounded-2xl flex items-center justify-between text-white hover:bg-slate-700 transition-all active:scale-95 shadow-lg">
-            <span className="flex items-center gap-3 font-black text-sm"><Type size={18} className="text-amber-500"/> כותרות וכתובת</span>
-            <ArrowLeft size={16} className="text-amber-500" />
+          <button onClick={() => setActiveSettingsTab('titles')} className="w-full bg-slate-50 border border-slate-200 p-5 rounded-2xl flex items-center justify-between text-slate-900 hover:bg-slate-700 transition-all active:scale-95 shadow-lg">
+            <span className="flex items-center gap-3 font-black text-sm"><Type size={18} className="text-amber-600"/> כותרות וכתובת</span>
+            <ArrowLeft size={16} className="text-amber-600" />
           </button>
           
-          <button onClick={() => setActiveSettingsTab('promos')} className="w-full bg-slate-800 border border-slate-700 p-5 rounded-2xl flex items-center justify-between text-white hover:bg-slate-700 transition-all active:scale-95 shadow-lg">
+          <button onClick={() => setActiveSettingsTab('promos')} className="w-full bg-slate-50 border border-slate-200 p-5 rounded-2xl flex items-center justify-between text-slate-900 hover:bg-slate-700 transition-all active:scale-95 shadow-lg">
             <span className="flex items-center gap-3 font-black text-sm"><Zap size={18} className="text-red-500"/> הודעות ומבצעים</span>
-            <ArrowLeft size={16} className="text-amber-500" />
+            <ArrowLeft size={16} className="text-amber-600" />
           </button>
 
-          <button onClick={() => setActiveSettingsTab('hours')} className="w-full bg-slate-800 border border-slate-700 p-5 rounded-2xl flex items-center justify-between text-white hover:bg-slate-700 transition-all active:scale-95 shadow-lg">
+          <button onClick={() => setActiveSettingsTab('hours')} className="w-full bg-slate-50 border border-slate-200 p-5 rounded-2xl flex items-center justify-between text-slate-900 hover:bg-slate-700 transition-all active:scale-95 shadow-lg">
             <span className="flex items-center gap-3 font-black text-sm"><Clock size={18} className="text-blue-400"/> ימי ושעות פעילות</span>
-            <ArrowLeft size={16} className="text-amber-500" />
+            <ArrowLeft size={16} className="text-amber-600" />
           </button>
         </div>
       ) : (
         <div className="space-y-4 mb-8 animate-in slide-in-from-left-4">
-          <button onClick={() => setActiveSettingsTab(null)} className="text-amber-500 text-xs font-black flex items-center gap-1 mb-4 hover:underline"><ArrowRight size={14}/> חזרה לתפריט ההגדרות</button>
+          <button onClick={() => setActiveSettingsTab(null)} className="text-amber-600 text-xs font-black flex items-center gap-1 mb-4 hover:underline"><ArrowRight size={14}/> חזרה לתפריט ההגדרות</button>
 
           {/* לשונית כותרות */}
           {activeSettingsTab === 'titles' && (
             <div className="space-y-3">
-              <input className="w-full bg-slate-800 border border-slate-700 p-4 rounded-2xl text-center text-white font-bold outline-none focus:border-amber-500" value={siteSettings.main_title} onChange={e => setSiteSettings({...siteSettings, main_title: e.target.value})} placeholder="כותרת ראשית" />
-              <input className="w-full bg-slate-800 border border-slate-700 p-4 rounded-2xl text-center text-white font-bold outline-none focus:border-amber-500" value={siteSettings.sub_title} onChange={e => setSiteSettings({...siteSettings, sub_title: e.target.value})} placeholder="כותרת משנית" />
-              <input className="w-full bg-slate-800 border border-slate-700 p-4 rounded-2xl text-center text-white font-bold outline-none focus:border-amber-500" value={siteSettings.address} onChange={e => setSiteSettings({...siteSettings, address: e.target.value})} placeholder="כתובת העסק" />
+              <input className="w-full bg-slate-50 border border-slate-200 p-4 rounded-2xl text-center text-slate-900 font-bold outline-none focus:border-amber-500" value={siteSettings.main_title} onChange={e => setSiteSettings({...siteSettings, main_title: e.target.value})} placeholder="כותרת ראשית" />
+              <input className="w-full bg-slate-50 border border-slate-200 p-4 rounded-2xl text-center text-slate-900 font-bold outline-none focus:border-amber-500" value={siteSettings.sub_title} onChange={e => setSiteSettings({...siteSettings, sub_title: e.target.value})} placeholder="כותרת משנית" />
+              <input className="w-full bg-slate-50 border border-slate-200 p-4 rounded-2xl text-center text-slate-900 font-bold outline-none focus:border-amber-500" value={siteSettings.address} onChange={e => setSiteSettings({...siteSettings, address: e.target.value})} placeholder="כתובת העסק" />
             </div>
           )}
 
@@ -3042,11 +3042,11 @@ onClick={(e) => {
             <div className="space-y-4">
               <div className="bg-red-500/5 p-3 rounded-xl border border-red-500/20">
                 <label className="text-[10px] font-black text-red-500 block mb-1">הודעה דחופה (במקום "מישהו הזמין"):</label>
-                <textarea className="w-full bg-slate-900 border border-slate-700 p-3 rounded-xl text-white text-xs text-right outline-none" value={siteSettings.urgent_message} onChange={e => setSiteSettings({...siteSettings, urgent_message: e.target.value})} placeholder="למשל: נשארו 5 קראנץ' אחרונים! 🥐" rows={2} />
+                <textarea className="w-full bg-white border border-slate-200 p-3 rounded-xl text-slate-900 text-xs text-right outline-none" value={siteSettings.urgent_message} onChange={e => setSiteSettings({...siteSettings, urgent_message: e.target.value})} placeholder="למשל: נשארו 5 קראנץ' אחרונים! " rows={2} />
               </div>
               
-              <div className="flex items-center justify-between bg-slate-800 p-4 rounded-xl border border-slate-700">
-                <span className="text-xs font-bold text-white flex items-center gap-2"><Users size={14} className="text-amber-500"/> הפעל "מישהו הזמין" ו-FOMO</span>
+              <div className="flex items-center justify-between bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <span className="text-xs font-bold text-slate-900 flex items-center gap-2"><Users size={14} className="text-amber-600"/> הפעל "מישהו הזמין" ו-FOMO</span>
                 <input type="checkbox" className="w-5 h-5 accent-amber-500" checked={siteSettings.fomo_social_active} onChange={e => setSiteSettings({...siteSettings, fomo_social_active: e.target.checked})} />
               </div>
 
@@ -3059,8 +3059,8 @@ onClick={(e) => {
                 {siteSettings.sale_active && (
                   <div className="space-y-3 animate-in fade-in">
                     <div className="grid grid-cols-2 gap-2">
-                       <input type="time" className="bg-slate-900 border border-slate-700 p-2 rounded-xl text-white text-center font-bold" value={siteSettings.sale_end_time} onChange={e => setSiteSettings({...siteSettings, sale_end_time: e.target.value})} />
-                       <input type="number" className="bg-slate-900 border border-slate-700 p-2 rounded-xl text-white text-center font-bold" value={siteSettings.sale_discount_percent} onChange={e => setSiteSettings({...siteSettings, sale_discount_percent: Number(e.target.value)})} placeholder="% הנחה" />
+                       <input type="time" className="bg-white border border-slate-200 p-2 rounded-xl text-slate-900 text-center font-bold" value={siteSettings.sale_end_time} onChange={e => setSiteSettings({...siteSettings, sale_end_time: e.target.value})} />
+                       <input type="number" className="bg-white border border-slate-200 p-2 rounded-xl text-slate-900 text-center font-bold" value={siteSettings.sale_discount_percent} onChange={e => setSiteSettings({...siteSettings, sale_discount_percent: Number(e.target.value)})} placeholder="% הנחה" />
                     </div>
                     <div className="flex flex-wrap gap-1">
                       {categories.map(cat => (
@@ -3068,7 +3068,7 @@ onClick={(e) => {
                             const current = siteSettings.sale_categories || [];
                             const next = current.includes(cat.slug) ? current.filter(s => s !== cat.slug) : [...current, cat.slug];
                             setSiteSettings({...siteSettings, sale_categories: next});
-                          }} className={`px-2 py-1 rounded-full text-[9px] font-bold border transition-all ${siteSettings.sale_categories?.includes(cat.slug) ? 'bg-red-600 text-white' : 'bg-slate-900 text-slate-500'}`}>{cat.name}</button>
+                          }} className={`px-2 py-1 rounded-full text-[9px] font-bold border transition-all ${siteSettings.sale_categories?.includes(cat.slug) ? 'bg-red-600 text-slate-900' : 'bg-white text-slate-500'}`}>{cat.name}</button>
                       ))}
                     </div>
                   </div>
@@ -3084,12 +3084,12 @@ onClick={(e) => {
   {siteSettings.threshold_promo_active && (
     <div className="space-y-3 animate-in fade-in">
       <div className="flex items-center justify-between">
-        <span className="text-xs font-bold text-slate-400">מינימום להטבה (₪):</span>
-        <input type="number" className="w-24 bg-slate-900 border border-slate-700 p-2 rounded-xl text-white text-center font-bold" value={siteSettings.threshold_promo_limit} onChange={e => setSiteSettings({...siteSettings, threshold_promo_limit: Number(e.target.value)})} />
+        <span className="text-xs font-bold text-slate-600">מינימום להטבה (₪):</span>
+        <input type="number" className="w-24 bg-white border border-slate-200 p-2 rounded-xl text-slate-900 text-center font-bold" value={siteSettings.threshold_promo_limit} onChange={e => setSiteSettings({...siteSettings, threshold_promo_limit: Number(e.target.value)})} />
       </div>
       <button 
         onClick={() => setShowGiftSelectorInAdmin(true)}
-        className="w-full py-2 bg-slate-800 text-green-400 rounded-xl font-black text-[10px] border border-green-500/30"
+        className="w-full py-2 bg-slate-50 text-green-400 rounded-xl font-black text-[10px] border border-green-500/30"
       >
         בחר מוצרים למתנה ({siteSettings.threshold_promo_items?.length || 0})
       </button>
@@ -3100,15 +3100,15 @@ onClick={(e) => {
               {/* מאפה מוזהב המלא */}
               <div className="bg-amber-500/10 border border-amber-500/30 p-4 rounded-2xl space-y-3">
                 <div className="flex justify-between items-center">
-                   <span className="text-xs font-bold text-amber-500 flex items-center gap-2"><Trophy size={14}/> יעד מאפה מוזהב</span>
+                   <span className="text-xs font-bold text-amber-600 flex items-center gap-2"><Trophy size={14}/> יעד מאפה מוזהב</span>
                    <div className="flex items-center gap-2">
-                      <input type="number" className="w-14 bg-slate-900 p-1 rounded-lg text-center text-white" value={siteSettings.golden_pastry_target} onChange={e => setSiteSettings({...siteSettings, golden_pastry_target: Number(e.target.value)})} />
+                      <input type="number" className="w-14 bg-white p-1 rounded-lg text-center text-slate-900" value={siteSettings.golden_pastry_target} onChange={e => setSiteSettings({...siteSettings, golden_pastry_target: Number(e.target.value)})} />
                       <input type="checkbox" className="w-5 h-5 accent-amber-500" checked={siteSettings.golden_pastry_active} onChange={e => setSiteSettings({...siteSettings, golden_pastry_active: e.target.checked})} />
                    </div>
                 </div>
-                <div className="flex justify-between items-center text-[10px] text-slate-400">
+                <div className="flex justify-between items-center text-[10px] text-slate-600">
                   <span>מונה נוכחי:</span>
-                  <input type="number" className="w-14 bg-slate-900 p-1 rounded-lg text-center text-white" value={siteSettings.golden_pastry_counter} onChange={e => setSiteSettings({...siteSettings, golden_pastry_counter: Number(e.target.value)})} />
+                  <input type="number" className="w-14 bg-white p-1 rounded-lg text-center text-slate-900" value={siteSettings.golden_pastry_counter} onChange={e => setSiteSettings({...siteSettings, golden_pastry_counter: Number(e.target.value)})} />
                 </div>
               </div>
 {/* החזרת בחירת הטבת לוגו סודית */}
@@ -3117,7 +3117,7 @@ onClick={(e) => {
     <Trophy size={14} /> הטבה סודית (3 לחיצות על לוגו):
   </label>
   <select 
-    className="w-full bg-slate-900 border border-slate-700 p-3 rounded-xl text-right text-white outline-none focus:border-blue-500 font-bold text-xs appearance-none"
+    className="w-full bg-white border border-slate-200 p-3 rounded-xl text-right text-slate-900 outline-none focus:border-blue-500 font-bold text-xs appearance-none"
     value={siteSettings.reward_type}
     onChange={e => setSiteSettings({...siteSettings, reward_type: e.target.value})}
   >
@@ -3137,8 +3137,8 @@ onClick={(e) => {
                  </div>
                  {siteSettings.coupon_active && (
                    <div className="grid grid-cols-2 gap-2 animate-in fade-in">
-                      <input className="bg-slate-900 border border-slate-700 p-2 rounded-xl text-white text-center font-bold" value={siteSettings.coupon_code} onChange={e => setSiteSettings({...siteSettings, coupon_code: e.target.value})} placeholder="הקוד" />
-                      <input type="number" className="bg-slate-900 border border-slate-700 p-2 rounded-xl text-white text-center font-bold" value={siteSettings.coupon_discount_percent} onChange={e => setSiteSettings({...siteSettings, coupon_discount_percent: Number(e.target.value)})} placeholder="%" />
+                      <input className="bg-white border border-slate-200 p-2 rounded-xl text-slate-900 text-center font-bold" value={siteSettings.coupon_code} onChange={e => setSiteSettings({...siteSettings, coupon_code: e.target.value})} placeholder="הקוד" />
+                      <input type="number" className="bg-white border border-slate-200 p-2 rounded-xl text-slate-900 text-center font-bold" value={siteSettings.coupon_discount_percent} onChange={e => setSiteSettings({...siteSettings, coupon_discount_percent: Number(e.target.value)})} placeholder="%" />
                    </div>
                  )}
               </div>
@@ -3148,34 +3148,34 @@ onClick={(e) => {
           {/* לשונית ימי ושעות פעילות */}
           {activeSettingsTab === 'hours' && (
             <div className="space-y-4">
-              <div className="bg-slate-800 p-4 rounded-xl border border-slate-700">
-                <label className="text-[10px] font-bold text-slate-400 block mb-2">ימי היריד:</label>
+              <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <label className="text-[10px] font-bold text-slate-600 block mb-2">ימי היריד:</label>
                 <div className="flex flex-wrap gap-1.5 justify-center">
                   {daysOfWeek.map(d => (
                     <button key={d.value} onClick={() => {
                         const current = siteSettings.fair_days || [];
                         const next = current.includes(d.value) ? current.filter(v => v !== d.value) : [...current, d.value];
                         setSiteSettings({...siteSettings, fair_days: next});
-                      }} className={`px-2.5 py-1.5 rounded-lg text-[10px] font-black border transition-all ${siteSettings.fair_days?.includes(d.value) ? 'bg-amber-600 border-amber-400 text-white shadow-lg' : 'bg-slate-900 text-slate-500 border-slate-700'}`}>{d.label}</button>
+                      }} className={`px-2.5 py-1.5 rounded-lg text-[10px] font-black border transition-all ${siteSettings.fair_days?.includes(d.value) ? 'bg-amber-600 border-amber-400 text-slate-900 shadow-lg' : 'bg-white text-slate-500 border-slate-200'}`}>{d.label}</button>
                   ))}
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-2">
-                <div className="bg-slate-800 p-3 rounded-xl border border-slate-700">
+                <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
                   <span className="text-[9px] font-black block text-slate-500 mb-1 uppercase">פתיחה יריד</span>
-                  <input type="time" className="w-full bg-transparent text-white font-bold text-center outline-none" value={siteSettings.opening_hour} onChange={e => setSiteSettings({...siteSettings, opening_hour: e.target.value})} />
+                  <input type="time" className="w-full bg-transparent text-slate-900 font-bold text-center outline-none" value={siteSettings.opening_hour} onChange={e => setSiteSettings({...siteSettings, opening_hour: e.target.value})} />
                 </div>
-                <div className="bg-slate-800 p-3 rounded-xl border border-slate-700">
+                <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
                   <span className="text-[9px] font-black block text-slate-500 mb-1 uppercase">סגירה יריד</span>
-                  <input type="time" className="w-full bg-transparent text-white font-bold text-center outline-none" value={siteSettings.closing_hour} onChange={e => setSiteSettings({...siteSettings, closing_hour: e.target.value})} />
+                  <input type="time" className="w-full bg-transparent text-slate-900 font-bold text-center outline-none" value={siteSettings.closing_hour} onChange={e => setSiteSettings({...siteSettings, closing_hour: e.target.value})} />
                 </div>
                 <div className="bg-green-900/20 border border-green-500/30 p-3 rounded-xl">
                   <span className="text-[9px] font-black block text-green-500 mb-1 uppercase">התחלה וואטסאפ</span>
-                  <input type="time" className="w-full bg-transparent text-white font-bold text-center outline-none" value={siteSettings.whatsapp_opening_hour} onChange={e => setSiteSettings({...siteSettings, whatsapp_opening_hour: e.target.value})} />
+                  <input type="time" className="w-full bg-transparent text-slate-900 font-bold text-center outline-none" value={siteSettings.whatsapp_opening_hour} onChange={e => setSiteSettings({...siteSettings, whatsapp_opening_hour: e.target.value})} />
                 </div>
                 <div className="bg-green-900/20 border border-green-500/30 p-3 rounded-xl">
                   <span className="text-[9px] font-black block text-green-500 mb-1 uppercase">סיום וואטסאפ</span>
-                  <input type="time" className="w-full bg-transparent text-white font-bold text-center outline-none" value={siteSettings.whatsapp_closing_hour} onChange={e => setSiteSettings({...siteSettings, whatsapp_closing_hour: e.target.value})} />
+                  <input type="time" className="w-full bg-transparent text-slate-900 font-bold text-center outline-none" value={siteSettings.whatsapp_closing_hour} onChange={e => setSiteSettings({...siteSettings, whatsapp_closing_hour: e.target.value})} />
                 </div>
               </div>
             </div>
@@ -3185,16 +3185,16 @@ onClick={(e) => {
 
       {/* רכיבים שזמינים תמיד בתחתית */}
       <div className="pt-6 border-t border-slate-800 space-y-4">
-        <button onClick={() => setShowPasswordModal(true)} className="w-full bg-slate-800/50 border border-slate-700 py-3 rounded-2xl text-amber-500 font-bold text-xs flex items-center justify-center gap-2 active:scale-95 transition-all hover:bg-slate-800">
+        <button onClick={() => setShowPasswordModal(true)} className="w-full bg-slate-50/50 border border-slate-200 py-3 rounded-2xl text-amber-600 font-bold text-xs flex items-center justify-center gap-2 active:scale-95 transition-all hover:bg-slate-50">
           <KeyRound size={16} /> שינוי סיסמה
         </button>
 
-        <div className="bg-slate-800/30 p-3 rounded-2xl border border-slate-800">
-          <span className="text-[10px] font-black text-slate-400 uppercase mb-3 block text-center">סטטוס האתר:</span>
-          <div className="flex bg-slate-900 p-1 rounded-xl border border-slate-700">
+        <div className="bg-slate-50/30 p-3 rounded-2xl border border-slate-800">
+          <span className="text-[10px] font-black text-slate-600 uppercase mb-3 block text-center">סטטוס האתר:</span>
+          <div className="flex bg-white p-1 rounded-xl border border-slate-200">
             {[{id:'open',t:'פתוח'},{id:'busy',t:'לחץ'},{id:'closed',t:'סגור'}].map(s => (
               <button key={s.id} onClick={() => setSiteSettings({...siteSettings, site_status: s.id})}
-                className={`flex-1 py-2 rounded-lg text-[11px] font-black transition-all ${siteSettings.site_status === s.id ? 'bg-amber-600 text-white shadow-lg' : 'text-slate-500 hover:text-slate-300'}`}>{s.t}</button>
+                className={`flex-1 py-2 rounded-lg text-[11px] font-black transition-all ${siteSettings.site_status === s.id ? 'bg-amber-600 text-slate-900 shadow-lg' : 'text-slate-500 hover:text-slate-600'}`}>{s.t}</button>
             ))}
           </div>
         </div>
@@ -3209,10 +3209,10 @@ onClick={(e) => {
 
 {showExtraSettingsModal && (
   <div className="fixed inset-0 z-[500] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl">
-    <div className="bg-slate-900 border-2 border-green-500 p-8 rounded-[2.5rem] shadow-2xl max-sm w-full animate-in zoom-in relative max-h-[90vh] overflow-y-auto">
-      <button onClick={() => { setSiteSettings(settingsSnapshot); setShowExtraSettingsModal(false); setActiveExtraTab(null); }} className="absolute top-6 left-6 text-slate-500 hover:text-white"><X size={20}/></button>
+    <div className="bg-white border-2 border-green-500 p-8 rounded-[2.5rem] shadow-2xl max-sm w-full animate-in zoom-in relative max-h-[90vh] overflow-y-auto">
+      <button onClick={() => { setSiteSettings(settingsSnapshot); setShowExtraSettingsModal(false); setActiveExtraTab(null); }} className="absolute top-6 left-6 text-slate-500 hover:text-slate-900"><X size={20}/></button>
       <Edit2 className="mx-auto text-green-400 mb-4" size={40} />
-      <h3 className="text-xl font-black mb-6 text-white text-center">עריכה אישית</h3>
+      <h3 className="text-xl font-black mb-6 text-slate-900 text-center">עריכה אישית</h3>
 
       {/* תפריט 7 כפתורים */}
       {!activeExtraTab ? (
@@ -3228,7 +3228,7 @@ onClick={(e) => {
 
             { id: 'pickup', label: 'אפשרויות איסוף', icon: <MapPin size={16}/> }
           ].map(tab => (
-            <button key={tab.id} onClick={() => setActiveExtraTab(tab.id)} className="w-full bg-slate-800 border border-slate-700 p-4 rounded-2xl flex items-center justify-between text-white font-bold hover:bg-slate-700 transition-all">
+            <button key={tab.id} onClick={() => setActiveExtraTab(tab.id)} className="w-full bg-slate-50 border border-slate-200 p-4 rounded-2xl flex items-center justify-between text-slate-900 font-bold hover:bg-slate-700 transition-all">
               <span className="flex items-center gap-3">{tab.icon} {tab.label}</span>
               <ArrowLeft size={16} className="text-green-500" />
             </button>
@@ -3240,8 +3240,8 @@ onClick={(e) => {
 
 {activeExtraTab === 'about' && (
   <div className="space-y-4 animate-in slide-in-from-left-4">
-    <div className="flex items-center justify-between bg-slate-800 p-4 rounded-xl border border-slate-700">
-      <span className="text-xs font-bold text-white flex items-center gap-2">
+    <div className="flex items-center justify-between bg-slate-50 p-4 rounded-xl border border-slate-200">
+      <span className="text-xs font-bold text-slate-900 flex items-center gap-2">
         <Eye size={14} className="text-pink-500"/> הצג את כפתור "מי אני" באתר?
       </span>
       <input 
@@ -3252,14 +3252,14 @@ onClick={(e) => {
       />
     </div>
     
-    <div className="bg-slate-800/50 p-3 rounded-xl border border-pink-500/20">
+    <div className="bg-slate-50/50 p-3 rounded-xl border border-pink-500/20">
       <label className="text-[10px] font-black text-pink-400 block mb-2">קישור לתמונה שלך (מרובעת):</label>
-      <input className="w-full bg-slate-900 border border-slate-700 p-3 rounded-xl text-white text-xs" value={siteSettings.about_image_url} onChange={e => setSiteSettings({...siteSettings, about_image_url: e.target.value})} placeholder="URL תמונה" />
+      <input className="w-full bg-white border border-slate-200 p-3 rounded-xl text-slate-900 text-xs" value={siteSettings.about_image_url} onChange={e => setSiteSettings({...siteSettings, about_image_url: e.target.value})} placeholder="URL תמונה" />
     </div>
 
-    <div className="bg-slate-800/50 p-3 rounded-xl border border-pink-500/20">
+    <div className="bg-slate-50/50 p-3 rounded-xl border border-pink-500/20">
       <label className="text-[10px] font-black text-pink-400 block mb-2">הסיפור שלך (תומך ב-HTML):</label>
-      <textarea className="w-full bg-slate-900 border border-slate-700 p-3 rounded-xl text-white text-xs text-right outline-none" rows={12} value={siteSettings.about_text} onChange={e => setSiteSettings({...siteSettings, about_text: e.target.value})} placeholder="כאן תוכל לכתוב מי אתה... השתמש ב <br/> לירידת שורה." />
+      <textarea className="w-full bg-white border border-slate-200 p-3 rounded-xl text-slate-900 text-xs text-right outline-none" rows={12} value={siteSettings.about_text} onChange={e => setSiteSettings({...siteSettings, about_text: e.target.value})} placeholder="כאן תוכל לכתוב מי אתה... השתמש ב <br/> לירידת שורה." />
     </div>
   </div>
 )}
@@ -3267,73 +3267,73 @@ onClick={(e) => {
 
 {activeExtraTab === 'brand' && (
   <div className="space-y-3">
-    <div className="bg-slate-800/50 p-2 rounded-xl border border-amber-500/20 mb-2">
-      <label className="text-[10px] font-black text-amber-500 block mb-1 pr-1">שם המותג לתזכורת ביומן:</label>
+    <div className="bg-slate-50/50 p-2 rounded-xl border border-amber-500/20 mb-2">
+      <label className="text-[10px] font-black text-amber-600 block mb-1 pr-1">שם המותג לתזכורת ביומן:</label>
       <input 
-        className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-white text-xs font-bold" 
+        className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-slate-900 text-xs font-bold" 
         value={siteSettings.reminder_brand_name} 
         onChange={e => setSiteSettings({...siteSettings, reminder_brand_name: e.target.value})} 
-        placeholder="למשל: ליאור בן משה" 
+        placeholder="למשל: הווק הטבעוני" 
       />
     </div>
-    <input className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-white text-xs" value={siteSettings.seo_title} onChange={e => setSiteSettings({...siteSettings, seo_title: e.target.value})} placeholder="כותרת SEO" />
-    <textarea className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-white text-xs" rows={2} value={siteSettings.seo_description} onChange={e => setSiteSettings({...siteSettings, seo_description: e.target.value})} placeholder="תיאור SEO" />
-    <input className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-white text-xs" value={siteSettings.whatsapp_recipient_name} onChange={e => setSiteSettings({...siteSettings, whatsapp_recipient_name: e.target.value})} placeholder="שם מקבל ההודעה" />
-    <input className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-white text-xs" value={siteSettings.payment_details} onChange={e => setSiteSettings({...siteSettings, payment_details: e.target.value})} placeholder="פרטי תשלום" />
+    <input className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-slate-900 text-xs" value={siteSettings.seo_title} onChange={e => setSiteSettings({...siteSettings, seo_title: e.target.value})} placeholder="כותרת SEO" />
+    <textarea className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-slate-900 text-xs" rows={2} value={siteSettings.seo_description} onChange={e => setSiteSettings({...siteSettings, seo_description: e.target.value})} placeholder="תיאור SEO" />
+    <input className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-slate-900 text-xs" value={siteSettings.whatsapp_recipient_name} onChange={e => setSiteSettings({...siteSettings, whatsapp_recipient_name: e.target.value})} placeholder="שם מקבל ההודעה" />
+    <input className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-slate-900 text-xs" value={siteSettings.payment_details} onChange={e => setSiteSettings({...siteSettings, payment_details: e.target.value})} placeholder="פרטי תשלום" />
   </div>
 )}
 
 
           {activeExtraTab === 'instagram' && (
             <div className="space-y-3">
-              <input className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-white text-xs" value={siteSettings.story_image_url} onChange={e => setSiteSettings({...siteSettings, story_image_url: e.target.value})} placeholder="URL תמונת סטורי" />
-              <input className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-white text-xs" value={siteSettings.instagram_username} onChange={e => setSiteSettings({...siteSettings, instagram_username: e.target.value})} placeholder="שם משתמש אינסטגרם" />
+              <input className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-slate-900 text-xs" value={siteSettings.story_image_url} onChange={e => setSiteSettings({...siteSettings, story_image_url: e.target.value})} placeholder="URL תמונת סטורי" />
+              <input className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-slate-900 text-xs" value={siteSettings.instagram_username} onChange={e => setSiteSettings({...siteSettings, instagram_username: e.target.value})} placeholder="שם משתמש אינסטגרם" />
             </div>
           )}
 
           {activeExtraTab === 'supabase' && (
             <div className="space-y-3">
-              <input className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-white text-[10px]" dir="ltr" value={siteSettings.supabase_url || SUPABASE_URL} onChange={e => setSiteSettings({...siteSettings, supabase_url: e.target.value})} placeholder="Supabase URL" />
-              <input className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-white text-[10px]" dir="ltr" value={siteSettings.supabase_key || SUPABASE_ANON_KEY} onChange={e => setSiteSettings({...siteSettings, supabase_key: e.target.value})} placeholder="Supabase Key" />
+              <input className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-slate-900 text-[10px]" dir="ltr" value={siteSettings.supabase_url || SUPABASE_URL} onChange={e => setSiteSettings({...siteSettings, supabase_url: e.target.value})} placeholder="Supabase URL" />
+              <input className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-slate-900 text-[10px]" dir="ltr" value={siteSettings.supabase_key || SUPABASE_ANON_KEY} onChange={e => setSiteSettings({...siteSettings, supabase_key: e.target.value})} placeholder="Supabase Key" />
             </div>
           )}
 
           {activeExtraTab === 'social' && (
             <div className="space-y-3">
-              <input className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-white text-xs" value={siteSettings.logo_url} onChange={e => setSiteSettings({...siteSettings, logo_url: e.target.value})} placeholder="URL לוגו" />
-              <input className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-white text-xs" value={siteSettings.whatsapp_number} onChange={e => setSiteSettings({...siteSettings, whatsapp_number: e.target.value})} placeholder="מספר וואטסאפ" />
-              <input className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-white text-xs" value={siteSettings.instagram_url} onChange={e => setSiteSettings({...siteSettings, instagram_url: e.target.value})} placeholder="לינק אינסטגרם" />
-              <input className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-white text-xs" value={siteSettings.facebook_url} onChange={e => setSiteSettings({...siteSettings, facebook_url: e.target.value})} placeholder="לינק פייסבוק" />
+              <input className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-slate-900 text-xs" value={siteSettings.logo_url} onChange={e => setSiteSettings({...siteSettings, logo_url: e.target.value})} placeholder="URL לוגו" />
+              <input className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-slate-900 text-xs" value={siteSettings.whatsapp_number} onChange={e => setSiteSettings({...siteSettings, whatsapp_number: e.target.value})} placeholder="מספר וואטסאפ" />
+              <input className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-slate-900 text-xs" value={siteSettings.instagram_url} onChange={e => setSiteSettings({...siteSettings, instagram_url: e.target.value})} placeholder="לינק אינסטגרם" />
+              <input className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-slate-900 text-xs" value={siteSettings.facebook_url} onChange={e => setSiteSettings({...siteSettings, facebook_url: e.target.value})} placeholder="לינק פייסבוק" />
             </div>
           )}
 
           {activeExtraTab === 'popup' && (
             <div className="space-y-3">
-              <div className="flex justify-between items-center bg-slate-800 p-3 rounded-xl">
-                <span className="text-white text-xs font-bold">הפעל הודעה?</span>
+              <div className="flex justify-between items-center bg-slate-50 p-3 rounded-xl">
+                <span className="text-slate-900 text-xs font-bold">הפעל הודעה?</span>
                 <input type="checkbox" checked={siteSettings.popup_active} onChange={e => setSiteSettings({...siteSettings, popup_active: e.target.checked})} />
               </div>
-              <textarea className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-white text-xs" rows={3} value={siteSettings.popup_text} onChange={e => setSiteSettings({...siteSettings, popup_text: e.target.value})} placeholder="מלל הודעה" />
-              <input className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-white text-xs" value={siteSettings.popup_image_url} onChange={e => setSiteSettings({...siteSettings, popup_image_url: e.target.value})} placeholder="URL תמונה" />
+              <textarea className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-slate-900 text-xs" rows={3} value={siteSettings.popup_text} onChange={e => setSiteSettings({...siteSettings, popup_text: e.target.value})} placeholder="מלל הודעה" />
+              <input className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-slate-900 text-xs" value={siteSettings.popup_image_url} onChange={e => setSiteSettings({...siteSettings, popup_image_url: e.target.value})} placeholder="URL תמונה" />
             </div>
           )}
 
           {activeExtraTab === 'extra' && (
             <div className="space-y-3">
-              <div className="flex justify-between items-center bg-slate-800 p-3 rounded-xl">
-                <span className="text-white text-xs font-bold">הפעל כפתור?</span>
+              <div className="flex justify-between items-center bg-slate-50 p-3 rounded-xl">
+                <span className="text-slate-900 text-xs font-bold">הפעל כפתור?</span>
                 <input type="checkbox" checked={siteSettings.extra_button_active} onChange={e => setSiteSettings({...siteSettings, extra_button_active: e.target.checked})} />
               </div>
-              <input className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-white text-xs" value={siteSettings.extra_button_text} onChange={e => setSiteSettings({...siteSettings, extra_button_text: e.target.value})} placeholder="מלל כפתור" />
-              <input className="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-white text-xs" value={siteSettings.extra_button_url} onChange={e => setSiteSettings({...siteSettings, extra_button_url: e.target.value})} placeholder="לינק כפתור" />
+              <input className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-slate-900 text-xs" value={siteSettings.extra_button_text} onChange={e => setSiteSettings({...siteSettings, extra_button_text: e.target.value})} placeholder="מלל כפתור" />
+              <input className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-slate-900 text-xs" value={siteSettings.extra_button_url} onChange={e => setSiteSettings({...siteSettings, extra_button_url: e.target.value})} placeholder="לינק כפתור" />
             </div>
           )}
 
           {activeExtraTab === 'pickup' && (
             <div className="space-y-3">
               {orderOptions.map(opt => (
-                <div key={opt.id} className="bg-slate-800 p-3 rounded-xl flex justify-between items-center">
-                  <span className="text-xs text-white">{opt.label} (₪{opt.cost})</span>
+                <div key={opt.id} className="bg-slate-50 p-3 rounded-xl flex justify-between items-center">
+                  <span className="text-xs text-slate-900">{opt.label} (₪{opt.cost})</span>
                   {!opt.is_pickup && <button onClick={async () => { if(confirm("למחוק?")) { await supabase.from('order_options').delete().eq('id', opt.id); fetchOrderOptions(); } }} className="text-red-500"><Trash2 size={14}/></button>}
                 </div>
               ))}
@@ -3377,16 +3377,16 @@ onClick={(e) => {
 
 {showSaveConfirm && (
   <div className="fixed inset-0 z-[3000] flex items-center justify-center px-6 bg-black/95 backdrop-blur-xl animate-in fade-in">
-    <div className="bg-slate-900 border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-w-sm w-full text-center animate-in zoom-in">
-      <Lock className="mx-auto text-amber-500 mb-4" size={48} />
-      <h3 className="text-xl font-black mb-2 text-white">אישור מנהל לשמירה</h3>
-      <p className="text-slate-400 text-sm mb-6">הזן סיסמת מנהל כדי לאשר את השינויים בעריכה האישית</p>
+    <div className="bg-white border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-w-sm w-full text-center animate-in zoom-in">
+      <Lock className="mx-auto text-amber-600 mb-4" size={48} />
+      <h3 className="text-xl font-black mb-2 text-slate-900">אישור מנהל לשמירה</h3>
+      <p className="text-slate-600 text-sm mb-6">הזן סיסמת מנהל כדי לאשר את השינויים בעריכה האישית</p>
 
       <input 
         type="password" 
         inputMode="numeric"
         placeholder="סיסמת מנהל"
-        className="w-full bg-slate-800 border-2 border-slate-700 p-4 rounded-2xl text-center text-xl text-white outline-none focus:border-amber-500 mb-6 font-bold"
+        className="w-full bg-slate-50 border-2 border-slate-200 p-4 rounded-2xl text-center text-xl text-slate-900 outline-none focus:border-amber-500 mb-6 font-bold"
         value={saveConfirmPass}
         onChange={e => setSaveConfirmPass(e.target.value)}
       />
@@ -3404,7 +3404,7 @@ onClick={(e) => {
               alert("סיסמה שגויה! השינויים לא נשמרו.");
             }
           }} 
-          className="w-full bg-green-600 text-white py-4 rounded-2xl font-black text-lg shadow-lg active:scale-95 transition-all"
+          className="w-full bg-green-600 text-slate-900 py-4 rounded-2xl font-black text-lg shadow-lg active:scale-95 transition-all"
         >
           אשר ושמור שינויים
         </button>
@@ -3413,7 +3413,7 @@ onClick={(e) => {
             setShowSaveConfirm(false);
             setSaveConfirmPass("");
           }} 
-          className="w-full bg-slate-800 text-slate-400 py-3 rounded-2xl font-bold"
+          className="w-full bg-slate-50 text-slate-600 py-3 rounded-2xl font-bold"
         >
           ביטול
         </button>
@@ -3426,16 +3426,16 @@ onClick={(e) => {
 
           {showPasswordModal && (
             <div className="fixed inset-0 z-[600] flex justify-center items-start pt-[25vh] bg-black/95 backdrop-blur-xl p-4">
-              <div className="bg-slate-900 border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-sm w-full animate-in zoom-in text-center relative">
-                <Lock className="mx-auto text-amber-500 mb-4 text-center" size={40} />
-                <h3 className="text-xl font-black mb-6 text-white text-center">שינוי סיסמה</h3>
+              <div className="bg-white border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-sm w-full animate-in zoom-in text-center relative">
+                <Lock className="mx-auto text-amber-600 mb-4 text-center" size={40} />
+                <h3 className="text-xl font-black mb-6 text-slate-900 text-center">שינוי סיסמה</h3>
                 <div className="space-y-4 mb-8 text-right">
                   <div className="text-right">
                     <label className="text-[10px] font-bold text-slate-500 mr-2 text-right">סיסמה נוכחית:</label>
                     <input 
                       type="password" 
                       inputMode="numeric"
-                      className="w-full bg-slate-800 border border-slate-700 p-4 rounded-2xl text-center text-white outline-none focus:border-amber-500 font-bold text-center"
+                      className="w-full bg-slate-50 border border-slate-200 p-4 rounded-2xl text-center text-slate-900 outline-none focus:border-amber-500 font-bold text-center"
                       value={passForm.old}
                       onChange={e => setPassForm({...passForm, old: e.target.value})}
                     />
@@ -3445,7 +3445,7 @@ onClick={(e) => {
                     <input 
                       type="password" 
                       inputMode="numeric"
-                      className="w-full bg-slate-800 border border-slate-700 p-4 rounded-2xl text-center text-white outline-none focus:border-amber-500 font-bold text-center"
+                      className="w-full bg-slate-50 border border-slate-200 p-4 rounded-2xl text-center text-slate-900 outline-none focus:border-amber-500 font-bold text-center"
                       value={passForm.new}
                       onChange={e => setPassForm({...passForm, new: e.target.value})}
                     />
@@ -3453,7 +3453,7 @@ onClick={(e) => {
                 </div>
                 <div className="flex gap-3 text-center">
                   <button onClick={handlePasswordChange} className="flex-1 bg-amber-500 text-[#0f172a] py-4 rounded-full font-black text-lg active:scale-95 text-center">עדכן סיסמה</button>
-                  <button onClick={() => setShowPasswordModal(false)} className="flex-1 bg-slate-800 text-slate-400 py-4 rounded-full font-black text-lg active:scale-95 text-center">ביטול</button>
+                  <button onClick={() => setShowPasswordModal(false)} className="flex-1 bg-slate-50 text-slate-600 py-4 rounded-full font-black text-lg active:scale-95 text-center">ביטול</button>
                 </div>
               </div>
             </div>
@@ -3461,18 +3461,18 @@ onClick={(e) => {
 
           {showAddItemModal && (
             <div className="fixed inset-0 z-[800] flex items-center justify-center px-4 bg-black/90 backdrop-blur-xl overflow-y-auto py-8">
-              <div className="bg-slate-900 border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-w-md w-full animate-in zoom-in text-center relative m-auto">
-                <div className="flex justify-between items-center mb-6 text-right"><h3 className="text-lg font-black text-white text-center w-full">{editingProduct ? 'עריכת פריט' : 'הוספת פריט חדש'}</h3><button onClick={() => {setEditingProduct(null); setShowAddItemModal(false);}} className="text-slate-500 hover:text-white"><X size={24}/></button></div>
+              <div className="bg-white border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-w-md w-full animate-in zoom-in text-center relative m-auto">
+                <div className="flex justify-between items-center mb-6 text-right"><h3 className="text-lg font-black text-slate-900 text-center w-full">{editingProduct ? 'עריכת פריט' : 'הוספת פריט חדש'}</h3><button onClick={() => {setEditingProduct(null); setShowAddItemModal(false);}} className="text-slate-500 hover:text-slate-900"><X size={24}/></button></div>
                 <form onSubmit={handleSaveProduct} className="space-y-4 text-center">
-                  <input name="name" className="w-full bg-slate-800 border border-slate-700 p-4 rounded-2xl text-center font-bold outline-none focus:border-amber-500 text-center" placeholder="שם המאפה" defaultValue={editingProduct?.name || ''} required />
-                  <textarea name="description" className="w-full bg-slate-800 border border-slate-700 p-4 rounded-2xl text-center text-sm outline-none focus:border-amber-500 text-center" placeholder="תיאור קצר..." defaultValue={editingProduct?.description || ''} rows={2} />
-<div className="bg-slate-800/50 border border-slate-700 p-4 rounded-2xl space-y-3">
+                  <input name="name" className="w-full bg-slate-50 border border-slate-200 p-4 rounded-2xl text-center font-bold outline-none focus:border-amber-500 text-center" placeholder="שם המאפה" defaultValue={editingProduct?.name || ''} required />
+                  <textarea name="description" className="w-full bg-slate-50 border border-slate-200 p-4 rounded-2xl text-center text-sm outline-none focus:border-amber-500 text-center" placeholder="תיאור קצר..." defaultValue={editingProduct?.description || ''} rows={2} />
+<div className="bg-slate-50/50 border border-slate-200 p-4 rounded-2xl space-y-3">
   <div className="flex justify-between items-center mb-2">
-    <span className="text-[11px] font-black text-amber-500 uppercase">סוגים ומלאי (למשל: וניל, שוקולד)</span>
+    <span className="text-[11px] font-black text-amber-600 uppercase">סוגים ומלאי (למשל: וניל, שוקולד)</span>
     <button 
       type="button"
       onClick={() => setTempVariants([...tempVariants, { name: "", stock: "" }])}
-      className="bg-amber-600 hover:bg-amber-500 text-white p-1.5 rounded-lg transition-all active:scale-90"
+      className="bg-amber-600 hover:bg-amber-500 text-slate-900 p-1.5 rounded-lg transition-all active:scale-90"
     >
       <Plus size={16} />
     </button>
@@ -3482,7 +3482,7 @@ onClick={(e) => {
     <div key={idx} className="flex gap-2 items-center animate-in slide-in-from-right-2">
       <input 
         placeholder="שם הסוג"
-        className="flex-1 bg-slate-900 border border-slate-700 p-2 rounded-xl text-center text-xs text-white outline-none focus:border-amber-500"
+        className="flex-1 bg-white border border-slate-200 p-2 rounded-xl text-center text-xs text-slate-900 outline-none focus:border-amber-500"
         value={v.name}
         onChange={(e) => {
           const newVariants = [...tempVariants];
@@ -3493,7 +3493,7 @@ onClick={(e) => {
       <input 
         type="number"
         placeholder="מלאי"
-        className="w-16 bg-slate-900 border border-slate-700 p-2 rounded-xl text-center text-xs text-white outline-none focus:border-amber-500"
+        className="w-16 bg-white border border-slate-200 p-2 rounded-xl text-center text-xs text-slate-900 outline-none focus:border-amber-500"
         value={v.stock}
         onChange={(e) => {
           const newVariants = [...tempVariants];
@@ -3516,32 +3516,32 @@ onClick={(e) => {
   )}
 </div>
                 {(formCategory === 'desserts' || categories.find(c => c.slug === formCategory)?.name === 'קינוחים') && (<textarea name="heating_instructions" className="w-full bg-amber-500/5 border border-amber-500/20 p-4 rounded-2xl text-center text-sm outline-none text-amber-200 focus:border-amber-500 font-bold text-center" placeholder="המלצת השף..." defaultValue={editingProduct?.heating_instructions || ''} rows={2} />)}
-                  <div className="bg-slate-800 border border-slate-700 p-4 rounded-2xl space-y-4 text-center">
-                      <div className="flex flex-col gap-2"><span className="text-[10px] font-black text-slate-400 text-center">קטגוריה:</span><div className="flex flex-wrap justify-center gap-2 text-center">{categories.map(c => (<label key={c.id} className="flex items-center gap-1 cursor-pointer text-center"><input type="radio" name="category" value={c.slug} defaultChecked={editingProduct?.category === c.slug || (!editingProduct && c.slug === 'pastries')} onChange={(e) => setFormCategory(e.target.value)} className="hidden peer text-center" /><span className="px-3 py-1.5 rounded-full border border-slate-600 text-[9px] font-bold peer-checked:bg-amber-600 peer-checked:border-amber-400 peer-checked:text-white transition-all text-center">{c.name}</span></label>))}</div></div>
-                      <div className="flex justify-between items-center border-t border-slate-700 pt-3 text-center"><span className="text-[10px] font-black text-slate-400 text-center">מיקום בתצוגה (מספר):</span><input name="display_order" type="number" className="w-20 bg-slate-900 border border-slate-600 p-2 rounded-xl text-center font-bold text-amber-500 outline-none text-center" defaultValue={editingProduct?.display_order} placeholder="אוטו'" /></div>
-                      <div className="flex justify-between items-center border-t border-slate-700 pt-3">
-                        <span className="text-[10px] font-black text-slate-400">ללא גלוטן?</span>
+                  <div className="bg-slate-50 border border-slate-200 p-4 rounded-2xl space-y-4 text-center">
+                      <div className="flex flex-col gap-2"><span className="text-[10px] font-black text-slate-600 text-center">קטגוריה:</span><div className="flex flex-wrap justify-center gap-2 text-center">{categories.map(c => (<label key={c.id} className="flex items-center gap-1 cursor-pointer text-center"><input type="radio" name="category" value={c.slug} defaultChecked={editingProduct?.category === c.slug || (!editingProduct && c.slug === 'pastries')} onChange={(e) => setFormCategory(e.target.value)} className="hidden peer text-center" /><span className="px-3 py-1.5 rounded-full border border-slate-600 text-[9px] font-bold peer-checked:bg-amber-600 peer-checked:border-amber-400 peer-checked:text-slate-900 transition-all text-center">{c.name}</span></label>))}</div></div>
+                      <div className="flex justify-between items-center border-t border-slate-200 pt-3 text-center"><span className="text-[10px] font-black text-slate-600 text-center">מיקום בתצוגה (מספר):</span><input name="display_order" type="number" className="w-20 bg-white border border-slate-600 p-2 rounded-xl text-center font-bold text-amber-600 outline-none text-center" defaultValue={editingProduct?.display_order} placeholder="אוטו'" /></div>
+                      <div className="flex justify-between items-center border-t border-slate-200 pt-3">
+                        <span className="text-[10px] font-black text-slate-600">ללא גלוטן?</span>
                         <input name="is_gluten_free" type="checkbox" className="w-5 h-5 accent-amber-500" defaultChecked={editingProduct?.is_gluten_free} />
                       </div>
                   </div>
-<input name="price" type="number" className="w-full bg-slate-800 border border-slate-700 p-4 rounded-2xl text-center font-bold outline-none focus:border-amber-500 text-center" placeholder="מחיר" defaultValue={editingProduct?.price || ''} required />
+<input name="price" type="number" className="w-full bg-slate-50 border border-slate-200 p-4 rounded-2xl text-center font-bold outline-none focus:border-amber-500 text-center" placeholder="מחיר" defaultValue={editingProduct?.price || ''} required />
 
 {/* ניהול מלאי חדש */}
-<div className="bg-slate-800/50 border border-slate-700 p-4 rounded-2xl space-y-3">
+<div className="bg-slate-50/50 border border-slate-200 p-4 rounded-2xl space-y-3">
   <div className="flex justify-between items-center">
-    <span className="text-[10px] font-black text-amber-500">מלאי כללי (ריק = ללא הגבלה):</span>
-    <input name="stock" type="number" className="w-24 bg-slate-900 border border-slate-600 p-2 rounded-xl text-center font-bold text-white outline-none" defaultValue={editingProduct?.stock} placeholder="∞" />
+    <span className="text-[10px] font-black text-amber-600">מלאי כללי (ריק = ללא הגבלה):</span>
+    <input name="stock" type="number" className="w-24 bg-white border border-slate-600 p-2 rounded-xl text-center font-bold text-slate-900 outline-none" defaultValue={editingProduct?.stock} placeholder="∞" />
   </div>
 
   {editingProduct?.variants?.length > 0 && (
-    <div className="pt-2 border-t border-slate-700">
-      <p className="text-[9px] font-bold text-slate-400 mb-2">מלאי לפי סוגים:</p>
+    <div className="pt-2 border-t border-slate-200">
+      <p className="text-[9px] font-bold text-slate-600 mb-2">מלאי לפי סוגים:</p>
       {editingProduct.variants.map(v => (
         <div key={v} className="flex justify-between items-center mb-1">
-          <span className="text-[10px] text-slate-300">{v}:</span>
+          <span className="text-[10px] text-slate-600">{v}:</span>
           <input 
             type="number" 
-            className="w-20 bg-slate-900 border border-slate-700 p-1 rounded-lg text-center text-xs text-white"
+            className="w-20 bg-white border border-slate-200 p-1 rounded-lg text-center text-xs text-slate-900"
             placeholder="∞"
             data-variant-stock={v}
             defaultValue={editingProduct.variant_stock?.[v]}
@@ -3551,13 +3551,13 @@ onClick={(e) => {
     </div>
   )}
 </div>
-                  <input name="image" className="w-full bg-slate-800 border border-slate-700 p-4 rounded-2xl text-center text-[10px] outline-none focus:border-amber-500 text-center" placeholder="URL תמונה" defaultValue={editingProduct?.image || ''} />
+                  <input name="image" className="w-full bg-slate-50 border border-slate-200 p-4 rounded-2xl text-center text-[10px] outline-none focus:border-amber-500 text-center" placeholder="URL תמונה" defaultValue={editingProduct?.image || ''} />
                   <div className="flex gap-3 text-center">
-                    <button type="submit" className="flex-1 bg-amber-600 text-white py-4 rounded-full font-black text-lg shadow-lg text-center">שמור מוצר</button>
+                    <button type="submit" className="flex-1 bg-amber-600 text-slate-900 py-4 rounded-full font-black text-lg shadow-lg text-center">שמור מוצר</button>
                     {editingProduct && (
                       <div className="flex gap-2 text-center">
-                        <button type="button" onClick={() => duplicateProduct(editingProduct)} className="bg-blue-600/20 text-blue-400 p-4 rounded-full border border-blue-500/50 hover:bg-blue-600 hover:text-white transition-all shadow-lg text-center" title="שכפל פריט"><Copy size={24}/></button>
-                        <button type="button" onClick={() => deleteProduct(editingProduct.id)} className="bg-red-600/20 text-red-500 p-4 rounded-full border border-red-500/50 hover:bg-red-600 hover:text-white transition-all shadow-lg text-center" title="מחק פריט"><Trash2 size={24}/></button>
+                        <button type="button" onClick={() => duplicateProduct(editingProduct)} className="bg-blue-600/20 text-blue-400 p-4 rounded-full border border-blue-500/50 hover:bg-blue-600 hover:text-slate-900 transition-all shadow-lg text-center" title="שכפל פריט"><Copy size={24}/></button>
+                        <button type="button" onClick={() => deleteProduct(editingProduct.id)} className="bg-red-600/20 text-red-500 p-4 rounded-full border border-red-500/50 hover:bg-red-600 hover:text-slate-900 transition-all shadow-lg text-center" title="מחק פריט"><Trash2 size={24}/></button>
                       </div>
                     )}
                   </div>
@@ -3576,7 +3576,7 @@ onClick={(e) => {
             {siteSettings.about_active && siteSettings.about_text && siteSettings.about_text.trim() !== "" && (
               <button 
                 onClick={() => { setShowAboutModal(true); logAboutView('internal_click'); }} 
-                className="bg-slate-800/95 border-y border-l border-pink-500/40 w-[45px] py-1.5 rounded-l-2xl shadow-xl hover:bg-slate-700 transition-all flex flex-col items-center justify-center active:scale-95 group pointer-events-auto animate-in slide-in-from-right-4 duration-700 gap-0"
+                className="bg-slate-50/95 border-y border-l border-pink-500/40 w-[45px] py-1.5 rounded-l-2xl shadow-xl hover:bg-slate-700 transition-all flex flex-col items-center justify-center active:scale-95 group pointer-events-auto animate-in slide-in-from-right-4 duration-700 gap-0"
               >
                 <span className="text-lg filter drop-shadow-md mb-0.5">👨‍🍳</span>
                 {/* טקסט מוקטן מאוד כדי להיכנס ב-45px בשורה אחת */}
@@ -3605,10 +3605,10 @@ onClick={(e) => {
                   <button 
                     key={c.id} 
                     onClick={() => { scrollToCategory(c.slug); setShowFloatingMenu(false); }} 
-                    className="bg-slate-800/95 border-y border-l border-amber-500/40 p-2 w-full rounded-l-2xl shadow-xl hover:bg-slate-700 transition-all flex flex-col items-center justify-center active:scale-95 group"
+                    className="bg-slate-50/95 border-y border-l border-amber-500/40 p-2 w-full rounded-l-2xl shadow-xl hover:bg-slate-700 transition-all flex flex-col items-center justify-center active:scale-95 group"
                   >
                     <span className="text-xl md:text-2xl filter drop-shadow-md">{c.icon}</span>
-                    <span className="text-[7px] font-black text-amber-500 uppercase tracking-tighter mt-1">{c.name}</span>
+                    <span className="text-[7px] font-black text-amber-600 uppercase tracking-tighter mt-1">{c.name}</span>
                   </button>
                 ))}
               </div>
@@ -3617,27 +3617,27 @@ onClick={(e) => {
             {/* כפתור ההמבורגר - 45px */}
             <button 
               onClick={() => setShowFloatingMenu(!showFloatingMenu)} 
-              className="bg-slate-800/95 border-y border-l border-amber-500/40 w-[45px] h-[40px] rounded-l-2xl shadow-xl pointer-events-auto hover:bg-slate-700 transition-colors active:scale-90 flex items-center justify-center"
+              className="bg-slate-50/95 border-y border-l border-amber-500/40 w-[45px] h-[40px] rounded-l-2xl shadow-xl pointer-events-auto hover:bg-slate-700 transition-colors active:scale-90 flex items-center justify-center"
             >
-              <Menu size={20} className="text-amber-500" />
+              <Menu size={20} className="text-amber-600" />
             </button>
           </div>
 
           {/* Benefit Gauge - Top Center */}
           {!isAdmin && isDiscountActive && siteSettings.reward_type === '6th_free' && totalPastriesInCart > 0 && (
             <div className="fixed top-2 left-1/2 -translate-x-1/2 z-[250] w-auto animate-in slide-in-from-top-4 duration-500 pointer-events-none">
-              <div className="bg-[#0f172a]/95 border border-slate-700/80 p-2 px-5 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-xl pointer-events-auto">
+              <div className="bg-white/95 border border-slate-200/80 p-2 px-5 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-xl pointer-events-auto">
                 <div className="flex items-center gap-3 md:gap-4">
                     <div className="flex flex-col items-center">
-                      <span className="text-[11px] md:text-xs font-black text-amber-500 uppercase tracking-tighter">בחרת {totalPastriesInCart % 6 === 0 && totalPastriesInCart > 0 ? 6 : totalPastriesInCart % 6}/6 מאפים</span>
-                      <div className="h-2 w-28 md:w-40 bg-slate-900 rounded-full overflow-hidden border border-slate-800 shadow-inner mt-1">
+                      <span className="text-[11px] md:text-xs font-black text-amber-600 uppercase tracking-tighter">בחרת {totalPastriesInCart % 6 === 0 && totalPastriesInCart > 0 ? 6 : totalPastriesInCart % 6}/6 מאפים</span>
+                      <div className="h-2 w-28 md:w-40 bg-white rounded-full overflow-hidden border border-slate-800 shadow-inner mt-1">
                         <div 
                           className={`h-full bg-gradient-to-r from-amber-600 to-amber-400 transition-all duration-700 ease-out ${totalPastriesInCart % 6 === 0 ? 'shimmer-effect' : ''}`}
                           style={{ width: `${((totalPastriesInCart % 6 || (totalPastriesInCart > 0 ? 6 : 0)) / 6) * 100}%` }}
                         />
                       </div>
                     </div>
-                    {totalPastriesInCart % 6 === 0 && totalPastriesInCart > 0 && <Trophy size={16} className="text-amber-500 animate-bounce" />}
+                    {totalPastriesInCart % 6 === 0 && totalPastriesInCart > 0 && <Trophy size={16} className="text-amber-600 animate-bounce" />}
                 </div>
               </div>
 
@@ -3677,7 +3677,7 @@ onClick={(e) => {
         setShowCompassion(false);
       }}
       // שינוי: w-[50px], px-0, flex-col, items-center
-      className="bg-slate-900/95 border border-green-500/30 w-[50px] py-2 rounded-r-xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] backdrop-blur-xl pointer-events-auto cursor-pointer hover:bg-slate-800 transition-colors flex flex-col items-center justify-center gap-1"
+      className="bg-white/95 border border-green-500/30 w-[50px] py-2 rounded-r-xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] backdrop-blur-xl pointer-events-auto cursor-pointer hover:bg-slate-50 transition-colors flex flex-col items-center justify-center gap-1"
     >
       <div className="flex gap-0.5 text-[10px]">
         <span>🐓</span>
@@ -3696,7 +3696,7 @@ onClick={(e) => {
 
 
           <div className={`fixed top-0 left-1/2 -translate-x-1/2 z-[300] w-auto pointer-events-none px-4 transition-all duration-700 ease-in-out ${showBoxAlert ? 'translate-y-24 opacity-100' : '-translate-y-full opacity-0'} text-center`}>
-            <div className="bg-slate-900/95 border-2 border-amber-500 text-amber-500 px-6 py-3 rounded-full shadow-[0_0_20px_rgba(245,158,11,0.4)] flex items-center gap-2 backdrop-blur-md text-center"><ShoppingBasket size={18} /><span className="font-black text-sm md:text-base whitespace-nowrap text-center">עוד מאפה והקופסה מלאה 📦</span></div>
+            <div className="bg-white/95 border-2 border-amber-500 text-amber-600 px-6 py-3 rounded-full shadow-[0_0_20px_rgba(245,158,11,0.4)] flex items-center gap-2 backdrop-blur-md text-center"><ShoppingBasket size={18} /><span className="font-black text-sm md:text-base whitespace-nowrap text-center">עוד מאפה והקופסה מלאה 📦</span></div>
           </div>
 
           <header className="py-1 flex flex-col items-center px-4 text-center animate-in fade-in slide-in-from-top-4 duration-1000">
@@ -3746,7 +3746,7 @@ onClick={(e) => {
   target="_blank" 
   rel="noopener noreferrer"
   // הכפתור עכשיו ב-w-auto כדי להיצמד לתוכן, עם px-1.5 למינימום רווח בצדדים
-  className="flex items-center justify-center gap-1 bg-white/5 border border-white/10 px-1.5 py-1 rounded-xl text-amber-500 hover:scale-105 transition-all active:scale-95 h-[38px] w-auto min-w-[90px] relative overflow-visible shadow-lg"
+  className="flex items-center justify-center gap-1 bg-white/5 border border-white/10 px-1.5 py-1 rounded-xl text-amber-600 hover:scale-105 transition-all active:scale-95 h-[38px] w-auto min-w-[90px] relative overflow-visible shadow-lg"
 >
   {/* הכלוב המעודכן: max-w-[50px] (גדול ב-20% מהקודם) */}
   <span 
@@ -3767,7 +3767,7 @@ onClick={(e) => {
 
 
                           )}
-                          <button onClick={handleSiteShare} className="p-2 bg-white/5 rounded-xl border border-white/10 text-amber-500 hover:scale-110 transition-transform h-[38px]"><Share2 size={18} /></button>
+                          <button onClick={handleSiteShare} className="p-2 bg-white/5 rounded-xl border border-white/10 text-amber-600 hover:scale-110 transition-transform h-[38px]"><Share2 size={18} /></button>
                        </div>
                        
 
@@ -3786,22 +3786,22 @@ onClick={(e) => {
             {/* מסגרת קליקהדוקה וקטנה במיוחד - כל הקפסולה לחיצה */}
             <button 
                 onClick={handleNavigation}
-                className="border border-white/20 bg-white/5 rounded-2xl py-1 px-3 mx-auto w-fit max-w-xs backdrop-blur-sm shadow-lg flex flex-col items-center gap-0 mt-2 transition-all hover:border-white/40 hover:bg-white/10 active:scale-95 group cursor-pointer"
+                className="border border-slate-200 bg-white/5 rounded-2xl py-1 px-3 mx-auto w-fit max-w-xs backdrop-blur-sm shadow-lg flex flex-col items-center gap-0 mt-2 transition-all hover:border-white/40 hover:bg-white/10 active:scale-95 group cursor-pointer"
             >
                 
                 {/* 1. כותרת ראשית */}
-                <h2 className="text-xl md:text-2xl font-bold text-gray-100 leading-none text-center">
+                <h2 className="text-xl md:text-2xl font-bold text-slate-900 leading-none text-center">
                     {siteSettings.main_title}
                 </h2>
 
                 {/* 2. כותרת משנית */}
-                <p className="text-gray-200 text-[10px] md:text-sm font-bold uppercase tracking-widest opacity-70 text-center leading-none mt-0.5">
+                <p className="text-slate-800 text-[10px] md:text-sm font-bold uppercase tracking-widest opacity-70 text-center leading-none mt-0.5">
                     {siteSettings.sub_title}
                 </p>
 
                 {/* 3. כתובת + אייקון */}
                 <div className="flex items-center justify-center gap-1 mt-0.5">
-                   <span className="text-slate-300 text-[10px] font-bold group-hover:text-white transition-colors border-b border-transparent group-hover:border-slate-400 leading-none">
+                   <span className="text-slate-600 text-[10px] font-bold group-hover:text-slate-900 transition-colors border-b border-transparent group-hover:border-slate-400 leading-none">
                        {siteSettings.address}
                    </span>
                    <Navigation size={10} fill="currentColor" className="text-blue-400 group-hover:text-blue-300 transition-colors shrink-0" />
@@ -3866,7 +3866,7 @@ onClick={(e) => {
                 {localStorage.getItem('last_successful_order') && calculateTotal() === 0 && (
                   <button 
                     onClick={handleRestoreOrder}
-                    className="bg-slate-900/50 border border-slate-800 text-slate-400 font-black text-[10px] px-3 py-1.5 rounded-full flex items-center gap-1.5 hover:text-amber-500 transition-all active:scale-95"
+                    className="bg-white/50 border border-slate-800 text-slate-600 font-black text-[10px] px-3 py-1.5 rounded-full flex items-center gap-1.5 hover:text-amber-600 transition-all active:scale-95"
                   >
                     <RotateCcw size={12} /> הזמנה חוזרת
                   </button>
@@ -3877,7 +3877,7 @@ onClick={(e) => {
                     setCartBeforeRandom({...cart}); 
                     setShowRandomizerModal(true); 
                   }}
-                  className="bg-slate-800 border border-amber-500/30 text-amber-500 px-3 py-1.5 rounded-full font-black text-[10px] flex items-center gap-1.5 hover:bg-amber-500 hover:text-[#0f172a] transition-all active:scale-95 shadow-lg"
+                  className="bg-slate-50 border border-amber-500/30 text-amber-600 px-3 py-1.5 rounded-full font-black text-[10px] flex items-center gap-1.5 hover:bg-amber-500 hover:text-[#0f172a] transition-all active:scale-95 shadow-lg"
                 >
                   <Wand2 size={12} /> 
                   {Object.keys(cart).length > 0 ? "תשלים לי" : "תבחר בשבילי"}
@@ -3886,7 +3886,7 @@ onClick={(e) => {
                 {lastRandomBudget !== null && (
                   <button 
                     onClick={() => handleRandomizer(lastRandomBudget)}
-                    className="bg-slate-900/50 border border-slate-800 p-1.5 rounded-full text-slate-400 hover:text-amber-500 transition-all active:scale-95"
+                    className="bg-white/50 border border-slate-800 p-1.5 rounded-full text-slate-600 hover:text-amber-600 transition-all active:scale-95"
                   >
                     <RotateCcw size={12} />
                   </button>
@@ -3895,7 +3895,7 @@ onClick={(e) => {
 
               <button 
                 onClick={() => setFilterGF(!filterGF)} 
-                className={`text-[9px] font-black uppercase px-3 py-1 rounded-full border transition-all active:scale-95 ${filterGF ? 'bg-amber-600 border-amber-400 text-white' : 'bg-slate-900/50 border-slate-800 text-slate-400'}`}
+                className={`text-[9px] font-black uppercase px-3 py-1 rounded-full border transition-all active:scale-95 ${filterGF ? 'bg-amber-600 border-amber-400 text-slate-900' : 'bg-white/50 border-slate-800 text-slate-600'}`}
               >
                 {filterGF ? 'כל המוצרים' : 'רק ללא גלוטן 🌾'}
               </button>
@@ -3909,7 +3909,7 @@ onClick={(e) => {
               const items = v.filter(p => p.category === cat.slug || (cat.slug === 'pastries' && !p.category));
               return items.length > 0 && (
                 <div key={cat.id} id={cat.slug} className="mb-10 text-center scroll-mt-40 animate-in fade-in slide-in-from-bottom-8 duration-700" style={{ animationDelay: `${idx * 150}ms` }}>
-                  <h2 className="text-center text-amber-500 font-black text-lg mb-4 flex items-center gap-4 opacity-80 tracking-widest justify-center">
+                  <h2 className="text-center text-amber-600 font-black text-lg mb-4 flex items-center gap-4 opacity-80 tracking-widest justify-center">
                     <div className="h-[1px] bg-gradient-to-r from-transparent to-amber-500/30 flex-1"></div>
 <span 
   onDoubleClick={() => setShowLoginModal(true)}
@@ -3921,7 +3921,7 @@ onClick={(e) => {
 
                     <div className="h-[1px] bg-gradient-to-l from-transparent to-amber-500/30 flex-1"></div>
                   </h2>
-                  {(cat.slug === 'pastries' || cat.slug === 'frozen') && (<div className="flex justify-center mb-6 text-center"><button onClick={() => setCategoryTip(cat.slug)} className="text-slate-400 font-black text-[11px] uppercase tracking-widest flex items-center gap-1.5 hover:text-amber-500 transition-all active:scale-95 text-center">{cat.slug === 'pastries' ? 'הוראות חימום' : 'הוראות אחסון'}<div className="w-5 h-5 rounded-full border border-current flex items-center justify-center text-center"><Info size={11} strokeWidth={3} /></div></button></div>)}
+                  {(cat.slug === 'pastries' || cat.slug === 'frozen') && (<div className="flex justify-center mb-6 text-center"><button onClick={() => setCategoryTip(cat.slug)} className="text-slate-600 font-black text-[11px] uppercase tracking-widest flex items-center gap-1.5 hover:text-amber-600 transition-all active:scale-95 text-center">{cat.slug === 'pastries' ? 'הוראות חימום' : 'הוראות אחסון'}<div className="w-5 h-5 rounded-full border border-current flex items-center justify-center text-center"><Info size={11} strokeWidth={3} /></div></button></div>)}
                   {/* --- אזור תצוגת המוצרים (גלריה או רשימה - פונטים מעודכנים) --- */}
                   <div className={viewMode === 'gallery' 
                       ? "grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-4 px-1 text-center" 
@@ -3932,26 +3932,27 @@ onClick={(e) => {
                         // ============================================================
                         // תצוגת גלריה (רגיל)
                         // ============================================================
-                        <div key={p.id} className={`bg-slate-800/40 rounded-xl border border-slate-700/50 overflow-hidden flex flex-col shadow-xl transition-all ${p.is_sold_out ? 'grayscale opacity-40' : ''}`}>
-                        <div onClick={() => setPreviewImage(p.image)} className="aspect-square w-full bg-slate-900 relative text-center cursor-zoom-in">
+                        <div key={p.id} className={`bg-slate-50/40 rounded-xl border border-slate-200/50 overflow-hidden flex flex-col shadow-xl transition-all ${p.is_sold_out ? 'grayscale opacity-40' : ''}`}>
+                        <div onClick={() => setPreviewImage(p.image)} className="aspect-square w-full bg-white relative text-center cursor-zoom-in">
                           {p.is_gluten_free && <div className="absolute top-1 left-1 z-20 bg-black/60 w-5 h-5 rounded-full flex items-center justify-center text-[10px] filter drop-shadow-md" title="ללא גלוטן">🌾</div>}
-                          {p.is_sold_out && <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/70 font-black text-white text-[10px] text-center">אזל</div>}
-                          {p.is_fomo && !p.is_sold_out && <div className="absolute top-1 right-1 z-10 bg-[#0f172a] text-amber-500 border border-amber-500/40 text-[6px] md:text-[8px] px-1.5 py-0.5 rounded-full font-black animate-pulse shadow-lg text-center text-xs text-right">נשארו בודדים</div>}
-                          {p.heating_instructions && !p.is_sold_out && (p.category === 'desserts' || cat.name === 'קינוחים') && (<button onClick={(e) => { e.stopPropagation(); setActiveTip(p); }} className="absolute bottom-1 left-1 z-10 bg-black/80 w-4 h-4 rounded-full text-amber-500 flex items-center justify-center shadow-md backdrop-blur-md border border-amber-500/30 text-center"><Info size={10} strokeWidth={3} /></button>)}
+                          {p.is_sold_out && <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/70 font-black text-slate-900 text-[10px] text-center">אזל</div>}
+                          {p.is_fomo && !p.is_sold_out && <div className="absolute top-1 right-1 z-10 bg-white text-amber-600 border border-amber-500/40 text-[6px] md:text-[8px] px-1.5 py-0.5 rounded-full font-black animate-pulse shadow-lg text-center text-xs text-right">נשארו בודדים</div>}
+                          {p.heating_instructions && !p.is_sold_out && (p.category === 'desserts' || cat.name === 'קינוחים') && (<button onClick={(e) => { e.stopPropagation(); setActiveTip(p); }} className="absolute bottom-1 left-1 z-10 bg-black/80 w-4 h-4 rounded-full text-amber-600 flex items-center justify-center shadow-md backdrop-blur-md border border-amber-500/30 text-center"><Info size={10} strokeWidth={3} /></button>)}
                           <img src={p.image} className="w-full h-full object-cover" loading="lazy" />
                         </div>
                         <div className="p-1 flex-1 flex flex-col text-center relative items-center">
-                          <h3 className="font-bold text-[13px] md:text-lg leading-tight text-slate-100 text-center">{p.name}</h3>
+                          <h3 className="font-bold text-[13px] md:text-lg leading-tight text-slate-900 text-center">{p.name}</h3>
 {p.description && (
   <button 
     onClick={(e) => { e.stopPropagation(); setDescModalProduct(p); }}
-    className="text-[10px] font-black text-amber-500 hover:text-amber-400 transition-colors mt-1 mb-1 uppercase tracking-tighter"
+    className="text-[10px] font-bold text-amber-600 underline underline-offset-2 hover:text-amber-500 transition-colors mt-1 mb-1"
   >
-תיאור המוצר
+    תיאור המוצר
   </button>
 )}
 
-                          <div className="text-amber-500 font-black text-[13px] md:text-xl my-0.5 text-center">₪{p.price}</div>
+
+                          <div className="text-amber-600 font-black text-[13px] md:text-xl my-0.5 text-center">₪{p.price}</div>
                           {p.variants && p.variants.length > 0 ? (
                             <div className="mt-auto w-full flex flex-col gap-1">
                               <button 
@@ -3962,21 +3963,21 @@ onClick={(e) => {
                                   );
                                   setShowVariantModal(true);
                                 }}
-                                className={`w-full py-2 rounded-lg font-black text-sm transition-all shadow-lg active:scale-95 ${Object.keys(cart).some(k => k.startsWith(`${p.id}__`)) ? 'bg-amber-500 text-[#0f172a]' : 'bg-slate-700 text-amber-500 border border-amber-500/30'}`}
+                                className={`w-full py-2 rounded-lg font-black text-sm transition-all shadow-lg active:scale-95 ${Object.keys(cart).some(k => k.startsWith(`${p.id}__`)) ? 'bg-amber-500 text-[#0f172a]' : 'bg-slate-700 text-amber-600 border border-amber-500/30'}`}
                               >
                                 {Object.keys(cart).some(k => k.startsWith(`${p.id}__`)) ? 'ערוך בחירה' : 'בחר'}
                               </button>
                               {Object.entries(cart).filter(([key]) => key.startsWith(`${p.id}__`)).map(([key, qty]) => (
-                                <div key={key} className="text-[9px] font-bold text-amber-400/80 bg-slate-900/50 rounded-md py-0.5 px-1 flex justify-between animate-in fade-in">
+                                <div key={key} className="text-[9px] font-bold text-amber-400/80 bg-white/50 rounded-md py-0.5 px-1 flex justify-between animate-in fade-in">
                                   <span>{key.split('__')[1]}</span>
                                   <span>{qty} יח'</span>
                                 </div>
                               ))}
                             </div>
                           ) : (
-                            <div className={`mt-auto flex items-center justify-between rounded-lg p-0.5 border border-slate-700/30 w-full ${p.is_sold_out ? 'opacity-20 pointer-events-none' : 'bg-slate-900/40'} text-center`}>
+                            <div className={`mt-auto flex items-center justify-between rounded-lg p-0.5 border border-slate-200/30 w-full ${p.is_sold_out ? 'opacity-20 pointer-events-none' : 'bg-white/40'} text-center`}>
                               <button onClick={() => updateQty(p.id, -1)} className="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center bg-slate-700/50 rounded-md hover:bg-slate-600 transition-all text-center"><Minus size={12} /></button>
-                              <span className={`text-[11px] md:text-base font-black ${cart[p.id] > 0 ? 'text-amber-500' : 'text-slate-500 text-center'}`}>{cart[p.id] || 0}</span>
+                              <span className={`text-[11px] md:text-base font-black ${cart[p.id] > 0 ? 'text-amber-600' : 'text-slate-500 text-center'}`}>{cart[p.id] || 0}</span>
                               <button 
                                 onClick={() => updateQty(p.id, 1)} 
                                 disabled={(() => {
@@ -4014,32 +4015,32 @@ onClick={(e) => {
                         // ============================================================
                         // תצוגת רשימה (מחיר גדול יותר, שם מוצר קטן יותר)
                         // ============================================================
-                        <div key={p.id} className={`bg-slate-800/40 rounded-xl border border-slate-700/50 py-0.5 px-2 flex items-center justify-between gap-3 shadow-sm transition-all ${p.is_sold_out ? 'grayscale opacity-40' : ''}`}>
+                        <div key={p.id} className={`bg-slate-50/40 rounded-xl border border-slate-200/50 py-0.5 px-2 flex items-center justify-between gap-3 shadow-sm transition-all ${p.is_sold_out ? 'grayscale opacity-40' : ''}`}>
                            
                            {/* צד ימין: תמונה וטקסט */}
                            <div className="flex items-center gap-3 flex-1 min-w-0">
                                <div onClick={() => setPreviewImage(p.image)} className="relative w-8 h-8 shrink-0 cursor-zoom-in">
-                                  <img src={p.image} className="w-full h-full object-cover rounded-lg bg-slate-900 border border-slate-700" loading="lazy" />
-                                  {p.is_gluten_free && <div className="absolute -top-1 -right-1 z-20 bg-black/80 w-4 h-4 rounded-full flex items-center justify-center text-[8px] border border-slate-700">🌾</div>}
+                                  <img src={p.image} className="w-full h-full object-cover rounded-lg bg-white border border-slate-200" loading="lazy" />
+                                  {p.is_gluten_free && <div className="absolute -top-1 -right-1 z-20 bg-black/80 w-4 h-4 rounded-full flex items-center justify-center text-[8px] border border-slate-200">🌾</div>}
                                   {p.is_fomo && !p.is_sold_out && <div className="absolute bottom-0 inset-x-0 bg-amber-500 text-[#0f172a] text-[7px] font-black text-center leading-3 rounded-b-lg">בודדים</div>}
                                </div>
 
                                <div className="flex flex-col text-right min-w-0">
                                   {/* שם מוצר - הוקטן ל-text-xs */}
-                                  <span className="font-bold text-xs text-slate-100 leading-none">{p.name}</span>
+                                  <span className="font-bold text-xs text-slate-900 leading-none">{p.name}</span>
 {p.description && (
   <button 
     onClick={(e) => { e.stopPropagation(); setDescModalProduct(p); }}
-    className="text-[9px] font-bold text-amber-500/80 hover:text-amber-500 underline underline-offset-2 w-fit mt-1"
+    className="text-[9px] font-bold text-amber-600 underline underline-offset-2 w-fit mt-1"
   >
-תיאור המוצר 
+   תיאור מוצר 
   </button>
 )}
-                             
+
                                   {Object.entries(cart).filter(([key]) => key.startsWith(`${p.id}__`)).length > 0 && (
                                     <div className="flex flex-wrap gap-1 mt-1">
                                       {Object.entries(cart).filter(([key]) => key.startsWith(`${p.id}__`)).map(([key, qty]) => (
-                                         <span key={key} className="text-[8px] bg-slate-900 px-1.5 rounded text-amber-500/80 font-bold border border-slate-700">{key.split('__')[1]}: {qty}</span>
+                                         <span key={key} className="text-[8px] bg-white px-1.5 rounded text-amber-600/80 font-bold border border-slate-200">{key.split('__')[1]}: {qty}</span>
                                       ))}
                                     </div>
                                   )}
@@ -4049,7 +4050,7 @@ onClick={(e) => {
                            {/* צד שמאל: מחיר + כפתורים (בתוך קונטיינר מיושר) */}
                            <div className="shrink-0 flex items-center gap-2 pl-1">
                               {/* המחיר - הוגדל חזרה ל-text-sm */}
-                              <span className="text-amber-500 font-black text-sm whitespace-nowrap">₪{p.price}</span>
+                              <span className="text-amber-600 font-black text-sm whitespace-nowrap">₪{p.price}</span>
 
                               {/* קונטיינר קבוע לכפתורים - שומר על המחיר במקום קבוע */}
                               <div className="w-[80px]">
@@ -4060,14 +4061,14 @@ onClick={(e) => {
                                         setVariantSelections(p.variants.reduce((acc, v) => ({ ...acc, [v]: cart[`${p.id}__${v}`] || 0 }), {}));
                                         setShowVariantModal(true);
                                       }}
-                                      className={`w-full py-1.5 rounded-lg font-black text-[10px] border active:scale-95 transition-all ${Object.keys(cart).some(k => k.startsWith(`${p.id}__`)) ? 'bg-amber-500 border-amber-500 text-[#0f172a]' : 'bg-slate-700/50 border-slate-600 text-amber-500'}`}
+                                      className={`w-full py-1.5 rounded-lg font-black text-[10px] border active:scale-95 transition-all ${Object.keys(cart).some(k => k.startsWith(`${p.id}__`)) ? 'bg-amber-500 border-amber-500 text-[#0f172a]' : 'bg-slate-700/50 border-slate-600 text-amber-600'}`}
                                     >
                                       {Object.keys(cart).some(k => k.startsWith(`${p.id}__`)) ? 'ערוך' : 'בחר'}
                                     </button>
                                   ) : (
-                                    <div className={`flex items-center gap-1 w-full bg-slate-900/50 rounded-lg p-0.5 border border-slate-700/50 ${p.is_sold_out ? 'opacity-20 pointer-events-none' : ''}`}>
-                                      <button onClick={() => updateQty(p.id, -1)} className="w-7 h-7 flex items-center justify-center bg-slate-800 rounded-md text-white active:scale-90 transition-all"><Minus size={12}/></button>
-                                      <span className={`font-black text-sm flex-1 text-center ${cart[p.id] > 0 ? 'text-amber-500' : 'text-slate-500'}`}>{cart[p.id] || 0}</span>
+                                    <div className={`flex items-center gap-1 w-full bg-white/50 rounded-lg p-0.5 border border-slate-200/50 ${p.is_sold_out ? 'opacity-20 pointer-events-none' : ''}`}>
+                                      <button onClick={() => updateQty(p.id, -1)} className="w-7 h-7 flex items-center justify-center bg-slate-50 rounded-md text-slate-900 active:scale-90 transition-all"><Minus size={12}/></button>
+                                      <span className={`font-black text-sm flex-1 text-center ${cart[p.id] > 0 ? 'text-amber-600' : 'text-slate-500'}`}>{cart[p.id] || 0}</span>
                                       <button 
                                         onClick={() => updateQty(p.id, 1)} 
                                         disabled={(() => {
@@ -4080,7 +4081,7 @@ onClick={(e) => {
                                             }
                                             return false;
                                         })()}
-                                        className={`w-7 h-7 flex items-center justify-center rounded-md text-white active:scale-90 transition-all ${
+                                        className={`w-7 h-7 flex items-center justify-center rounded-md text-slate-900 active:scale-90 transition-all ${
                                             (() => {
                                                 const now = new Date();
                                                 const currentTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
@@ -4089,7 +4090,7 @@ onClick={(e) => {
                                                 const isSaleOutOfStock = (isSale && siteSettings.sale_categories?.includes(p.category || 'pastries') && p.sale_stock !== null && (cart[p.id] || 0) >= p.sale_stock);
 
                                                 if (isOutOfStock || isSaleOutOfStock) {
-                                                    return 'bg-slate-800 cursor-not-allowed opacity-50';
+                                                    return 'bg-slate-50 cursor-not-allowed opacity-50';
                                                 }
                                                 return 'bg-amber-600';
                                             })()
@@ -4123,9 +4124,9 @@ onClick={(e) => {
 
           {showPickupModal && (
             <div className="fixed inset-0 z-[700] flex justify-center items-start pt-[10vh] bg-black/90 backdrop-blur-xl animate-in fade-in p-4 overflow-y-auto">
-              <div className="bg-slate-900 border-2 border-green-500 p-8 rounded-[2.5rem] shadow-2xl max-sm w-full animate-in zoom-in text-center relative m-auto">
+              <div className="bg-white border-2 border-green-500 p-8 rounded-[2.5rem] shadow-2xl max-sm w-full animate-in zoom-in text-center relative m-auto">
                 <ShoppingBag className="mx-auto text-green-500 mb-4 text-center" size={48} />
-                <h3 className="text-xl font-black mb-6 text-white text-center">איך תרצו לקבל את ההזמנה?</h3>
+                <h3 className="text-xl font-black mb-6 text-slate-900 text-center">איך תרצו לקבל את ההזמנה?</h3>
 
                 <div className="space-y-4 mb-8 text-center">
                   <div className="relative text-right">
@@ -4135,7 +4136,7 @@ onClick={(e) => {
                       <input 
                         type="text" 
                         placeholder="רשמו שם מלא" 
-                        className="w-full bg-slate-800 border-2 border-slate-700 p-4 pr-12 rounded-2xl text-center text-lg text-white outline-none focus:border-green-500 font-bold" 
+                        className="w-full bg-slate-50 border-2 border-slate-200 p-4 pr-12 rounded-2xl text-center text-lg text-slate-900 outline-none focus:border-green-500 font-bold" 
                         value={customerName} 
                         onChange={(e) => setCustomerName(e.target.value)} 
                       />
@@ -4155,7 +4156,7 @@ onClick={(e) => {
         onClick={() => setSelectedOrderOption(option)}
         className={`flex-1 min-w-[100px] min-h-[110px] rounded-2xl border-2 transition-all flex flex-col items-center justify-center p-2 relative shadow-md active:scale-95 ${
          isSelected 
-            ? 'bg-green-600 border-white text-white ring-4 ring-green-500/20 z-10 scale-105' 
+            ? 'bg-green-600 border-white text-slate-900 ring-4 ring-green-500/20 z-10 scale-105' 
             : `bg-white border-slate-200 text-[#0f172a] ${shouldPulse ? 'animate-pulse-soft' : ''}`
         }`}
       >
@@ -4172,7 +4173,7 @@ onClick={(e) => {
 
 
         {/* מחיר בתחתית */}
-        <span className={`text-[9px] font-bold ${isSelected ? 'text-white/90' : 'text-green-600'}`}>
+        <span className={`text-[9px] font-bold ${isSelected ? 'text-slate-900/90' : 'text-green-600'}`}>
           {option.cost > 0 ? `+ ₪${option.cost}` : 'חינם'}
         </span>
 
@@ -4196,7 +4197,7 @@ onClick={(e) => {
                         <Clock className="absolute right-4 top-4 text-slate-500 z-10" size={18} />
 <input 
   type="time" 
-  className="w-full bg-slate-800 border-2 border-slate-700 p-4 pr-12 rounded-2xl text-center text-2xl text-green-400 outline-none focus:border-green-500 font-bold appearance-none relative z-0" 
+  className="w-full bg-slate-50 border-2 border-slate-200 p-4 pr-12 rounded-2xl text-center text-2xl text-green-400 outline-none focus:border-green-500 font-bold appearance-none relative z-0" 
   value={pickupTime} 
   // הגדרת טווח השעות לפי וואטסאפ
   min={siteSettings.whatsapp_opening_hour || siteSettings.opening_hour || "12:00"}
@@ -4237,7 +4238,7 @@ onClick={(e) => {
                   {siteSettings.coupon_active && (
                     <div className="bg-purple-900/10 border border-purple-500/30 p-4 rounded-2xl">
                        <input 
-                        className="w-full bg-slate-900 border-2 border-slate-800 p-3 rounded-xl text-center text-white outline-none focus:border-purple-500 font-black" 
+                        className="w-full bg-white border-2 border-slate-800 p-3 rounded-xl text-center text-slate-900 outline-none focus:border-purple-500 font-black" 
                         value={appliedCoupon} 
                         onChange={e => setAppliedCoupon(e.target.value)} 
                         placeholder="יש קוד קופון?" 
@@ -4256,11 +4257,11 @@ onClick={(e) => {
                   <button 
                     disabled={!customerName || !selectedOrderOption || (selectedOrderOption.is_pickup && !pickupTime)}
                     onClick={finalizeOrder} 
-                    className="w-full bg-green-600 disabled:opacity-50 text-white py-4 rounded-full font-black text-lg shadow-lg active:scale-95 transition-all text-center"
+                    className="w-full bg-green-600 disabled:opacity-50 text-slate-900 py-4 rounded-full font-black text-lg shadow-lg active:scale-95 transition-all text-center"
                   >
                     אישור ושליחת וואטסאפ
                   </button>
-                  <button onClick={() => {setShowPickupModal(false); setSelectedOrderOption(null);}} className="w-full bg-slate-800 text-slate-400 py-3 rounded-full font-bold text-sm text-center">חזרה לסל</button>
+                  <button onClick={() => {setShowPickupModal(false); setSelectedOrderOption(null);}} className="w-full bg-slate-50 text-slate-600 py-3 rounded-full font-bold text-sm text-center">חזרה לסל</button>
                 </div>
               </div>
             </div>
@@ -4269,7 +4270,7 @@ onClick={(e) => {
           {/* Golden Pastry Win Modal */}
           {showGoldenModal && (
             <div className="fixed inset-0 z-[900] flex items-center justify-center px-6 bg-black/95 backdrop-blur-xl animate-in fade-in text-center">
-              <div className="bg-slate-900 border-2 border-amber-500 p-8 rounded-[3rem] shadow-2xl max-sm w-full animate-in zoom-in text-center relative overflow-hidden">
+              <div className="bg-white border-2 border-amber-500 p-8 rounded-[3rem] shadow-2xl max-sm w-full animate-in zoom-in text-center relative overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none">
                   {[...Array(40)].map((_, i) => (
                     <div 
@@ -4291,10 +4292,10 @@ onClick={(e) => {
                 </div>
 
                 <div className="bg-gradient-to-tr from-amber-600 to-yellow-400 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(245,158,11,0.5)]">
-                    <Trophy className="text-white" size={48} />
+                    <Trophy className="text-slate-900" size={48} />
                 </div>
-                <h3 className="text-3xl font-black mb-2 text-white">זכית במאפה בחינם! ✨</h3>
-                <p className="text-slate-300 font-bold mb-8">
+                <h3 className="text-3xl font-black mb-2 text-slate-900">זכית במאפה בחינם! ✨</h3>
+                <p className="text-slate-600 font-bold mb-8">
                   הגעת בדיוק למאפה ה-{siteSettings.golden_pastry_target} שנמכר היום! <br/>
                   המאפה הזול בסל שלך ({goldenWinnerItem?.name}) עלינו.
                 </p>
@@ -4333,17 +4334,17 @@ onClick={(e) => {
           {/* Randomizer Modal */}
           {showRandomizerModal && (
             <div className="fixed inset-0 z-[700] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl">
-              <div className="bg-slate-900 border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-sm w-full animate-in zoom-in text-center relative">
+              <div className="bg-white border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-sm w-full animate-in zoom-in text-center relative">
                 <button onClick={() => setShowRandomizerModal(false)} className="absolute top-6 left-6 text-slate-500"><X size={20}/></button>
-                < Wand2 className="mx-auto text-amber-500 mb-4" size={48} />
-                <h3 className="text-xl font-black mb-2 text-white">נרכיב לך שקית הפתעות?</h3>
-                <p className="text-slate-400 text-sm mb-6">רשום לנו מה התקציב שלך, ואנחנו נבחר בשבילך מיקס של דברים טובים!</p>
+                < Wand2 className="mx-auto text-amber-600 mb-4" size={48} />
+                <h3 className="text-xl font-black mb-2 text-slate-900">נרכיב לך שקית הפתעות?</h3>
+                <p className="text-slate-600 text-sm mb-6">רשום לנו מה התקציב שלך, ואנחנו נבחר בשבילך מיקס של דברים טובים!</p>
 
                 <input 
                   type="number" 
                   inputMode="numeric"
                   placeholder="כמה בא לך להשקיע? (₪)"
-                  className="w-full bg-slate-800 border-2 border-slate-700 p-4 rounded-2xl text-center text-2xl text-amber-500 outline-none focus:border-amber-500 mb-6 font-bold"
+                  className="w-full bg-slate-50 border-2 border-slate-200 p-4 rounded-2xl text-center text-2xl text-amber-600 outline-none focus:border-amber-500 mb-6 font-bold"
                   value={budget}
                   onChange={e => setBudget(e.target.value)}
                 />
@@ -4362,28 +4363,28 @@ onClick={(e) => {
 
           {showThankYouModal && (
             <div className="fixed inset-0 z-[900] flex items-center justify-center px-6 bg-black/95 backdrop-blur-xl animate-in fade-in text-center">
-              <div className="bg-slate-900 border-2 border-pink-500/50 p-8 rounded-[3rem] shadow-2xl max-sm w-full animate-in zoom-in text-center relative border-t-pink-500 border-b-amber-500 overflow-y-auto max-h-[95vh]">
+              <div className="bg-white border-2 border-pink-500/50 p-8 rounded-[3rem] shadow-2xl max-sm w-full animate-in zoom-in text-center relative border-t-pink-500 border-b-amber-500 overflow-y-auto max-h-[95vh]">
                 <div className="bg-gradient-to-tr from-pink-500 to-amber-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-pink-500/20 text-center">
-                    <Trophy className="text-white" size={32} />
+                    <Trophy className="text-slate-900" size={32} />
                 </div>
-                <h3 className="text-2xl font-black mb-1 text-white">תודה שהזמנת</h3>
-                <h4 className="text-lg font-black mb-6 text-amber-500 text-center">Lior Ben Moshe</h4>
+                <h3 className="text-2xl font-black mb-1 text-slate-900">תודה שהזמנת</h3>
+                <h4 className="text-lg font-black mb-6 text-amber-600 text-center">Vegan Wok</h4>
 
                 <div className="space-y-4 mb-8">
                   {/* Instagram Story Block - עם הורדת תמונה ושיתוף קובץ */}
-                  <div className="bg-slate-800/50 p-5 rounded-[2rem] border border-slate-700 text-center relative overflow-hidden">
+                  <div className="bg-slate-50/50 p-5 rounded-[2rem] border border-slate-200 text-center relative overflow-hidden">
                       
                       {/* הודעה מעוצבת להעתקה */}
                       {copyNotification && (
-                        <div className="absolute inset-0 z-50 flex items-center justify-center bg-slate-900/95 backdrop-blur-sm animate-in fade-in zoom-in duration-300">
+                        <div className="absolute inset-0 z-50 flex items-center justify-center bg-white/95 backdrop-blur-sm animate-in fade-in zoom-in duration-300">
                            <div className="flex flex-col items-center gap-2">
                               <div className="bg-green-500/20 p-2 rounded-full text-green-500"><Copy size={20} /></div>
-                              <span className="text-white font-black text-sm">{copyNotification}</span>
+                              <span className="text-slate-900 font-black text-sm">{copyNotification}</span>
                            </div>
                         </div>
                       )}
 
-                      <p className="text-slate-200 font-bold text-sm mb-1 leading-relaxed text-center">
+                      <p className="text-black font-bold text-sm mb-1 leading-relaxed text-center">
                           שתפו בסטורי שאתם מסודרים ותייגו אותי:<br/>
                           <span className="text-pink-500 font-black text-lg">@{siteSettings.instagram_username}</span>
                       </p>
@@ -4431,7 +4432,7 @@ onClick={(e) => {
                                   setIsSharing(false); // סיום טעינה
                               }
                           }}
-                          className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 text-white py-3 rounded-2xl font-black text-lg shadow-xl active:scale-95 transition-all text-center disabled:opacity-70 disabled:cursor-not-allowed"
+                          className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 text-slate-900 py-3 rounded-2xl font-black text-lg shadow-xl active:scale-95 transition-all text-center disabled:opacity-70 disabled:cursor-not-allowed"
                       >
                           {isSharing ? (
                               <span className="animate-pulse">מכין את התמונה...</span>
@@ -4443,8 +4444,8 @@ onClick={(e) => {
 
 
                   {/* Facebook Groups Block */}
-                  <div className="bg-slate-800/50 p-5 rounded-[2rem] border border-slate-700 text-center">
-                      <p className="text-slate-200 font-bold text-sm mb-4 leading-relaxed text-center">
+                  <div className="bg-slate-50/50 p-5 rounded-[2rem] border border-slate-200 text-center">
+                      <p className="text-black font-bold text-sm mb-4 leading-relaxed text-center">
                           תפרגנו לי גם בקבוצות הפייסבוק:
                       </p>
                       <div className="grid grid-cols-1 gap-2">
@@ -4453,10 +4454,10 @@ onClick={(e) => {
                           { name: 'אוכלים טבעוני', url: 'https://www.facebook.com/share/g/1Fik8jwCLf/' },
                           { name: 'טבעוניות אוכלות בחוץ', url: 'https://www.facebook.com/share/g/1ANA3tyxSS/' }
                         ].map(group => (
-                            <a key={group.name} href={group.url} target="_blank" className="flex items-center justify-between w-full bg-slate-900/80 p-3 rounded-xl border border-white/5 hover:border-blue-500 transition-all active:scale-95 group">
+                            <a key={group.name} href={group.url} target="_blank" className="flex items-center justify-between w-full bg-white/80 p-3 rounded-xl border border-white/5 hover:border-blue-500 transition-all active:scale-95 group">
                                <div className="flex items-center gap-2">
                                   <Facebook className="text-blue-500" size={16} />
-                                  <span className="text-[11px] font-black text-white">{group.name}</span>
+                                  <span className="text-[11px] font-black text-slate-900">{group.name}</span>
                                </div>
                                <ExternalLink size={12} className="text-slate-600 group-hover:text-blue-400" />
                             </a>
@@ -4471,7 +4472,7 @@ onClick={(e) => {
         // שורת הניקוי:
         window.history.replaceState({}, '', window.location.pathname);
     }}  
-                   className="text-slate-500 font-black text-xs uppercase tracking-widest hover:text-white transition-colors text-center pb-2"
+                   className="text-slate-500 font-black text-xs uppercase tracking-widest hover:text-slate-900 transition-colors text-center pb-2"
                 >
                     סגור
                 </button>
@@ -4483,13 +4484,13 @@ onClick={(e) => {
 
       {activeTip && (
         <div className="fixed inset-0 z-[600] flex items-center justify-center px-6 bg-black/80 backdrop-blur-sm animate-in fade-in text-center">
-          <div className="bg-slate-900 border-2 border-amber-500/50 p-6 rounded-[2rem] shadow-2xl max-w-sm w-full text-center relative animate-in zoom-in">
-            <button onClick={() => setActiveTip(null)} className="absolute top-4 left-4 text-slate-500 hover:text-white"><X size={20} /></button>
+          <div className="bg-white border-2 border-amber-500/50 p-6 rounded-[2rem] shadow-2xl max-w-sm w-full text-center relative animate-in zoom-in">
+            <button onClick={() => setActiveTip(null)} className="absolute top-4 left-4 text-slate-500 hover:text-slate-900"><X size={20} /></button>
             <div className="flex flex-col items-center gap-3 text-center">
-              <div className="bg-amber-500/20 p-3 rounded-full text-amber-500 shadow-inner text-center"><Cookie size={32} /></div>
-              <h3 className="text-lg font-black text-amber-500 text-center">המלצת השף 🍪</h3>
-              <p className="text-gray-200 leading-relaxed font-bold text-sm bg-slate-800/50 p-4 rounded-2xl border border-slate-700 w-full overflow-y-auto max-h-[40vh] whitespace-pre-wrap text-center">{activeTip.heating_instructions}</p>
-              <button onClick={() => setActiveTip(null)} className="mt-2 w-full bg-amber-600 text-white py-3 rounded-xl font-black shadow-lg active:scale-95 transition-all text-center">הבנתי, תודה!</button>
+              <div className="bg-amber-500/20 p-3 rounded-full text-amber-600 shadow-inner text-center"><Cookie size={32} /></div>
+              <h3 className="text-lg font-black text-amber-600 text-center">המלצת השף 🍪</h3>
+              <p className="text-slate-800 leading-relaxed font-bold text-sm bg-slate-50/50 p-4 rounded-2xl border border-slate-200 w-full overflow-y-auto max-h-[40vh] whitespace-pre-wrap text-center">{activeTip.heating_instructions}</p>
+              <button onClick={() => setActiveTip(null)} className="mt-2 w-full bg-amber-600 text-slate-900 py-3 rounded-xl font-black shadow-lg active:scale-95 transition-all text-center">הבנתי, תודה!</button>
             </div>
           </div>
         </div>
@@ -4497,15 +4498,15 @@ onClick={(e) => {
 
       {categoryTip && (
         <div className="fixed inset-0 z-[600] flex items-center justify-center px-6 bg-black/80 backdrop-blur-sm animate-in fade-in text-center">
-          <div className="bg-slate-900 border-2 border-amber-500/50 p-6 rounded-[2rem] shadow-2xl max-sm w-full text-center relative animate-in zoom-in">
-            <button onClick={() => setCategoryTip(null)} className="absolute top-4 left-4 text-slate-500 hover:text-white"><X size={20} /></button>
+          <div className="bg-white border-2 border-amber-500/50 p-6 rounded-[2rem] shadow-2xl max-sm w-full text-center relative animate-in zoom-in">
+            <button onClick={() => setCategoryTip(null)} className="absolute top-4 left-4 text-slate-500 hover:text-slate-900"><X size={20} /></button>
             <div className="flex flex-col items-center gap-3 text-center">
-              <div className="bg-amber-500/20 p-3 rounded-full text-amber-500 shadow-inner text-center">{categoryTip === 'pastries' ? <Flame size={32} /> : <Snowflake size={32} />}</div>
-              <h3 className="text-lg font-black text-amber-500 text-center">{categoryTip === 'pastries' ? 'הוראות חימום 🥐' : 'הוראות אחסון ❄️'}</h3>
-              <div className="text-gray-200 leading-relaxed font-bold text-sm bg-slate-800/50 p-6 rounded-2xl border border-slate-700 w-full whitespace-pre-wrap text-center">
+              <div className="bg-amber-500/20 p-3 rounded-full text-amber-600 shadow-inner text-center">{categoryTip === 'pastries' ? <Flame size={32} /> : <Snowflake size={32} />}</div>
+              <h3 className="text-lg font-black text-amber-600 text-center">{categoryTip === 'pastries' ? 'הוראות חימום ' : 'הוראות אחסון ❄️'}</h3>
+              <div className="text-slate-800 leading-relaxed font-bold text-sm bg-slate-50/50 p-6 rounded-2xl border border-slate-200 w-full whitespace-pre-wrap text-center">
                 {categoryTip === 'pastries' ? (<><div className="text-xs text-center">לחמם בתנור/טוסטר אובן/נינג'ה על 150 מעלות <br />5-10 דקות.<br />להמנע מחימום במיקרו!<br /></div><br /><span className="text-yellow-400 font-bold text-center">*אם לא אוכלים באותו יום,<br />ניתן להקפיא כחודשיים*</span></>) : (<div className="text-center">אם אתם לוקחים הביתה <br />אנא הצטיידו בצידנית וקרחונים.</div>)}
               </div>
-              <button onClick={() => setCategoryTip(null)} className="mt-2 w-full bg-amber-600 text-white py-3 rounded-xl font-black shadow-lg active:scale-95 transition-all text-center">הבנתי, תודה!</button>
+              <button onClick={() => setCategoryTip(null)} className="mt-2 w-full bg-amber-600 text-slate-900 py-3 rounded-xl font-black shadow-lg active:scale-95 transition-all text-center">הבנתי, תודה!</button>
             </div>
           </div>
         </div>
@@ -4513,9 +4514,9 @@ onClick={(e) => {
 
 {showDayWarning && (
   <div className="fixed inset-0 z-[600] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl animate-in fade-in text-center">
-    <div className="bg-slate-900 border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-sm w-full animate-in zoom-in text-center relative">
-      <AlertCircle className="mx-auto text-amber-500 mb-4 text-center" size={48} />
-      <h3 className="text-xl font-black mb-6 text-white leading-tight text-center whitespace-pre-line">
+    <div className="bg-white border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-sm w-full animate-in zoom-in text-center relative">
+      <AlertCircle className="mx-auto text-amber-600 mb-4 text-center" size={48} />
+      <h3 className="text-xl font-black mb-6 text-slate-900 leading-tight text-center whitespace-pre-line">
           רצוי לא להזמין כרגע
           {"\n"}תעקבו, נתראה ביריד הבא
       </h3>
@@ -4557,7 +4558,7 @@ onClick={(e) => {
         {/* כפתור חזרה לאתר כלינק טקסט בלבד */}
         <button 
           onClick={() => setShowDayWarning(false)} 
-          className="text-slate-500 font-bold text-xs uppercase tracking-widest hover:text-slate-300 transition-colors py-2"
+          className="text-slate-500 font-bold text-xs uppercase tracking-widest hover:text-slate-600 transition-colors py-2"
         >
           חזרה לאתר
         </button>
@@ -4570,9 +4571,9 @@ onClick={(e) => {
 
       {showEmptyCartModal && (
         <div className="fixed inset-0 z-[600] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl animate-in fade-in text-center">
-          <div className="bg-slate-900 border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-sm w-full animate-in zoom-in text-center relative">
-            <ShoppingCart className="mx-auto text-amber-500 mb-4 text-center" size={48} />
-            <h3 className="text-xl font-black mb-6 text-white leading-tight text-center">לא בחרת פריטים לשמירה</h3>
+          <div className="bg-white border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-sm w-full animate-in zoom-in text-center relative">
+            <ShoppingCart className="mx-auto text-amber-600 mb-4 text-center" size={48} />
+            <h3 className="text-xl font-black mb-6 text-slate-900 leading-tight text-center">לא בחרת פריטים לשמירה</h3>
             <button onClick={() => setShowEmptyCartModal(false)} className="w-full bg-amber-500 text-[#0f172a] py-4 rounded-full font-black text-lg active:scale-95 transition-all text-center">חזור לחנות</button>
           </div>
         </div>
@@ -4580,18 +4581,18 @@ onClick={(e) => {
 
       {showDiscountModal && (
         <div className="fixed inset-0 z-[600] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl text-center">
-          <div className="bg-slate-900 border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-sm w-full animate-in zoom-in text-center relative">
-            <Gift className="mx-auto text-amber-500 mb-4 animate-bounce text-center" size={48} />
-            <h3 className="text-xl font-black mb-6 text-white text-center">גילית סוד! ✨</h3>
+          <div className="bg-white border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-sm w-full animate-in zoom-in text-center relative">
+            <Gift className="mx-auto text-amber-600 mb-4 animate-bounce text-center" size={48} />
+            <h3 className="text-xl font-black mb-6 text-slate-900 text-center">גילית סוד! ✨</h3>
             <div className="mb-8 space-y-2 text-center">
-              <p className="text-amber-500 font-black text-lg text-center">
+              <p className="text-amber-600 font-black text-lg text-center">
                 {siteSettings.reward_type === '12_percent' ? 'קיבלת 12% הנחה סודית!' : 
                   siteSettings.reward_type === '5_percent' ? 'קיבלת 5% הנחה סודית!' :
                   'קיבלת מאפה שישי במתנה!'}
                 <br/>המשיכו להזמנה
               </p>
               {siteSettings.reward_type === '12_percent' && (
-                <p className="text-slate-400 text-[10px] font-bold text-center">*אין כפל מבצעים*</p>
+                <p className="text-slate-600 text-[10px] font-bold text-center">*אין כפל מבצעים*</p>
               )}
             </div>
             <button onClick={() => setShowDiscountModal(false)} className="w-full bg-amber-500 text-[#0f172a] py-4 rounded-full font-black text-lg text-center">תודה!</button>
@@ -4601,14 +4602,14 @@ onClick={(e) => {
 
       {showAlreadyActiveModal && (
         <div className="fixed inset-0 z-[600] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl text-center">
-          <div className="bg-slate-900 border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-sm w-full animate-in zoom-in text-center relative">
+          <div className="bg-white border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-sm w-full animate-in zoom-in text-center relative">
             <div className="mx-auto bg-amber-500/10 w-20 h-20 rounded-full flex items-center justify-center mb-4">
-              <Zap className="text-amber-500 animate-pulse" size={40} />
+              <Zap className="text-amber-600 animate-pulse" size={40} />
             </div>
-            <h3 className="text-xl font-black mb-4 text-white text-center">ההטבה כבר הופעלה! ✨</h3>
+            <h3 className="text-xl font-black mb-4 text-slate-900 text-center">ההטבה כבר הופעלה! ✨</h3>
             <div className="mb-8 text-center">
-              <p className="text-slate-400 text-sm font-bold text-center">ההטבה שלך מחכה בסל הקניות:</p>
-              <p className="text-amber-500 font-black text-xs mt-2 text-center uppercase tracking-widest">
+              <p className="text-slate-600 text-sm font-bold text-center">ההטבה שלך מחכה בסל הקניות:</p>
+              <p className="text-amber-600 font-black text-xs mt-2 text-center uppercase tracking-widest">
                 {siteSettings.reward_type === '12_percent' ? '12% הנחה' : 
                   siteSettings.reward_type === '5_percent' ? '5% הנחה' :
                   'מאפה שישי במתנה'}
@@ -4626,7 +4627,7 @@ onClick={(e) => {
           className="fixed inset-0 z-[1100] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-300 cursor-zoom-out"
           onClick={() => setPreviewImage(null)}
         >
-          <button className="absolute top-6 left-6 text-white/70 bg-white/10 p-3 rounded-full backdrop-blur-md transition-all">
+          <button className="absolute top-6 left-6 text-slate-900/70 bg-white/10 p-3 rounded-full backdrop-blur-md transition-all">
             <X size={28} />
           </button>
 
@@ -4642,26 +4643,26 @@ onClick={(e) => {
 
       {showPastryWarning && (
         <div className="fixed inset-0 z-[850] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl animate-in fade-in">
-          <div className="bg-slate-900 border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-[0_0_50px_rgba(245,158,11,0.3)] max-sm w-full animate-in zoom-in text-center relative overflow-hidden">
+          <div className="bg-white border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-[0_0_50px_rgba(245,158,11,0.3)] max-sm w-full animate-in zoom-in text-center relative overflow-hidden">
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl"></div>
             <div className="bg-amber-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-amber-500/30">
-               <ShoppingBasket className="text-amber-500 animate-bounce" size={32} />
+               <ShoppingBasket className="text-amber-600 animate-bounce" size={32} />
             </div>
-            <h3 className="text-2xl font-black mb-2 text-white italic">רגע! חבל לפספס...</h3>
-            <div className="bg-slate-800/50 p-5 rounded-3xl border border-slate-700 mb-6">
-               <p className="text-slate-300 font-bold text-lg leading-relaxed text-center">
-                  בחרת <span className="text-amber-500 text-2xl font-black">{totalPastriesInCart}</span> מאפים.
+            <h3 className="text-2xl font-black mb-2 text-slate-900 italic">רגע! חבל לפספס...</h3>
+            <div className="bg-slate-50/50 p-5 rounded-3xl border border-slate-200 mb-6">
+               <p className="text-slate-600 font-bold text-lg leading-relaxed text-center">
+                  בחרת <span className="text-amber-600 text-2xl font-black">{totalPastriesInCart}</span> מאפים.
                   <br />
-                  נשארו לך רק עוד <span className="text-white text-2xl font-black underline decoration-amber-500">{(6 - (totalPastriesInCart % 6)) % 6}</span> מאפים
+                  נשארו לך רק עוד <span className="text-slate-900 text-2xl font-black underline decoration-amber-500">{(6 - (totalPastriesInCart % 6)) % 6}</span> מאפים
                   <br />
-                  כדי לקבל את המאפה הבא <span className="text-amber-500 font-black text-center">במתנה! 🎁</span>
+                  כדי לקבל את המאפה הבא <span className="text-amber-600 font-black text-center">במתנה! 🎁</span>
                </p>
             </div>
             <div className="flex flex-col gap-3">
               <button onClick={() => setShowPastryWarning(false)} className="w-full bg-amber-500 hover:bg-amber-400 text-[#0f172a] py-4 rounded-2xl font-black text-xl shadow-xl active:scale-95 transition-all text-center shimmer-effect">
-                הוסף מאפים וקבל מתנה! 🥐
+                הוסף מאפים וקבל מתנה! 
               </button>
-              <button onClick={() => { setShowPastryWarning(false); continueToOrderDetails(); }} className="w-full py-2 text-slate-500 font-bold text-xs hover:text-white transition-colors text-center">
+              <button onClick={() => { setShowPastryWarning(false); continueToOrderDetails(); }} className="w-full py-2 text-slate-500 font-bold text-xs hover:text-slate-900 transition-colors text-center">
                 אני מוותר על המתנה, המשך בכל זאת
               </button>
             </div>
@@ -4669,7 +4670,7 @@ onClick={(e) => {
         </div>
       )}
 
-      {showBackToTop && (<div className="fixed bottom-6 right-4 z-[100] text-center"><button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="bg-slate-800/80 border border-slate-700 p-3 rounded-full text-amber-500 shadow-2xl active:scale-90 animate-in zoom-in text-center flex items-center justify-center"><ArrowUp size={24} /></button></div>)}
+      {showBackToTop && (<div className="fixed bottom-6 right-4 z-[100] text-center"><button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="bg-slate-50/80 border border-slate-200 p-3 rounded-full text-amber-600 shadow-2xl active:scale-90 animate-in zoom-in text-center flex items-center justify-center"><ArrowUp size={24} /></button></div>)}
 
       {!isAdmin && (
         <div className="fixed bottom-6 left-0 z-[100] flex flex-col items-start gap-3 w-fit max-w-fit pointer-events-none">
@@ -4758,14 +4759,14 @@ onClick={(e) => {
         // שינוי: הורדתי את pt-[25vh] ל-pt-24 והוספתי items-start
         // ככה זה יושב גבוה במסך והמקלדת לא עולה על זה
         <div className="fixed inset-0 z-[600] flex justify-center items-start pt-24 bg-black/90 backdrop-blur-xl animate-in fade-in p-4">
-          <div className="bg-slate-900 border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-sm w-full animate-in zoom-in text-center relative m-auto">
-            <Lock className="mx-auto text-amber-500 mb-4 text-center" size={40} />
-            <h3 className="text-xl font-black mb-6 text-white text-center">קוד מנהל</h3>
+          <div className="bg-white border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-sm w-full animate-in zoom-in text-center relative m-auto">
+            <Lock className="mx-auto text-amber-600 mb-4 text-center" size={40} />
+            <h3 className="text-xl font-black mb-6 text-slate-900 text-center">קוד מנהל</h3>
             <input 
               type="password" 
               inputMode="numeric"
               pattern="[0-9]*"
-              className="w-full bg-slate-800 border-2 border-slate-700 p-4 rounded-2xl text-center text-xl text-amber-500 outline-none focus:border-amber-500 mb-6 font-bold text-center" 
+              className="w-full bg-slate-50 border-2 border-slate-200 p-4 rounded-2xl text-center text-xl text-amber-600 outline-none focus:border-amber-500 mb-6 font-bold text-center" 
               value={loginPass}
                            onFocus={(e) => {
                 setTimeout(() => {
@@ -4789,17 +4790,17 @@ onClick={(e) => {
             />
             <div className="flex gap-3 text-center">
               <button onClick={handleLogin} className="flex-1 bg-amber-500 text-[#0f172a] py-4 rounded-full font-black text-lg active:scale-95 transition-all text-center">כניסה</button>
-              <button onClick={() => setShowLoginModal(false)} className="flex-1 bg-slate-800 text-slate-400 py-4 rounded-full font-black text-lg active:scale-95 transition-all text-center">ביטול</button>
+              <button onClick={() => setShowLoginModal(false)} className="flex-1 bg-slate-50 text-slate-600 py-4 rounded-full font-black text-lg active:scale-95 transition-all text-center">ביטול</button>
             </div>
           </div>
         </div>
       )}
 {showVariantModal && selectedVariantProduct && (
         <div className="fixed inset-0 z-[800] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl animate-in fade-in text-center">
-          <div className="bg-slate-900 border-2 border-amber-500 p-6 rounded-[2.5rem] shadow-2xl max-w-sm w-full animate-in zoom-in text-center relative overflow-y-auto max-h-[80vh]">
-            <button onClick={() => setShowVariantModal(false)} className="absolute top-5 left-5 text-slate-500 hover:text-white"><X size={24}/></button>
-            <h3 className="text-xl font-black mb-1 text-white text-center">{selectedVariantProduct.name}</h3>
-            <p className="text-amber-500 text-sm font-bold mb-6 text-center">בחר את הסוגים שבא לך</p>
+          <div className="bg-white border-2 border-amber-500 p-6 rounded-[2.5rem] shadow-2xl max-w-sm w-full animate-in zoom-in text-center relative overflow-y-auto max-h-[80vh]">
+            <button onClick={() => setShowVariantModal(false)} className="absolute top-5 left-5 text-slate-500 hover:text-slate-900"><X size={24}/></button>
+            <h3 className="text-xl font-black mb-1 text-slate-900 text-center">{selectedVariantProduct.name}</h3>
+            <p className="text-amber-600 text-sm font-bold mb-6 text-center">בחר את הסוגים שבא לך</p>
 
             <div className="space-y-4 mb-6">
 {selectedVariantProduct.variants.map((variant) => {
@@ -4810,13 +4811,13 @@ onClick={(e) => {
   const isLimitReached = maxStock !== null && maxStock !== undefined && currentVal >= maxStock;
 
   return (
-    <div key={variant} className={`bg-slate-800/50 p-3 rounded-2xl border border-slate-700 flex items-center justify-between transition-all ${isSoldOut ? 'opacity-60' : ''}`}>
+    <div key={variant} className={`bg-slate-50/50 p-3 rounded-2xl border border-slate-200 flex items-center justify-between transition-all ${isSoldOut ? 'opacity-60' : ''}`}>
         {/* שם הסוג עם קו חוצה אם נגמר המלאי */}
         <span className={`font-bold text-sm pr-2 ${isSoldOut ? 'line-through text-slate-500 decoration-red-500 decoration-2' : 'text-slate-200'}`}>
           {variant} {isSoldOut && "(אזל)"}
         </span>
 
-        <div className="flex items-center gap-3 bg-slate-900 rounded-lg p-1 border border-slate-700">
+        <div className="flex items-center gap-3 bg-white rounded-lg p-1 border border-slate-200">
           <button 
             type="button"
 onClick={() => {
@@ -4824,10 +4825,10 @@ onClick={() => {
      setVariantSelections(prev => ({...prev, [variant]: prev[variant] - 1}));
   }
 }}
-            className="w-8 h-8 flex items-center justify-center bg-slate-700 rounded-md text-white active:scale-90 transition-all"
+            className="w-8 h-8 flex items-center justify-center bg-slate-700 rounded-md text-slate-900 active:scale-90 transition-all"
           ><Minus size={14}/></button>
 
-          <span className={`w-6 text-center font-black ${isSoldOut ? 'text-slate-600' : 'text-amber-500'}`}>
+          <span className={`w-6 text-center font-black ${isSoldOut ? 'text-slate-600' : 'text-amber-600'}`}>
             {currentVal}
           </span>
 
@@ -4841,7 +4842,7 @@ onClick={() => {
      setVariantSelections(prev => ({...prev, [variant]: (prev[variant] || 0) + 1}));
    }
 }}
-            className={`w-8 h-8 flex items-center justify-center rounded-md text-white active:scale-90 transition-all shadow-lg ${isSoldOut || isLimitReached ? 'bg-slate-800 text-slate-600 cursor-not-allowed' : 'bg-amber-600'}`}
+            className={`w-8 h-8 flex items-center justify-center rounded-md text-slate-900 active:scale-90 transition-all shadow-lg ${isSoldOut || isLimitReached ? 'bg-slate-50 text-slate-600 cursor-not-allowed' : 'bg-amber-600'}`}
           ><Plus size={14}/></button>
         </div>
     </div>
@@ -4850,35 +4851,35 @@ onClick={() => {
 
             </div>
 
-            <button onClick={handleConfirmVariants} className="w-full bg-amber-600 text-white py-4 rounded-full font-black text-lg text-center shadow-lg active:scale-95 transition-all">סיימתי לבחור</button>
+            <button onClick={handleConfirmVariants} className="w-full bg-amber-600 text-slate-900 py-4 rounded-full font-black text-lg text-center shadow-lg active:scale-95 transition-all">סיימתי לבחור</button>
           </div>
         </div>
       )}
       {showSaleStockModal && (
         <div className="fixed inset-0 z-[1300] flex items-center justify-center px-4 bg-black/95 backdrop-blur-xl animate-in fade-in">
-          <div className="bg-slate-900 border-2 border-red-500 p-6 rounded-[2.5rem] shadow-2xl max-w-md w-full max-h-[85vh] flex flex-col">
+          <div className="bg-white border-2 border-red-500 p-6 rounded-[2.5rem] shadow-2xl max-w-md w-full max-h-[85vh] flex flex-col">
             <div className="flex justify-between items-center mb-6">
               <div className="text-right">
-                <h3 className="text-xl font-black text-white">מלאי למבצע סוף יום</h3>
+                <h3 className="text-xl font-black text-slate-900">מלאי למבצע סוף יום</h3>
                 <p className="text-[10px] text-slate-500 font-bold">הגדר כמה נשאר מכל מוצר. השאר ריק למלאי לא מוגבל.</p>
               </div>
-              <button onClick={() => setShowSaleStockModal(false)} className="text-slate-500 hover:text-white"><X size={24}/></button>
+              <button onClick={() => setShowSaleStockModal(false)} className="text-slate-500 hover:text-slate-900"><X size={24}/></button>
             </div>
 
             <div className="overflow-y-auto space-y-3 flex-1 pr-1 custom-scrollbar">
               {products
                 .filter(p => siteSettings.sale_categories?.includes(p.category || 'pastries'))
                 .map(p => (
-                  <div key={p.id} className="bg-slate-800/40 p-3 rounded-2xl border border-slate-700 flex items-center justify-between">
+                  <div key={p.id} className="bg-slate-50/40 p-3 rounded-2xl border border-slate-200 flex items-center justify-between">
                     <div className="flex items-center gap-3 text-right">
-                      <img src={p.image} className="w-10 h-10 rounded-lg object-cover bg-slate-900" />
-                      <span className="font-bold text-sm text-white">{p.name}</span>
+                      <img src={p.image} className="w-10 h-10 rounded-lg object-cover bg-white" />
+                      <span className="font-bold text-sm text-slate-900">{p.name}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <input 
                         type="number"
                         placeholder="∞"
-                        className="w-16 bg-slate-900 border border-slate-600 p-2 rounded-xl text-center font-black text-red-500 outline-none focus:border-red-500"
+                        className="w-16 bg-white border border-slate-600 p-2 rounded-xl text-center font-black text-red-500 outline-none focus:border-red-500"
                         defaultValue={p.sale_stock}
 onBlur={async (e) => {
   const val = e.target.value === "" ? null : Number(e.target.value);
@@ -4910,7 +4911,7 @@ onBlur={async (e) => {
 
             <button 
               onClick={() => setShowSaleStockModal(false)} 
-              className="w-full mt-6 bg-red-600 text-white py-4 rounded-2xl font-black text-lg shadow-xl active:scale-95 transition-all"
+              className="w-full mt-6 bg-red-600 text-slate-900 py-4 rounded-2xl font-black text-lg shadow-xl active:scale-95 transition-all"
             >
               סיימתי, עדכן מלאי
             </button>
@@ -4920,27 +4921,27 @@ onBlur={async (e) => {
 
       {showSaleModal && (
         <div className="fixed inset-0 z-[1200] flex items-center justify-center px-6 bg-black/95 backdrop-blur-xl animate-in fade-in">
-          <div className="bg-slate-900 border-2 border-red-500 p-8 rounded-[2.5rem] shadow-[0_0_50px_rgba(239,68,68,0.3)] max-sm w-full animate-in zoom-in text-center relative overflow-hidden">
+          <div className="bg-white border-2 border-red-500 p-8 rounded-[2.5rem] shadow-[0_0_50px_rgba(239,68,68,0.3)] max-sm w-full animate-in zoom-in text-center relative overflow-hidden">
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-red-500/10 rounded-full blur-3xl"></div>
             <Flame className="mx-auto text-red-500 mb-4 animate-bounce" size={56} />
-            <h3 className="text-3xl font-black mb-2 text-white italic">מבצע סוף יום!!</h3>
-            <p className="text-slate-300 font-bold text-lg mb-6 leading-relaxed">
+            <h3 className="text-3xl font-black mb-2 text-slate-900 italic">מבצע סוף יום!!</h3>
+            <p className="text-slate-600 font-bold text-lg mb-6 leading-relaxed">
               חוגגים את סיום היום עם <span className="text-red-500 text-2xl font-black">{siteSettings.sale_discount_percent}% הנחה</span>
               <br />
               על כל ה
-              <span className="text-white underline decoration-red-500 decoration-2 underline-offset-4 px-1">
+              <span className="text-slate-900 underline decoration-red-500 decoration-2 underline-offset-4 px-1">
                 {categories.filter(c => siteSettings.sale_categories?.includes(c.slug)).map(c => c.name).join(', ')}
               </span>
             </p>
-            <div className="bg-slate-800/50 py-3 px-6 rounded-2xl border border-red-500/20 mb-8 inline-block">
-              <span className="text-slate-400 text-xs font-bold ml-2">בתוקף עד שעה:</span>
-              <span className="text-white font-black">{siteSettings.sale_end_time}</span>
+            <div className="bg-slate-50/50 py-3 px-6 rounded-2xl border border-red-500/20 mb-8 inline-block">
+              <span className="text-slate-600 text-xs font-bold ml-2">בתוקף עד שעה:</span>
+              <span className="text-slate-900 font-black">{siteSettings.sale_end_time}</span>
             </div>
             <button 
               onClick={() => setShowSaleModal(false)} 
-              className="w-full bg-red-600 hover:bg-red-500 text-white py-5 rounded-2xl font-black text-xl shadow-xl active:scale-95 transition-all shimmer-effect"
+              className="w-full bg-red-600 hover:bg-red-500 text-slate-900 py-5 rounded-2xl font-black text-xl shadow-xl active:scale-95 transition-all shimmer-effect"
             >
-              יאללה, תביאו לי! 🥐🔥
+              יאללה, תביאו לי! 🔥
             </button>
           </div>
         </div>
@@ -4951,19 +4952,19 @@ onBlur={async (e) => {
         <div className="fixed inset-0 z-[2000] flex items-center justify-center px-4 py-4 bg-black/90 backdrop-blur-xl animate-in fade-in duration-500">
 
           {/* הקונטיינר הראשי */}
-          <div className="bg-slate-900 border-2 border-amber-500/50 rounded-[2.5rem] shadow-2xl max-w-lg md:max-w-4xl w-full max-h-[90vh] animate-in zoom-in duration-300 relative flex flex-col overflow-hidden">
+          <div className="bg-white border-2 border-amber-500/50 rounded-[2.5rem] shadow-2xl max-w-lg md:max-w-4xl w-full max-h-[90vh] animate-in zoom-in duration-300 relative flex flex-col overflow-hidden">
 
             {/* כפתור סגירה X */}
             <button 
               onClick={() => setShowWelcomePopup(false)} 
-              className="absolute top-4 left-4 z-[2100] bg-black/60 text-white p-2 rounded-full hover:bg-red-500 transition-all shadow-lg border border-white/10"
+              className="absolute top-4 left-4 z-[2100] bg-black/60 text-slate-900 p-2 rounded-full hover:bg-red-500 transition-all shadow-lg border border-white/10"
             >
               <X size={20} />
             </button>
 
             {/* 1. כותרת / ברכה - תופס גובה קבוע */}
             <div className="pt-8 md:pt-10 px-6 md:px-12 text-center shrink-0">
-              <h3 className="text-2xl md:text-4xl font-black text-amber-500 drop-shadow-lg leading-tight">
+              <h3 className="text-2xl md:text-4xl font-black text-amber-600 drop-shadow-lg leading-tight">
                 {(() => {
                   const h = new Date().getHours();
                   let greeting = "לילה טוב";
@@ -4983,7 +4984,7 @@ onBlur={async (e) => {
               <div className="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center overflow-y-auto custom-scrollbar shrink-0 md:shrink">
                 <div className="text-center">
                   <p 
-                    className="text-white font-bold text-sm md:text-lg leading-relaxed whitespace-pre-wrap"
+                    className="text-slate-900 font-bold text-sm md:text-lg leading-relaxed whitespace-pre-wrap"
                     dangerouslySetInnerHTML={{ __html: siteSettings.popup_text?.replace(/\n/g, '<br/>') }}
                   ></p>
                 </div>
@@ -5032,20 +5033,20 @@ onBlur={async (e) => {
         // שינוי קריטי: items-start pt-20 במקום items-center
         // זה גורם לחלונית להיות צמודה למעלה במובייל, כך שהמקלדת לא תסתיר אותה
         <div className="fixed inset-0 z-[1100] flex items-start md:items-center justify-center px-4 bg-black/90 backdrop-blur-xl animate-in fade-in pt-20 md:pt-0">
-          <div className="bg-slate-900 border-2 border-slate-700 p-6 rounded-[2.5rem] shadow-2xl max-w-2xl w-full max-h-[85vh] flex flex-col relative animate-in zoom-in">
+          <div className="bg-white border-2 border-slate-200 p-6 rounded-[2.5rem] shadow-2xl max-w-2xl w-full max-h-[85vh] flex flex-col relative animate-in zoom-in">
 
              {/* כפתורי פעולה בפינה */}
              <div className="absolute top-5 left-5 flex items-center gap-3 z-10">
                 <button 
                   onClick={handleRecipesShare}
-                  className="bg-slate-800 text-amber-500 p-2 rounded-full hover:bg-slate-700 transition-all active:scale-90 border border-slate-700"
+                  className="bg-slate-50 text-amber-600 p-2 rounded-full hover:bg-slate-700 transition-all active:scale-90 border border-slate-200"
                   title="שתף רשימת מתכונים"
                 >
                   <Share2 size={20} />
                 </button>
                 <button 
                   onClick={() => { setShowRecipesModal(false); setActiveRecipeCat("all"); setRecipeSearch(""); }} 
-                  className="text-slate-500 hover:text-white transition-colors"
+                  className="text-slate-500 hover:text-slate-900 transition-colors"
                 >
                   <X size={24}/>
                 </button>
@@ -5053,14 +5054,14 @@ onBlur={async (e) => {
           
              <div className="text-center mb-4">
                 <BookOpen className="mx-auto text-pink-400 mb-2" size={32} />
-                <h3 className="text-2xl font-black text-white">המתכונים של ליאור</h3>
+                <h3 className="text-2xl font-black text-slate-900">המתכונים של איריס גוסלר</h3>
                 
                 {/* תפריט קטגוריות ממורכז - תוקן ל-flex-wrap */}
                 <div className="flex justify-center mt-4">
                    <div className="flex flex-wrap justify-center gap-2 w-full max-w-md">
                       <button 
                         onClick={() => setActiveRecipeCat("all")}
-                        className={`px-4 py-2 rounded-xl text-[10px] font-black transition-all ${activeRecipeCat === "all" ? 'bg-pink-600 text-white shadow-lg' : 'bg-slate-800 text-slate-500'}`}
+                        className={`px-4 py-2 rounded-xl text-[10px] font-black transition-all ${activeRecipeCat === "all" ? 'bg-pink-600 text-slate-900 shadow-lg' : 'bg-slate-50 text-slate-500'}`}
                       >
                         הכל
                       </button>
@@ -5068,7 +5069,7 @@ onBlur={async (e) => {
                         <button 
                           key={cat.id}
                           onClick={() => setActiveRecipeCat(cat.slug)}
-                          className={`px-4 py-2 rounded-xl text-[10px] font-black transition-all truncate ${activeRecipeCat === cat.slug ? 'bg-pink-600 text-white shadow-lg' : 'bg-slate-800 text-slate-500'}`}
+                          className={`px-4 py-2 rounded-xl text-[10px] font-black transition-all truncate ${activeRecipeCat === cat.slug ? 'bg-pink-600 text-slate-900 shadow-lg' : 'bg-slate-50 text-slate-500'}`}
                         >
                           {cat.name}
                         </button>
@@ -5081,7 +5082,7 @@ onBlur={async (e) => {
                   <input 
                     type="text" 
                     placeholder="חפש מתכון..." 
-                    className="w-full bg-slate-800 border border-slate-700 p-2 pr-10 rounded-xl text-right text-xs text-white outline-none focus:border-pink-500 transition-colors" 
+                    className="w-full bg-slate-50 border border-slate-200 p-2 pr-10 rounded-xl text-right text-xs text-slate-900 outline-none focus:border-pink-500 transition-colors" 
                     value={recipeSearch} 
                     onChange={(e) => setRecipeSearch(e.target.value)} 
 onFocus={(e) => {
@@ -5093,7 +5094,7 @@ onFocus={(e) => {
 
                   {/* רשימת השלמה אוטומטית (Autocomplete) */}
                   {recipeSearch.trim().length > 0 && (
-                    <div className="absolute top-full left-0 right-0 mt-1 bg-slate-900 border border-slate-700 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] overflow-hidden max-h-60 overflow-y-auto custom-scrollbar z-[60]">
+                    <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] overflow-hidden max-h-60 overflow-y-auto custom-scrollbar z-[60]">
                       {recipes.filter(r => r.title.includes(recipeSearch)).length > 0 ? (
                         recipes
                           .filter(r => r.title.includes(recipeSearch))
@@ -5105,9 +5106,9 @@ onFocus={(e) => {
                                 setRecipeSearch("");  // מנקה את החיפוש כדי לסגור את הרשימה
                                 logRecipeView(r, 'internal_click');
                               }}
-                              className="w-full text-right px-3 py-2.5 text-xs text-slate-200 hover:bg-slate-800 border-b border-slate-800/50 last:border-0 flex items-center gap-3 transition-colors group"
+                              className="w-full text-right px-3 py-2.5 text-xs text-slate-200 hover:bg-slate-50 border-b border-slate-800/50 last:border-0 flex items-center gap-3 transition-colors group"
                             >
-                              <img src={r.image} className="w-8 h-8 rounded-lg object-cover bg-slate-800 border border-slate-700" alt="" />
+                              <img src={r.image} className="w-8 h-8 rounded-lg object-cover bg-slate-50 border border-slate-200" alt="" />
                               <div className="flex flex-col items-start gap-0.5">
                                 <span className="font-bold group-hover:text-pink-400 transition-colors">{r.title}</span>
                                 {r.category_slug && (
@@ -5146,7 +5147,7 @@ onFocus={(e) => {
             setSelectedRecipe(recipe); 
             logRecipeView(recipe, 'internal_click'); 
           }} 
-          className="relative aspect-square rounded-2xl overflow-hidden border border-slate-700/50 shadow-lg cursor-pointer group active:scale-95 transition-all"
+          className="relative aspect-square rounded-2xl overflow-hidden border border-slate-200/50 shadow-lg cursor-pointer group active:scale-95 transition-all"
         >
           {/* תצוגת המדליה */}
           {rank && (
@@ -5161,7 +5162,7 @@ onFocus={(e) => {
                 
                 {/* אייקון Trophy קטן */}
                 <div className="absolute -top-1 -left-1">
-                  <Trophy size={10} className={rank === 1 ? 'text-yellow-100' : 'text-white'} />
+                  <Trophy size={10} className={rank === 1 ? 'text-yellow-100' : 'text-slate-900'} />
                 </div>
               </div>
             </div>
@@ -5169,7 +5170,7 @@ onFocus={(e) => {
 
           <img src={recipe.image} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent flex flex-col justify-end p-2">
-            <span className="text-white font-black text-[10px] text-center leading-tight line-clamp-2 drop-shadow-md">
+            <span className="text-slate-900 font-black text-[10px] text-center leading-tight line-clamp-2 drop-shadow-md">
               {recipe.title}
             </span>
           </div>
@@ -5188,10 +5189,10 @@ onFocus={(e) => {
         // pb-20 מרים את כל המתכון מעל הבאנר של השמש והירח שנשארים דולקים ברקע
         <div className="fixed inset-0 z-[1200] flex items-center justify-center px-4 pb-20 bg-black/95 backdrop-blur-xl animate-in fade-in">
           
-          <div className="bg-slate-900 border border-slate-700 w-full max-w-md md:max-w-4xl lg:max-w-5xl h-[80vh] rounded-[2rem] shadow-2xl overflow-hidden flex flex-col relative animate-in zoom-in duration-300">
+          <div className="bg-white border border-slate-200 w-full max-w-md md:max-w-4xl lg:max-w-5xl h-[80vh] rounded-[2rem] shadow-2xl overflow-hidden flex flex-col relative animate-in zoom-in duration-300">
              
              {/* Sticky Header - כותרת גמישה שלא נחתכת */}
-             <div className="bg-slate-900/95 backdrop-blur-md border-b border-slate-800 p-3 md:p-4 sticky top-0 z-20 flex items-center justify-between shrink-0 gap-2">
+             <div className="bg-white/95 backdrop-blur-md border-b border-slate-800 p-3 md:p-4 sticky top-0 z-20 flex items-center justify-between shrink-0 gap-2">
                 <div className="flex items-center gap-1.5 shrink-0">
                     <button 
                       onClick={() => {
@@ -5199,7 +5200,7 @@ onFocus={(e) => {
                         setShowRecipesModal(true); 
                         window.history.replaceState({}, document.title, window.location.pathname);
                       }}
-                      className="bg-slate-800 border border-slate-700 text-slate-300 px-2.5 py-1.5 rounded-full flex items-center gap-1 hover:bg-slate-700 transition-all active:scale-95 shadow-sm"
+                      className="bg-slate-50 border border-slate-200 text-slate-600 px-2.5 py-1.5 rounded-full flex items-center gap-1 hover:bg-slate-700 transition-all active:scale-95 shadow-sm"
                     >
                       <LayoutGrid size={14} className="text-pink-500" />
                       <span className="text-[10px] md:text-xs font-black">כל המתכונים</span>
@@ -5210,7 +5211,7 @@ onFocus={(e) => {
                         const url = new URL(window.location.href);
                         url.searchParams.set('recipe', selectedRecipe.id);
                         const directLink = url.toString();
-                        const baseText = `היי, קבלו מתכון ל${selectedRecipe.title} מאת ליאור בן משה! 🥐✨`;
+                        const baseText = `היי, קבלו מתכון ל${selectedRecipe.title} מאת הווק הטבעוני! ✨`;
                         if (navigator.share) {
                           try { await navigator.share({ title: selectedRecipe.title, text: baseText, url: directLink }); }
                           catch (err) { console.log(err); }
@@ -5218,18 +5219,18 @@ onFocus={(e) => {
                            window.open(`https://wa.me/?text=${encodeURIComponent(baseText + "\n" + directLink)}`, '_blank');
                         }
                       }}
-                      className="w-8 h-8 md:w-9 md:h-9 flex items-center justify-center bg-slate-800 rounded-full text-amber-500 hover:text-white transition-all active:scale-95 border border-slate-700"
+                      className="w-8 h-8 md:w-9 md:h-9 flex items-center justify-center bg-slate-50 rounded-full text-amber-600 hover:text-slate-900 transition-all active:scale-95 border border-slate-200"
                     >
                       <Share2 size={16} />
                     </button>
                 </div>
 
                 {/* כותרת מותאמת: קטנה יותר בטלפון ויורדת שורה במידת הצורך */}
-                <h3 className="text-sm md:text-lg font-black text-white text-center leading-tight px-2 flex-1 min-w-0 break-words">
+                <h3 className="text-sm md:text-lg font-black text-slate-900 text-center leading-tight px-2 flex-1 min-w-0 break-words">
                     {selectedRecipe.title}
                 </h3>
                 
-                <button onClick={() => setSelectedRecipe(null)} className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center bg-slate-800 rounded-full text-slate-400 hover:text-white transition-all shrink-0">
+                <button onClick={() => setSelectedRecipe(null)} className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center bg-slate-50 rounded-full text-slate-600 hover:text-slate-900 transition-all shrink-0">
                   <X size={20}/>
                 </button>
              </div>
@@ -5365,7 +5366,7 @@ onClick={() => {
             <tr>
               <td>
                 <h1 class="main-recipe-title">${selectedRecipe.title}</h1>
-                <div class="author-name">מתכון מאת: ${selectedRecipe.author_name || 'ליאור בן משה'}</div>
+                <div class="author-name">מתכון מאת: ${selectedRecipe.author_name || 'הווק הטבעוני'}</div>
                 <div class="recipe-body">
                   ${formattedContent}
                 </div>
@@ -5378,7 +5379,7 @@ onClick={() => {
               <td>
                 <div class="footer-space"></div>
                 <div class="footer-content">
-                  © כל הזכויות שמורות ל${selectedRecipe.author_name || 'ליאור בן משה'}. 
+                  © כל הזכויות שמורות ל${selectedRecipe.author_name || 'הווק הטבעוני'}. 
                   אין להעתיק, לשכפל או להפיץ.
                 </div>
               </td>
@@ -5401,17 +5402,17 @@ onClick={() => {
   }, 800);
 }}
 
-  className="absolute top-2 left-2 p-2 bg-black/50 backdrop-blur-md rounded-lg border border-white/10 text-white hover:bg-amber-600 transition-all z-10"
+  className="absolute top-2 left-2 p-2 bg-black/50 backdrop-blur-md rounded-lg border border-white/10 text-slate-900 hover:bg-amber-600 transition-all z-10"
 >
   <Printer size={16} />
 </button>
-                       <div className="w-full h-full rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-700/50 bg-slate-800">
+                       <div className="w-full h-full rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-200/50 bg-slate-50">
                           <img src={selectedRecipe.image} className="w-full h-full object-cover" />
                        </div>
                     </div>
                     {selectedRecipe.author_name && (
                       <div className="bg-amber-500/10 border border-amber-500/20 px-3 py-1.5 rounded-xl mb-6 md:mb-0">
-                        <span className="text-amber-500 font-black text-[10px] md:text-base">המתכון של {selectedRecipe.author_name}</span>
+                        <span className="text-amber-600 font-black text-[10px] md:text-base">המתכון של {selectedRecipe.author_name}</span>
                       </div>
                     )}
                   </div>
@@ -5419,24 +5420,21 @@ onClick={() => {
                   {/* אופן ההכנה - לוגיקת זיהוי שלבים חכמה + תמיכה בקו תחתון ובולד */}
                   <div className="flex-1 text-slate-200 text-sm md:text-base leading-relaxed font-medium select-none" onContextMenu={(e) => e.preventDefault()}>
                      {(() => {
+
                         const lines = selectedRecipe.content.split(/\r?\n/);
                         const groups = [];
                         let currentGroup = null;
 
-                        // פונקציה שמפרקת גם לפי # (קו תחתון) וגם לפי * (בולד)
+                        // 1. הפונקציה המקורית שלך לעיצוב טקסט (קו תחתון ובולד) - ללא שינוי
                         const renderFormattedText = (txt) => {
-                          // 1. פירוק לפי סולמיות לקו תחתון
                           const underlineParts = txt.split('#');
                           return underlineParts.map((uPart, uIndex) => {
-                            // אם האינדקס אי זוגי, זה טקסט שהיה בין סולמיות
                             const isUnderline = uIndex % 2 === 1;
-                            
-                            // 2. פירוק לפי כוכביות לבולד (בתוך כל חלק)
                             const boldParts = uPart.split('*');
                             const renderedContent = boldParts.map((bPart, bIndex) => {
                               const isBold = bIndex % 2 === 1;
                               return isBold ? 
-                                <strong key={bIndex} className="font-black text-white">{bPart}</strong> : 
+                                <strong key={bIndex} className="font-black text-slate-900">{bPart}</strong> : 
                                 <span key={bIndex}>{bPart}</span>;
                             });
 
@@ -5446,9 +5444,51 @@ onClick={() => {
                           });
                         };
 
+                        // 2. פונקציה מעודכנת: תומכת גם ב-YouTube וגם ב-MP4
+                        const processContent = (text) => {
+                            // א. בדיקת יוטיוב
+                            const ytMatch = text.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+                            if (ytMatch && ytMatch[1]) {
+                                return (
+                                    <div className="w-full aspect-video my-4 rounded-xl overflow-hidden shadow-lg bg-black border border-slate-200 relative z-10" onClick={(e) => e.stopPropagation()}>
+                                        <iframe
+                                            width="100%"
+                                            height="100%"
+                                            src={`https://www.youtube.com/embed/${ytMatch[1]}`}
+                                            title="YouTube video player"
+                                            frameBorder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        ></iframe>
+                                    </div>
+                                );
+                            }
+
+                            // ב. בדיקת קובץ MP4 ישיר (חדש!)
+                            // מחפש קישור שמתחיל ב-http ומסתיים ב-.mp4 (לא רגיש לאותיות גדולות/קטנות)
+                            const mp4Match = text.match(/(https?:\/\/[^\s]+\.mp4)/i);
+                            if (mp4Match && mp4Match[1]) {
+                                return (
+                                    <div className="w-full aspect-video my-4 rounded-xl overflow-hidden shadow-lg bg-black border border-slate-200 relative z-10" onClick={(e) => e.stopPropagation()}>
+                                        <video 
+                                            controls 
+                                            playsInline 
+                                            className="w-full h-full object-contain"
+                                            src={mp4Match[1]}
+                                        >
+                                            הדפדפן שלך לא תומך בתגית וידאו.
+                                        </video>
+                                    </div>
+                                );
+                            }
+
+                            // ג. אם זה לא וידאו - מחזיר טקסט רגיל מעוצב
+                            return renderFormattedText(text);
+                        };
+
+                        // 3. לוגיקת זיהוי השלבים המקורית שלך
                         lines.forEach((line) => {
                           const trimmed = line.trim();
-                          // זיהוי אם זו שורת שלב (מספר ואחריו נקודה/סוגריים)
                           const isNewStep = /^[^\w\u0590-\u05FF]*\d+[\.\)\-\:]/.test(trimmed);
 
                           if (trimmed === "") {
@@ -5468,25 +5508,26 @@ onClick={() => {
                         });
                         if (currentGroup) groups.push(currentGroup);
 
+                        // 4. רינדור סופי
                         return groups.map((group, idx) => {
                           if (group.type === 'empty') return <div key={idx} className="h-4" />;
                           
                           const isStep = group.type === 'step';
                           
-                          // שליחה לפונקציית העיצוב החדשה
-                          const content = renderFormattedText(group.text);
+                          // שולח לפונקציה החדשה שבודקת וידאו
+                          const content = processContent(group.text);
 
                           if (isMarkingSteps && isStep) {
                             const stepKey = `${selectedRecipe.id}-${idx}`;
                             const isChecked = checkedSteps[stepKey];
                             return (
                               <div key={idx} onClick={() => setCheckedSteps(prev => ({...prev, [stepKey]: !prev[stepKey]}))}
-                                className={`flex items-start gap-3 p-4 md:p-5 rounded-2xl mb-4 transition-all cursor-pointer border shadow-sm ${isChecked ? 'bg-green-600/10 border-green-500/40 opacity-50' : 'bg-slate-800/40 border-slate-700 hover:border-slate-500'}`}
+                                className={`flex items-start gap-3 p-4 md:p-5 rounded-2xl mb-4 transition-all cursor-pointer border shadow-sm ${isChecked ? 'bg-green-600/10 border-green-500/40 opacity-50' : 'bg-slate-50/40 border-slate-200 hover:border-slate-500'}`}
                               >
-                                <div className={`mt-0.5 w-5 h-5 md:w-7 md:h-7 rounded-lg border flex items-center justify-center shrink-0 transition-all ${isChecked ? 'bg-green-500 border-green-400' : 'bg-slate-900 border-slate-600'}`}>
-                                  {isChecked && <Plus size={14} className="rotate-45 text-white" />}
+                                <div className={`mt-0.5 w-5 h-5 md:w-7 md:h-7 rounded-lg border flex items-center justify-center shrink-0 transition-all ${isChecked ? 'bg-green-500 border-green-400' : 'bg-white border-slate-600'}`}>
+                                  {isChecked && <Plus size={14} className="rotate-45 text-slate-900" />}
                                 </div>
-                                <span className={`flex-1 whitespace-pre-wrap transition-all ${isChecked ? 'text-slate-400 line-through decoration-slate-500/50 decoration-2' : 'text-white font-bold'}`}>
+                                <span className={`flex-1 whitespace-pre-wrap transition-all ${isChecked ? 'text-slate-600 line-through decoration-slate-500/50 decoration-2' : 'text-slate-900 font-bold'}`}>
                                   {content}
                                 </span>
                               </div>
@@ -5495,7 +5536,7 @@ onClick={() => {
                           return <div key={idx} className="mb-2 whitespace-pre-wrap">{content}</div>;
                         });
                      })()}
-                  </div>
+  </div>
 
                 </div>
              </div>
@@ -5507,7 +5548,7 @@ onClick={() => {
                   {/* 1. כפתור השאר מסך פעיל */}
                   <button 
                     onClick={toggleWakeLock}
-                    className={`flex-1 flex flex-col items-center justify-center rounded-2xl border transition-all active:scale-95 py-2.5 ${isScreenAwake ? 'bg-amber-500 border-amber-400 text-[#0f172a]' : 'bg-slate-800 border-slate-700 text-slate-400'}`}
+                    className={`flex-1 flex flex-col items-center justify-center rounded-2xl border transition-all active:scale-95 py-2.5 ${isScreenAwake ? 'bg-amber-500 border-amber-400 text-[#0f172a]' : 'bg-slate-50 border-slate-200 text-slate-600'}`}
                   >
                     <div className={isScreenAwake ? 'animate-pulse' : ''}><Flame size={20} /></div>
                     <span className="text-[9px] md:text-xs font-black mt-1 leading-tight uppercase">השאר מסך פעיל</span>
@@ -5535,7 +5576,7 @@ onClick={() => {
                       } catch (e) { console.error(e); }
                       finally { setIsSharing(false); }
                     }}
-                    className="flex-[2.5] bg-gradient-to-r from-pink-600 to-amber-500 text-white py-4 rounded-2xl font-black shadow-lg active:scale-95 transition-all flex flex-col items-center justify-center gap-1 shimmer-effect px-2 text-center"
+                    className="flex-[2.5] bg-gradient-to-r from-pink-600 to-amber-500 text-slate-900 py-4 rounded-2xl font-black shadow-lg active:scale-95 transition-all flex flex-col items-center justify-center gap-1 shimmer-effect px-2 text-center"
                   >
                     {isSharing ? <span className="animate-pulse text-xs">מכין...</span> : <><Instagram size={20} /><span className="text-[10px] md:text-xs font-black leading-tight uppercase">בהצלחה! תייגו אותי בתוצאות</span></>}
                   </button>
@@ -5543,7 +5584,7 @@ onClick={() => {
                   {/* 3. כפתור סימון שלבי הכנה */}
                   <button 
                     onClick={() => setIsMarkingSteps(!isMarkingSteps)}
-                    className={`flex-1 flex flex-col items-center justify-center rounded-2xl border transition-all active:scale-95 py-2.5 ${isMarkingSteps ? 'bg-green-600 border-green-400 text-white' : 'bg-slate-800 border-slate-700 text-slate-400'}`}
+                    className={`flex-1 flex flex-col items-center justify-center rounded-2xl border transition-all active:scale-95 py-2.5 ${isMarkingSteps ? 'bg-green-600 border-green-400 text-slate-900' : 'bg-slate-50 border-slate-200 text-slate-600'}`}
                   >
                     <BookOpen size={20} />
                     <span className="text-[10px] md:text-xs font-black mt-1 leading-tight uppercase text-center">סימון שלבי הכנה</span>
@@ -5552,7 +5593,7 @@ onClick={() => {
 
                 {/* הודעת העתקה צפה */}
                 {copyNotification && (
-                  <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-pink-600 text-white px-4 py-1 rounded-full text-[10px] font-black shadow-xl animate-in slide-in-from-bottom-2">
+                  <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-pink-600 text-slate-900 px-4 py-1 rounded-full text-[10px] font-black shadow-xl animate-in slide-in-from-bottom-2">
                     {copyNotification}
                   </div>
                 )}
@@ -5567,18 +5608,18 @@ onClick={() => {
 
 {showPendingOrdersModal && (
   <div className="fixed inset-0 z-[2000] flex items-center justify-center px-4 bg-black/95 backdrop-blur-xl animate-in fade-in">
-    <div className="bg-slate-900 border-2 border-orange-500 p-6 rounded-[2.5rem] shadow-2xl max-w-md w-full max-h-[85vh] flex flex-col">
+    <div className="bg-white border-2 border-orange-500 p-6 rounded-[2.5rem] shadow-2xl max-w-md w-full max-h-[85vh] flex flex-col">
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-xl font-black text-white flex items-center gap-2"><ShoppingCart size={20} className="text-orange-400" /> הזמנות בתהליך</h3>
-        <button onClick={() => setShowPendingOrdersModal(false)} className="text-slate-500 hover:text-white"><X size={24}/></button>
+        <h3 className="text-xl font-black text-slate-900 flex items-center gap-2"><ShoppingCart size={20} className="text-orange-400" /> הזמנות בתהליך</h3>
+        <button onClick={() => setShowPendingOrdersModal(false)} className="text-slate-500 hover:text-slate-900"><X size={24}/></button>
       </div>
 
       <div className="overflow-y-auto space-y-3 flex-1 custom-scrollbar px-1">
         {pendingOrders.length > 0 ? pendingOrders.map((order) => (
-          <div key={order.visitor_id} className="bg-slate-800/40 p-4 rounded-3xl border border-slate-700/50 hover:border-orange-500/30 transition-all">
+          <div key={order.visitor_id} className="bg-slate-50/40 p-4 rounded-3xl border border-slate-200/50 hover:border-orange-500/30 transition-all">
             <div className="flex justify-between items-start">
               <div className="text-right">
-                <p className="font-black text-white text-sm">{order.customer_name || "לקוח/ה אנונימי/ת"}</p>
+                <p className="font-black text-slate-900 text-sm">{order.customer_name || "לקוח/ה אנונימי/ת"}</p>
                 {/* הצגת תאריך ושעה של עדכון אחרון */}
                 <p className="text-[10px] text-orange-400 font-bold mt-1">
                   שינוי אחרון: {new Date(order.updated_at).toLocaleString('he-IL', {
@@ -5593,14 +5634,14 @@ onClick={() => {
               <div className="flex gap-2">
                 <button 
                   onClick={() => deletePendingOrder(order.visitor_id)}
-                  className="p-2 bg-red-600/10 text-red-500 rounded-xl hover:bg-red-600 hover:text-white transition-all"
+                  className="p-2 bg-red-600/10 text-red-500 rounded-xl hover:bg-red-600 hover:text-slate-900 transition-all"
                   title="מחק הזמנה מהרשימה"
                 >
                   <Trash2 size={16} />
                 </button>
                 <button 
                   onClick={() => setSelectedPendingOrder(selectedPendingOrder === order.visitor_id ? null : order.visitor_id)}
-                  className={`px-3 py-1 rounded-xl text-[10px] font-black transition-all ${selectedPendingOrder === order.visitor_id ? 'bg-orange-500 text-white' : 'bg-slate-700 text-slate-300'}`}
+                  className={`px-3 py-1 rounded-xl text-[10px] font-black transition-all ${selectedPendingOrder === order.visitor_id ? 'bg-orange-500 text-slate-900' : 'bg-slate-700 text-slate-600'}`}
                 >
                   {selectedPendingOrder === order.visitor_id ? 'סגור' : 'מה בסל?'}
                 </button>
@@ -5608,14 +5649,14 @@ onClick={() => {
             </div>
 
             {selectedPendingOrder === order.visitor_id && (
-              <div className="mt-4 pt-4 border-t border-slate-700 space-y-2 animate-in slide-in-from-top-2">
+              <div className="mt-4 pt-4 border-t border-slate-200 space-y-2 animate-in slide-in-from-top-2">
                 {Object.entries(order.cart_data).map(([key, qty]) => {
                   const [idStr, variant] = key.split('__');
                   const p = products.find(prod => prod.id === Number(idStr));
                   return (
-                    <div key={key} className="flex justify-between items-center bg-slate-900/50 p-2 rounded-xl border border-slate-800">
+                    <div key={key} className="flex justify-between items-center bg-white/50 p-2 rounded-xl border border-slate-800">
                       <div className="flex flex-col text-right">
-                        <span className="text-xs font-bold text-white">{p?.name || "מוצר נמחק"}</span>
+                        <span className="text-xs font-bold text-slate-900">{p?.name || "מוצר נמחק"}</span>
                         {variant && <span className="text-[9px] text-orange-400">{variant}</span>}
                       </div>
                       <span className="text-xs font-black text-orange-500">{qty} יח'</span>
@@ -5635,7 +5676,7 @@ onClick={() => {
       
       <button 
         onClick={() => setShowPendingOrdersModal(false)}
-        className="w-full mt-6 bg-slate-800 text-white py-3 rounded-2xl font-black text-sm"
+        className="w-full mt-6 bg-slate-50 text-slate-900 py-3 rounded-2xl font-black text-sm"
       >
         סגור חלונית
       </button>
@@ -5646,13 +5687,13 @@ onClick={() => {
 {/* חלונית תזכורת לסל ממתין */}
 {showInactivityPopup && !isAdmin && (
   <div className="fixed inset-0 z-[2500] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl animate-in fade-in">
-    <div className="bg-slate-900 border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-w-sm w-full text-center animate-in zoom-in">
+    <div className="bg-white border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-w-sm w-full text-center animate-in zoom-in">
       <div className="bg-amber-500/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 border border-amber-500/30">
-        <ShoppingBasket className="text-amber-500 animate-bounce" size={40} />
+        <ShoppingBasket className="text-amber-600 animate-bounce" size={40} />
       </div>
       
-      <h3 className="text-xl font-black mb-2 text-white">המוצרים שבחרת מחכים לך פה</h3>
-      <p className="text-slate-400 font-bold text-sm mb-8">
+      <h3 className="text-xl font-black mb-2 text-slate-900">המוצרים שבחרת מחכים לך פה</h3>
+      <p className="text-slate-600 font-bold text-sm mb-8">
         שכחת ללחוץ על כפתור "תשמור לי"
       </p>
 
@@ -5662,7 +5703,7 @@ onClick={() => {
             setShowInactivityPopup(false);
             handleWhatsAppClick(); // פותח את שלב מילוי הפרטים
           }} 
-          className="w-full bg-green-600 text-white py-4 rounded-2xl font-black text-lg shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2"
+          className="w-full bg-green-600 text-slate-900 py-4 rounded-2xl font-black text-lg shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2"
         >
           <MessageCircle size={20} fill="currentColor" />
           סיימתי, אני רוצה להזמין
@@ -5670,7 +5711,7 @@ onClick={() => {
         
         <button 
           onClick={() => setShowInactivityPopup(false)} 
-          className="w-full bg-slate-800 text-slate-400 py-3 rounded-2xl font-bold text-sm hover:text-white transition-colors"
+          className="w-full bg-slate-50 text-slate-600 py-3 rounded-2xl font-bold text-sm hover:text-slate-900 transition-colors"
         >
           אל תשגע אותי, אני עוד מסתכל
         </button>
@@ -5681,30 +5722,30 @@ onClick={() => {
 
 {showThresholdGiftModal && (
   <div className="fixed inset-0 z-[2000] flex items-center justify-center px-4 bg-black/95 backdrop-blur-xl animate-in fade-in text-center">
-    <div className="bg-slate-900 border-2 border-green-500 p-6 rounded-[2.5rem] shadow-2xl max-w-lg w-full animate-in zoom-in">
+    <div className="bg-white border-2 border-green-500 p-6 rounded-[2.5rem] shadow-2xl max-w-lg w-full animate-in zoom-in">
       <div className="bg-green-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-green-400">
         <PartyPopper size={32} />
       </div>
-      <h3 className="text-xl font-black text-white mb-2 italic">איזה כיף! מגיע לך מתנה</h3>
-      <p className="text-slate-400 font-bold text-sm mb-6">מכיוון שעברת את ה-₪{siteSettings.threshold_promo_limit}, תוכל לבחור מוצר אחד שתרצה לקבל מאיתנו במתנה:</p>
+      <h3 className="text-xl font-black text-slate-900 mb-2 italic">איזה כיף! מגיע לך מתנה</h3>
+      <p className="text-slate-600 font-bold text-sm mb-6">מכיוון שעברת את ה-₪{siteSettings.threshold_promo_limit}, תוכל לבחור מוצר אחד שתרצה לקבל מאיתנו במתנה:</p>
       
       <div className="grid grid-cols-3 gap-3 mb-8">
         {products.filter(p => siteSettings.threshold_promo_items?.includes(p.id)).map(p => (
           <div 
             key={p.id} 
             onClick={() => setSelectedGiftItem(p)}
-            className={`cursor-pointer rounded-2xl overflow-hidden border-2 transition-all active:scale-95 ${selectedGiftItem?.id === p.id ? 'border-green-500 bg-green-500/10 scale-105 shadow-[0_0_15px_rgba(34,197,94,0.3)]' : 'border-slate-800 bg-slate-800/40 opacity-70'}`}
+            className={`cursor-pointer rounded-2xl overflow-hidden border-2 transition-all active:scale-95 ${selectedGiftItem?.id === p.id ? 'border-green-500 bg-green-500/10 scale-105 shadow-[0_0_15px_rgba(34,197,94,0.3)]' : 'border-slate-800 bg-slate-50/40 opacity-70'}`}
           >
             <div className="aspect-square relative">
               <img src={p.image} className="w-full h-full object-cover" />
               {selectedGiftItem?.id === p.id && (
                 <div className="absolute inset-0 bg-green-600/20 flex items-center justify-center">
-                  <div className="bg-green-500 text-white rounded-full p-1 shadow-lg"><Plus size={16} /></div>
+                  <div className="bg-green-500 text-slate-900 rounded-full p-1 shadow-lg"><Plus size={16} /></div>
                 </div>
               )}
             </div>
             <div className="p-1.5 h-12 flex items-center justify-center">
-              <span className="text-[10px] font-black text-white leading-tight">{p.name}</span>
+              <span className="text-[10px] font-black text-slate-900 leading-tight">{p.name}</span>
             </div>
           </div>
         ))}
@@ -5717,7 +5758,7 @@ onClick={() => {
             setShowThresholdGiftModal(false);
             setShowPickupModal(true);
           }} 
-          className="w-full bg-green-600 disabled:opacity-30 text-white py-4 rounded-2xl font-black text-lg shadow-lg active:scale-95 transition-all"
+          className="w-full bg-green-600 disabled:opacity-30 text-slate-900 py-4 rounded-2xl font-black text-lg shadow-lg active:scale-95 transition-all"
         >
           בחרתי את המתנה שלי! 🎁
         </button>
@@ -5727,7 +5768,7 @@ onClick={() => {
             setShowThresholdGiftModal(false);
             setShowPickupModal(true);
           }} 
-          className="text-slate-500 font-bold text-[10px] uppercase hover:text-white transition-colors"
+          className="text-slate-500 font-bold text-[10px] uppercase hover:text-slate-900 transition-colors"
         >
           אני לא רוצה מתנה, המשך
         </button>
@@ -5738,11 +5779,11 @@ onClick={() => {
 
 {showGiftSelectorInAdmin && (
   <div className="fixed inset-0 z-[2000] flex items-center justify-center px-4 bg-black/90 backdrop-blur-xl">
-    <div className="bg-slate-900 border-2 border-green-500 p-6 rounded-[2rem] max-w-md w-full max-h-[80vh] flex flex-col">
-      <h3 className="text-white font-black mb-4">בחר מוצרים שהלקוח יוכל לבחור כמתנה:</h3>
+    <div className="bg-white border-2 border-green-500 p-6 rounded-[2rem] max-w-md w-full max-h-[80vh] flex flex-col">
+      <h3 className="text-slate-900 font-black mb-4">בחר מוצרים שהלקוח יוכל לבחור כמתנה:</h3>
       <div className="overflow-y-auto space-y-2 flex-1 pr-2">
         {products.filter(p => p.is_visible).map(p => (
-          <div key={p.id} className="flex items-center justify-between bg-slate-800 p-3 rounded-xl border border-slate-700">
+          <div key={p.id} className="flex items-center justify-between bg-slate-50 p-3 rounded-xl border border-slate-200">
             <span className="text-sm font-bold">{p.name}</span>
             <input 
               type="checkbox" 
@@ -5757,38 +5798,38 @@ onClick={() => {
           </div>
         ))}
       </div>
-      <button onClick={() => setShowGiftSelectorInAdmin(false)} className="w-full mt-4 bg-green-600 py-3 rounded-xl font-black text-white">סיימתי</button>
+      <button onClick={() => setShowGiftSelectorInAdmin(false)} className="w-full mt-4 bg-green-600 py-3 rounded-xl font-black text-slate-900">סיימתי</button>
     </div>
   </div>
 )}
 
 {showRecipeStatsModal && (
   <div className="fixed inset-0 z-[2500] flex items-center justify-center px-4 bg-black/95 backdrop-blur-xl animate-in fade-in">
-    <div className="bg-slate-900 border-2 border-pink-500 p-6 rounded-[2.5rem] shadow-2xl max-w-md w-full max-h-[85vh] flex flex-col">
+    <div className="bg-white border-2 border-pink-500 p-6 rounded-[2.5rem] shadow-2xl max-w-md w-full max-h-[85vh] flex flex-col">
       <div className="flex justify-between items-center mb-4 border-b border-slate-800 pb-4">
-        <h3 className="text-xl font-black text-white flex items-center gap-2">
+        <h3 className="text-xl font-black text-slate-900 flex items-center gap-2">
           <BarChart3 className="text-pink-400" /> סטטיסטיקת מתכונים
         </h3>
-        <button onClick={() => setShowRecipeStatsModal(false)} className="text-slate-500 hover:text-white"><X size={24}/></button>
+        <button onClick={() => setShowRecipeStatsModal(false)} className="text-slate-500 hover:text-slate-900"><X size={24}/></button>
       </div>
 
       {/* כפתורי מיון חדשים */}
-      <div className="bg-slate-800 p-1 rounded-xl flex mb-4 border border-slate-700">
+      <div className="bg-slate-50 p-1 rounded-xl flex mb-4 border border-slate-200">
         <button 
             onClick={() => setRecipeSortMode('total')}
-            className={`flex-1 py-2 rounded-lg text-[10px] font-black transition-all ${recipeSortMode === 'total' ? 'bg-pink-600 text-white shadow-md' : 'text-slate-400 hover:text-white'}`}
+            className={`flex-1 py-2 rounded-lg text-[10px] font-black transition-all ${recipeSortMode === 'total' ? 'bg-pink-600 text-slate-900 shadow-md' : 'text-slate-600 hover:text-slate-900'}`}
         >
             סה"כ צפיות
         </button>
         <button 
             onClick={() => setRecipeSortMode('internal')}
-            className={`flex-1 py-2 rounded-lg text-[10px] font-black transition-all ${recipeSortMode === 'internal' ? 'bg-green-600 text-white shadow-md' : 'text-slate-400 hover:text-white'}`}
+            className={`flex-1 py-2 rounded-lg text-[10px] font-black transition-all ${recipeSortMode === 'internal' ? 'bg-green-600 text-slate-900 shadow-md' : 'text-slate-600 hover:text-slate-900'}`}
         >
             לחיצה באתר
         </button>
         <button 
             onClick={() => setRecipeSortMode('direct')}
-            className={`flex-1 py-2 rounded-lg text-[10px] font-black transition-all ${recipeSortMode === 'direct' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-400 hover:text-white'}`}
+            className={`flex-1 py-2 rounded-lg text-[10px] font-black transition-all ${recipeSortMode === 'direct' ? 'bg-blue-600 text-slate-900 shadow-md' : 'text-slate-600 hover:text-slate-900'}`}
         >
             קישור ישיר
         </button>
@@ -5822,13 +5863,13 @@ onClick={() => {
             if (stats.total === 0 && recipeSortMode !== 'total') return null;
 
             return (
-              <div key={recipe.id} className="bg-slate-800/40 p-3 rounded-2xl border border-slate-700/50">
+              <div key={recipe.id} className="bg-slate-50/40 p-3 rounded-2xl border border-slate-200/50">
                 <div className="flex justify-between items-center mb-1">
                   <div className="flex items-center gap-2 min-w-0">
-                    <span className={`w-5 h-5 shrink-0 rounded-full flex items-center justify-center text-[9px] font-black ${stats.total > 0 ? 'bg-pink-600' : 'bg-slate-700'} text-white`}>
+                    <span className={`w-5 h-5 shrink-0 rounded-full flex items-center justify-center text-[9px] font-black ${stats.total > 0 ? 'bg-pink-600' : 'bg-slate-700'} text-slate-900`}>
                       {idx + 1}
                     </span>
-                    <span className="font-bold text-xs text-white truncate">{recipe.title}</span>
+                    <span className="font-bold text-xs text-slate-900 truncate">{recipe.title}</span>
                   </div>
                   
                   {/* המספר הגדול בצד משתנה לפי המיון */}
@@ -5844,11 +5885,11 @@ onClick={() => {
                 
                 {/* שורת הפירוט המלא */}
                 <div className="flex gap-2 mt-2">
-                  <div className={`flex-1 p-1.5 rounded-xl text-center border transition-colors ${recipeSortMode === 'direct' ? 'bg-blue-600/20 border-blue-500/50' : 'bg-slate-900/50 border-slate-800'}`}>
+                  <div className={`flex-1 p-1.5 rounded-xl text-center border transition-colors ${recipeSortMode === 'direct' ? 'bg-blue-600/20 border-blue-500/50' : 'bg-white/50 border-slate-800'}`}>
                     <p className="text-[7px] text-slate-500 font-bold uppercase">קישור ישיר</p>
                     <p className="text-[10px] font-black text-blue-400">{stats.direct}</p>
                   </div>
-                  <div className={`flex-1 p-1.5 rounded-xl text-center border transition-colors ${recipeSortMode === 'internal' ? 'bg-green-600/20 border-green-500/50' : 'bg-slate-900/50 border-slate-800'}`}>
+                  <div className={`flex-1 p-1.5 rounded-xl text-center border transition-colors ${recipeSortMode === 'internal' ? 'bg-green-600/20 border-green-500/50' : 'bg-white/50 border-slate-800'}`}>
                     <p className="text-[7px] text-slate-500 font-bold uppercase">לחיצה באתר</p>
                     <p className="text-[10px] font-black text-green-400">{stats.internal}</p>
                   </div>
@@ -5871,7 +5912,7 @@ onClick={() => {
         איפוס נתוני צפיות
       </button>
 
-      <button onClick={() => setShowRecipeStatsModal(false)} className="w-full mt-2 bg-slate-800 text-white py-3 rounded-2xl font-black text-sm">סגור</button>
+      <button onClick={() => setShowRecipeStatsModal(false)} className="w-full mt-2 bg-slate-50 text-slate-900 py-3 rounded-2xl font-black text-sm">סגור</button>
     </div>
   </div>
 )}
@@ -5880,35 +5921,35 @@ onClick={() => {
 {/* About Modal - גרסה 12.0: תיקון סטיקי למחשב וצמצום רווחים סופי */}
 {showAboutModal && (
   <div className="fixed inset-0 z-[2500] flex items-center justify-center px-4 pb-20 bg-black/95 backdrop-blur-xl animate-in fade-in">
-    <div className="bg-slate-900 border border-slate-700 w-full max-w-md md:max-w-4xl h-[75vh] md:h-[65vh] rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col relative animate-in zoom-in duration-300">
+    <div className="bg-white border border-slate-200 w-full max-w-md md:max-w-4xl h-[75vh] md:h-[65vh] rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col relative animate-in zoom-in duration-300">
       
       {/* Header - Sticky */}
-      <div className="bg-slate-900/95 backdrop-blur-md border-b border-slate-800 p-3 md:p-4 sticky top-0 z-50 flex items-center justify-between shrink-0">
+      <div className="bg-white/95 backdrop-blur-md border-b border-slate-800 p-3 md:p-4 sticky top-0 z-50 flex items-center justify-between shrink-0">
         <button 
           onClick={async () => {
             const shareUrl = `${window.location.origin}${window.location.pathname}?view=about`;
-            const shareText = `הכירו את ליאור בן משה - הקונדיטור שמאחורי הפטיסרי הטבעוני! 👨‍🍳✨`;
-            if (navigator.share) { await navigator.share({ title: 'ליאור בן משה', text: shareText, url: shareUrl }); }
+            const shareText = `הווק הטבעוני, מטבח אסייאתי פרימיום👨‍🍳✨`;
+            if (navigator.share) { await navigator.share({ title: 'הווק הטבעוני', text: shareText, url: shareUrl }); }
             else { window.open(`https://wa.me/?text=${encodeURIComponent(shareText + " " + shareUrl)}`, '_blank'); }
           }}
-          className="w-9 h-9 flex items-center justify-center bg-slate-800 rounded-full text-pink-400 border border-slate-700 shadow-lg active:scale-90"
+          className="w-9 h-9 flex items-center justify-center bg-slate-50 rounded-full text-pink-400 border border-slate-200 shadow-lg active:scale-90"
         >
           <Share2 size={18} />
         </button>
-        <h3 className="text-lg font-black text-white">מי אני</h3>
-        <button onClick={() => setShowAboutModal(false)} className="w-9 h-9 flex items-center justify-center bg-slate-800 rounded-full text-slate-400 hover:text-white transition-all">
+        <h3 className="text-lg font-black text-slate-900">מי אני</h3>
+        <button onClick={() => setShowAboutModal(false)} className="w-9 h-9 flex items-center justify-center bg-slate-50 rounded-full text-slate-600 hover:text-slate-900 transition-all">
           <X size={20}/>
         </button>
       </div>
 
       {/* Content Area - גלילה מנוהלת */}
-      <div className="overflow-y-auto custom-scrollbar flex-1 relative bg-slate-900">
+      <div className="overflow-y-auto custom-scrollbar flex-1 relative bg-white">
         {/* השינוי כאן: md:items-start מונע מהתמונה להימתח ומאפשר לה להיות סטיקית */}
         <div className="flex flex-col md:flex-row items-center md:items-start min-h-full">
           
           {/* תמונה סטיקית - עובדת עכשיו גם במחשב */}
-          <div className="w-full md:w-auto shrink-0 p-4 md:p-8 sticky top-0 z-30 bg-slate-900/90 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none">
-             <div className="w-[150px] h-[150px] md:w-[200px] md:h-[200px] rounded-2xl overflow-hidden shadow-2xl border-2 border-slate-700/50 bg-slate-800 shrink-0 mx-auto md:mx-0">
+          <div className="w-full md:w-auto shrink-0 p-4 md:p-8 sticky top-0 z-30 bg-white/90 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none">
+             <div className="w-[150px] h-[150px] md:w-[200px] md:h-[200px] rounded-2xl overflow-hidden shadow-2xl border-2 border-slate-200/50 bg-slate-50 shrink-0 mx-auto md:mx-0">
                 <img 
                   src={siteSettings.about_image_url || siteSettings.logo_url} 
                   className="w-full h-full object-cover" 
@@ -5927,7 +5968,7 @@ onClick={() => {
              {/* Footer בתוך הגלילה */}
              <div className="mt-16 flex flex-col items-center opacity-30 text-center pb-8">
                 <img src={siteSettings.logo_url} className="w-20 grayscale mb-2" />
-                <p className="text-[8px] font-black tracking-[0.2em]">LIOR BEN MOSHE • SINCE 2016</p>
+                <p className="text-[8px] font-black tracking-[0.2em]">Iris Gusler</p>
              </div>
           </div>
           
@@ -5939,45 +5980,45 @@ onClick={() => {
 
 {showAboutStatsModal && (
   <div className="fixed inset-0 z-[2500] flex items-center justify-center px-4 bg-black/95 backdrop-blur-xl animate-in fade-in">
-    <div className="bg-slate-900 border-2 border-pink-500 p-6 rounded-[2.5rem] shadow-2xl max-w-md w-full animate-in zoom-in text-right">
+    <div className="bg-white border-2 border-pink-500 p-6 rounded-[2.5rem] shadow-2xl max-w-md w-full animate-in zoom-in text-right">
       
       {/* כותרת */}
       <div className="flex justify-between items-center mb-6 border-b border-slate-800 pb-4">
-        <h3 className="text-xl font-black text-white flex items-center gap-2">
+        <h3 className="text-xl font-black text-slate-900 flex items-center gap-2">
           <User className="text-pink-400" /> פירוט צפיות ב-"מי אני"
         </h3>
-        <button onClick={() => setShowAboutStatsModal(false)} className="text-slate-500 hover:text-white transition-colors">
+        <button onClick={() => setShowAboutStatsModal(false)} className="text-slate-500 hover:text-slate-900 transition-colors">
           <X size={24}/>
         </button>
       </div>
 
-      <div className="bg-slate-800/80 p-6 rounded-3xl border border-slate-700 shadow-inner space-y-6">
+      <div className="bg-slate-50/80 p-6 rounded-3xl border border-slate-200 shadow-inner space-y-6">
         
         {/* סך הכל צפיות */}
         <div className="text-center">
           <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">סך הכל חשיפות</p>
-          <p className="text-4xl font-black text-white">
+          <p className="text-4xl font-black text-slate-900">
             {(aboutStats.internal_click || 0) + (aboutStats.direct_link || 0)}
           </p>
         </div>
 
         <div className="grid grid-cols-2 gap-3">
           {/* כרטיס לחיצה באתר */}
-          <div className="bg-slate-900/80 p-4 rounded-2xl border border-pink-500/20 text-center">
+          <div className="bg-white/80 p-4 rounded-2xl border border-pink-500/20 text-center">
             <div className="bg-pink-500/10 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-2 text-pink-500">
               <MousePointer2 size={18} />
             </div>
             <p className="text-[9px] font-black text-slate-500 uppercase">לחיצה בתוך האתר</p>
-            <p className="text-xl font-black text-white">{aboutStats.internal_click || 0}</p>
+            <p className="text-xl font-black text-slate-900">{aboutStats.internal_click || 0}</p>
           </div>
 
           {/* כרטיס כניסה מקישור */}
-          <div className="bg-slate-900/80 p-4 rounded-2xl border border-blue-500/20 text-center">
+          <div className="bg-white/80 p-4 rounded-2xl border border-blue-500/20 text-center">
             <div className="bg-blue-500/10 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-2 text-blue-400">
               <ExternalLink size={18} />
             </div>
             <p className="text-[9px] font-black text-slate-500 uppercase">כניסה מקישור ישיר</p>
-            <p className="text-xl font-black text-white">{aboutStats.direct_link || 0}</p>
+            <p className="text-xl font-black text-slate-900">{aboutStats.direct_link || 0}</p>
           </div>
         </div>
 
@@ -5990,7 +6031,7 @@ onClick={() => {
               if (typeof fetchVisits === 'function') fetchVisits();
             }
           }}
-          className="w-full py-2 bg-red-600/10 text-red-500 border border-red-500/20 rounded-xl text-[10px] font-black hover:bg-red-600 hover:text-white transition-all flex items-center justify-center gap-2"
+          className="w-full py-2 bg-red-600/10 text-red-500 border border-red-500/20 rounded-xl text-[10px] font-black hover:bg-red-600 hover:text-slate-900 transition-all flex items-center justify-center gap-2"
         >
           <RotateCcw size={14} /> איפוס נתונים
         </button>
@@ -5998,7 +6039,7 @@ onClick={() => {
 
       <button 
         onClick={() => setShowAboutStatsModal(false)} 
-        className="w-full mt-6 bg-pink-600 text-white py-4 rounded-2xl font-black shadow-lg active:scale-95 transition-all"
+        className="w-full mt-6 bg-pink-600 text-slate-900 py-4 rounded-2xl font-black shadow-lg active:scale-95 transition-all"
       >
         סגור פירוט
       </button>
@@ -6006,46 +6047,31 @@ onClick={() => {
   </div>
 )}
 
-{/* חלונית תיאור מוצר - גרסה כהה */}
+{/* חלונית תיאור מוצר */}
 {descModalProduct && (
-  <div 
-    className="fixed inset-0 z-[2000] flex items-center justify-center px-6 bg-black/80 backdrop-blur-sm animate-in fade-in duration-300" 
-    onClick={() => setDescModalProduct(null)}
-  >
+  <div className="fixed inset-0 z-[1500] flex items-center justify-center px-6 bg-black/80 backdrop-blur-md animate-in fade-in" onClick={() => setDescModalProduct(null)}>
     <div 
-      className="bg-[#1e293b] border-2 border-amber-500/50 p-8 rounded-[2.5rem] shadow-[0_0_50px_rgba(0,0,0,0.5)] max-w-sm w-full animate-in zoom-in duration-300 relative"
+      className="bg-white border-2 border-amber-500 p-8 rounded-[2.5rem] shadow-2xl max-w-sm w-full animate-in zoom-in relative"
       onClick={e => e.stopPropagation()}
     >
-      {/* כפתור סגירה */}
-      <button 
-        onClick={() => setDescModalProduct(null)} 
-        className="absolute top-6 left-6 text-slate-400 hover:text-white transition-colors"
-      >
+      <button onClick={() => setDescModalProduct(null)} className="absolute top-6 left-6 text-slate-500 hover:text-slate-900 transition-colors">
         <X size={20}/>
       </button>
       
       <div className="text-center">
-        {/* תמונה עם הילה כתומה */}
-        <div className="w-24 h-24 mx-auto mb-4 rounded-2xl overflow-hidden border-2 border-amber-500/20 shadow-[0_0_20px_rgba(245,158,11,0.1)] bg-[#0f172a]">
-          <img src={descModalProduct.image} className="w-full h-full object-cover" alt={descModalProduct.name} />
+        <div className="w-20 h-20 mx-auto mb-4 rounded-2xl overflow-hidden border-2 border-slate-100 shadow-sm">
+          <img src={descModalProduct.image} className="w-full h-full object-cover" />
         </div>
-
-        <h3 className="text-xl font-black text-white mb-1">{descModalProduct.name}</h3>
-        <p className="text-amber-500 font-black text-sm mb-4 tracking-widest">₪{descModalProduct.price}</p>
-        
-        <div className="h-px bg-slate-700 w-full mb-6 opacity-50"></div>
-        
-        {/* תוכן התיאור - טקסט לבן קריא */}
-        <p className="text-slate-200 font-medium leading-relaxed text-right whitespace-pre-wrap text-sm md:text-base">
+        <h3 className="text-xl font-black text-slate-900 mb-2">{descModalProduct.name}</h3>
+        <div className="h-px bg-slate-100 w-1/2 mx-auto mb-6"></div>
+        <p className="text-slate-700 font-medium leading-relaxed text-right whitespace-pre-wrap">
           {descModalProduct.description}
         </p>
-
-        {/* כפתור סגירה בסטייל האתר שלך */}
         <button 
           onClick={() => setDescModalProduct(null)}
-          className="w-full mt-8 bg-amber-600 text-[#0f172a] py-4 rounded-2xl font-black shadow-lg shadow-amber-600/10 active:scale-95 transition-all"
+          className="w-full mt-8 bg-slate-900 text-white py-4 rounded-2xl font-black shadow-lg active:scale-95 transition-all"
         >
-          הבנתי, תודה!
+          סגור
         </button>
       </div>
     </div>
@@ -6057,28 +6083,28 @@ onClick={() => {
         <div className="fixed inset-0 z-[800] flex items-end justify-center px-4 pb-6 bg-black/70 backdrop-blur-sm animate-in fade-in text-center" onClick={() => setShowNavModal(false)}>
           <div className="bg-[#1e293b] border-t-2 border-amber-500/30 w-full max-w-sm rounded-[2.5rem] p-6 animate-in slide-in-from-bottom-full duration-300 shadow-2xl text-center" onClick={(e) => e.stopPropagation()}>
             <div className="w-12 h-1 bg-slate-700 rounded-full mx-auto mb-6 opacity-50 text-center" />
-            <h3 className="text-lg font-black text-white mb-6 text-center">איך תרצו לנווט?</h3>
+            <h3 className="text-lg font-black text-slate-900 mb-6 text-center">איך תרצו לנווט?</h3>
             <div className="space-y-3 text-center">
-              <button onClick={() => openNavigationApp('waze')} className="flex items-center justify-between w-full bg-slate-800/80 hover:bg-slate-700 p-5 rounded-2xl transition-all border border-slate-700 active:scale-95 text-center"><span className="font-bold text-white text-lg text-center">Waze</span><ArrowLeft size={18} className="text-amber-500 text-center" /></button>
-              <button onClick={() => openNavigationApp('google')} className="flex items-center justify-between w-full bg-slate-800/80 hover:bg-slate-700 p-5 rounded-2xl transition-all border border-slate-700 active:scale-95 text-center"><span className="font-bold text-white text-lg text-center">Google Maps</span><ArrowLeft size={18} className="text-amber-500 text-center" /></button>
-              {/iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent) && (<button onClick={() => openNavigationApp('apple')} className="flex items-center justify-between w-full bg-slate-800/80 hover:bg-slate-700 p-5 rounded-2xl transition-all border border-slate-700 active:scale-95 text-center"><span className="font-bold text-white text-lg text-center">Apple Maps</span><ArrowLeft size={18} className="text-amber-500 text-center" /></button>)}
-              <button onClick={() => setShowNavModal(false)} className="w-full py-4 text-slate-500 font-black text-xs uppercase tracking-widest mt-2 hover:text-slate-300 transition-colors text-center">ביטול</button>
+              <button onClick={() => openNavigationApp('waze')} className="flex items-center justify-between w-full bg-slate-50/80 hover:bg-slate-700 p-5 rounded-2xl transition-all border border-slate-200 active:scale-95 text-center"><span className="font-bold text-slate-900 text-lg text-center">Waze</span><ArrowLeft size={18} className="text-amber-600 text-center" /></button>
+              <button onClick={() => openNavigationApp('google')} className="flex items-center justify-between w-full bg-slate-50/80 hover:bg-slate-700 p-5 rounded-2xl transition-all border border-slate-200 active:scale-95 text-center"><span className="font-bold text-slate-900 text-lg text-center">Google Maps</span><ArrowLeft size={18} className="text-amber-600 text-center" /></button>
+              {/iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent) && (<button onClick={() => openNavigationApp('apple')} className="flex items-center justify-between w-full bg-slate-50/80 hover:bg-slate-700 p-5 rounded-2xl transition-all border border-slate-200 active:scale-95 text-center"><span className="font-bold text-slate-900 text-lg text-center">Apple Maps</span><ArrowLeft size={18} className="text-amber-600 text-center" /></button>)}
+              <button onClick={() => setShowNavModal(false)} className="w-full py-4 text-slate-500 font-black text-xs uppercase tracking-widest mt-2 hover:text-slate-600 transition-colors text-center">ביטול</button>
             </div>
           </div>
         </div>
       )}
 {showCartSummaryModal && (
   <div className="fixed inset-0 z-[1000] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl animate-in fade-in">
-    <div className="bg-slate-900 border-2 border-green-500 p-6 rounded-[2.5rem] shadow-2xl max-w-sm w-full animate-in zoom-in relative flex flex-col max-h-[85vh]">
+    <div className="bg-white border-2 border-green-500 p-6 rounded-[2.5rem] shadow-2xl max-w-sm w-full animate-in zoom-in relative flex flex-col max-h-[85vh]">
       {/* כפתור סגירה */}
-      <button onClick={() => setShowCartSummaryModal(false)} className="absolute top-5 left-5 text-slate-500 hover:text-white transition-colors"><X size={24}/></button>
+      <button onClick={() => setShowCartSummaryModal(false)} className="absolute top-5 left-5 text-slate-500 hover:text-slate-900 transition-colors"><X size={24}/></button>
 
       {/* כותרת החלונית */}
       <div className="text-center mb-6">
         <div className="bg-green-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2 text-green-500 shadow-lg shadow-green-500/10">
           <ShoppingBasket size={32} />
         </div>
-        <h3 className="text-xl font-black text-white">הסל שלי</h3>
+        <h3 className="text-xl font-black text-slate-900">הסל שלי</h3>
         <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1">פירוט ההזמנה שלך</p>
       </div>
 
@@ -6090,11 +6116,11 @@ onClick={() => {
             const p = products.find(prod => prod.id === Number(idStr));
             if (!p) return null;
             return (
-              <div key={key} className="bg-slate-800/40 border border-slate-700/50 p-3 rounded-2xl flex items-center justify-between group transition-all hover:bg-slate-800/60">
+              <div key={key} className="bg-slate-50/40 border border-slate-200/50 p-3 rounded-2xl flex items-center justify-between group transition-all hover:bg-slate-50/60">
                 <div className="flex flex-col text-right">
-                  <span className="font-bold text-sm text-white leading-tight">{p.name}</span>
-                  {variant && <span className="text-[10px] text-amber-500 font-black mt-0.5">סוג: {variant}</span>}
-                  <span className="text-[10px] text-slate-400 mt-1 font-bold">₪{p.price * qty}</span>
+                  <span className="font-bold text-sm text-slate-900 leading-tight">{p.name}</span>
+                  {variant && <span className="text-[10px] text-amber-600 font-black mt-0.5">סוג: {variant}</span>}
+                  <span className="text-[10px] text-slate-600 mt-1 font-bold">₪{p.price * qty}</span>
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -6108,10 +6134,10 @@ onClick={() => {
                   </button>
 
                   {/* פקדי כמות */}
-                  <div className="flex items-center gap-2 bg-slate-900/80 rounded-xl p-1 border border-slate-700">
-                    <button onClick={() => updateQty(p.id, -1, variant)} className="w-7 h-7 flex items-center justify-center bg-slate-800 rounded-lg text-white hover:bg-slate-700 active:scale-90 transition-all"><Minus size={12}/></button>
+                  <div className="flex items-center gap-2 bg-white/80 rounded-xl p-1 border border-slate-200">
+                    <button onClick={() => updateQty(p.id, -1, variant)} className="w-7 h-7 flex items-center justify-center bg-slate-50 rounded-lg text-slate-900 hover:bg-slate-700 active:scale-90 transition-all"><Minus size={12}/></button>
                     <span className="w-5 text-center font-black text-green-500 text-sm">{qty}</span>
-                    <button onClick={() => updateQty(p.id, 1, variant)} className="w-7 h-7 flex items-center justify-center bg-green-600 rounded-lg text-white hover:bg-green-500 active:scale-90 transition-all shadow-md shadow-green-600/20"><Plus size={12}/></button>
+                    <button onClick={() => updateQty(p.id, 1, variant)} className="w-7 h-7 flex items-center justify-center bg-green-600 rounded-lg text-slate-900 hover:bg-green-500 active:scale-90 transition-all shadow-md shadow-green-600/20"><Plus size={12}/></button>
                   </div>
                 </div>
               </div>
@@ -6140,7 +6166,7 @@ onClick={() => {
         const currentTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
         const isSale = siteSettings.sale_active && currentTime < siteSettings.sale_end_time;
         return (
-          <span className={`text-[9px] font-black px-1.5 py-0.5 rounded-md ${isSale ? 'text-red-500 bg-red-500/10 animate-pulse' : 'text-amber-500 bg-amber-500/10'}`}>
+          <span className={`text-[9px] font-black px-1.5 py-0.5 rounded-md ${isSale ? 'text-red-500 bg-red-500/10 animate-pulse' : 'text-amber-600 bg-amber-500/10'}`}>
             {isSale ? 'מבצע סוף יום פעיל! 🔥' : 'הופעלה הנחה!'}
           </span>
         );
@@ -6181,7 +6207,7 @@ if (isSale) {
     else if (siteSettings.reward_type === '5_percent') benefitsText += `*🎁 הופעלה הנחה סודית של 5%!*\n`;
     else if (siteSettings.reward_type === '6th_free') {
       const freeCount = Math.floor(totalPastriesInCart / 6);
-      if (freeCount > 0) benefitsText += `*🥐 קיבלתי ${freeCount} מאפים במתנה! (6 ב-5)*\n`;
+      if (freeCount > 0) benefitsText += `* קיבלתי ${freeCount} מאפים במתנה! (6 ב-5)*\n`;
     }
   }
 }
@@ -6193,11 +6219,11 @@ if (isSale) {
                 ? `*סה"כ לתשלום: ₪${finalTotal}* (במקום ₪${originalTotal})`
                 : `*סה"כ לתשלום: ₪${finalTotal}*`;
 
-              const shareMsg = `היי, תראו מה אני מזמין מליאור בן משה 🥐✨:\n\n${items}\n\n${benefitsText}${priceSummary}\n\nמה אתם רוצים להוסיף? הנה הלינק:\n${window.location.href}`;
+              const shareMsg = `היי, תראו מה אני מזמין מהווק הטבעוני היום✨:\n\n${items}\n\n${benefitsText}${priceSummary}\n\nמה אתם רוצים להוסיף? הנה הלינק:\n${window.location.href}`;
 
               window.open(`https://wa.me/?text=${encodeURIComponent(shareMsg)}`, '_blank');
             }}
-            className="w-full bg-slate-800 border border-slate-700 text-slate-300 py-3 rounded-2xl font-bold text-xs flex items-center justify-center gap-2 mb-3 hover:bg-slate-700 transition-all active:scale-95 shadow-lg"
+            className="w-full bg-slate-50 border border-slate-200 text-slate-600 py-3 rounded-2xl font-bold text-xs flex items-center justify-center gap-2 mb-3 hover:bg-slate-700 transition-all active:scale-95 shadow-lg"
           >
             <Share2 size={14} className="text-primary" />
             שיתוף הסל וההטבות (התייעצות)
@@ -6320,7 +6346,7 @@ if (isSale) {
                     setShowRecipeFormModal(false); setShowRecipeCatManager(false); setShowSaleStockModal(false);
                     setShowSaveConfirm(false); setCategoryTip(null); setActiveTip(null);
                   }}
-                  className={`bg-gradient-to-r ${gradient} text-white px-5 py-1 rounded-t-2xl ${shadow} pointer-events-auto ${isFairActive ? 'animate-sun' : ''} active:scale-95 transition-all flex flex-col items-center border-t border-x border-white/20 whitespace-nowrap overflow-hidden`}
+                  className={`bg-gradient-to-r ${gradient} text-white px-5 py-1 rounded-t-2xl ${shadow} pointer-events-auto ${isFairActive ? 'animate-sun' : ''} active:scale-95 transition-all flex flex-col items-center border-t border-x border-slate-200 whitespace-nowrap overflow-hidden`}
                 >
                   <div className="flex items-center gap-1.5 leading-tight">
                     <span className="text-base">{icon}</span>
