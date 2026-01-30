@@ -8,8 +8,8 @@ import {
   Cookie, Snowflake, Navigation, ArrowRight, Database, LayoutGrid, List, Trophy, Gift, Leaf, Award, GripVertical, PlusCircle, Printer, Type, ShoppingCart, Copy, Info, BarChart3, Users, Calendar, KeyRound, Camera, User, ExternalLink, Layers, ShoppingBag, PartyPopper, Wand2, Ticket, RefreshCw, BookOpen
 } from 'lucide-react';
 
-const SUPABASE_URL = 'https://gmeplxcpzparmhszuwcl.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_yk-zMdlVuFuJdM8XiUMDnQ_B9XzHZtj';
+const SUPABASE_URL = 'https://rxjnfvmejinbmuyidbvr.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_WFo_8EQzvTwnr0X-T9ISPg_8eiASzph';
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const WHATSAPP_NUMBER = "972547741436";
@@ -228,6 +228,7 @@ const [showVariantModal, setShowVariantModal] = useState(false);
   const [showDiscountModal, setShowDiscountModal] = useState(false);
   const [showAlreadyActiveModal, setShowAlreadyActiveModal] = useState(false);
     const [pendingWhatsappLink, setPendingWhatsappLink] = useState(""); // קישור ממתין לזוכים
+const [descModalProduct, setDescModalProduct] = useState(null);
 
   const [showCompassion, setShowCompassion] = useState(false); 
   const [showNavModal, setShowNavModal] = useState(false);
@@ -342,7 +343,7 @@ whatsapp_group_url: "https://chat.whatsapp.com/FQPk9GkRx0s6jKJXQzU0hT",
     coupon_discount_percent: 10,
     urgent_message: "",
     whatsapp_number: "972547741436",
-    logo_url: "https://i.postimg.cc/ncJMXLt2/LOGO.png",
+    logo_url: "https://i.postimg.cc/FRQ5cTVN/1000099532-removebg-preview.png",
     instagram_url: "https://www.instagram.com/liorbenmoshe.veganpatisserie",
     facebook_url: "https://www.facebook.com/LiorBenMoshe",
     extra_button_active: true,
@@ -2410,7 +2411,7 @@ onClick={(e) => {
                     <input name="name" className="bg-slate-800 border border-slate-700 p-3 rounded-xl text-center text-sm font-bold outline-none focus:border-purple-500" placeholder="שם קטגוריה" defaultValue={editingCategory?.name || ''} required />
                   </div>
                   <div className="grid grid-cols-3 gap-3">
-                    <input name="icon" className="bg-slate-800 border border-slate-700 p-3 rounded-xl text-center text-lg outline-none focus:border-purple-500" placeholder="אימוג'י" defaultValue={editingCategory?.icon || ''} required />
+                    <input name="icon" className="bg-slate-800 border border-slate-700 p-3 rounded-xl text-center text-lg outline-none focus:border-purple-500" placeholder="אימוג'י" defaultValue={editingCategory?.icon || ''} />
                     <input name="display_order" type="number" readOnly className="bg-slate-900/50 border border-slate-800 p-3 rounded-xl text-center text-sm font-bold text-slate-500 outline-none" placeholder="סדר" value={editingCategory ? editingCategory.display_order : nextCatOrder} />
                     <div className="flex items-center justify-center gap-2 bg-slate-800 border border-slate-700 rounded-xl p-2">
                       <span className="text-[10px] font-bold text-slate-400">מוצג?</span>
@@ -3941,11 +3942,14 @@ onClick={(e) => {
                         </div>
                         <div className="p-1 flex-1 flex flex-col text-center relative items-center">
                           <h3 className="font-bold text-[13px] md:text-lg leading-tight text-slate-100 text-center">{p.name}</h3>
-                          {p.description && (
-                            <p className="text-[9px] md:text-xs text-slate-400 mt-0.5 line-clamp-2 px-1 leading-tight text-center">
-                              {p.description}
-                            </p>
-                          )}
+{p.description && (
+  <button 
+    onClick={(e) => { e.stopPropagation(); setDescModalProduct(p); }}
+    className="text-[10px] font-black text-amber-500 hover:text-amber-400 transition-colors mt-1 mb-1 uppercase tracking-tighter"
+  >
+תיאור המוצר
+  </button>
+)}
 
                           <div className="text-amber-500 font-black text-[13px] md:text-xl my-0.5 text-center">₪{p.price}</div>
                           {p.variants && p.variants.length > 0 ? (
@@ -4023,8 +4027,15 @@ onClick={(e) => {
                                <div className="flex flex-col text-right min-w-0">
                                   {/* שם מוצר - הוקטן ל-text-xs */}
                                   <span className="font-bold text-xs text-slate-100 leading-none">{p.name}</span>
-                                  {p.description && <p className="text-[10px] text-slate-400 leading-tight mt-1">{p.description}</p>}
-                                  
+{p.description && (
+  <button 
+    onClick={(e) => { e.stopPropagation(); setDescModalProduct(p); }}
+    className="text-[9px] font-bold text-amber-500/80 hover:text-amber-500 underline underline-offset-2 w-fit mt-1"
+  >
+תיאור המוצר 
+  </button>
+)}
+                             
                                   {Object.entries(cart).filter(([key]) => key.startsWith(`${p.id}__`)).length > 0 && (
                                     <div className="flex flex-wrap gap-1 mt-1">
                                       {Object.entries(cart).filter(([key]) => key.startsWith(`${p.id}__`)).map(([key, qty]) => (
@@ -5408,16 +5419,19 @@ onClick={() => {
                   {/* אופן ההכנה - לוגיקת זיהוי שלבים חכמה + תמיכה בקו תחתון ובולד */}
                   <div className="flex-1 text-slate-200 text-sm md:text-base leading-relaxed font-medium select-none" onContextMenu={(e) => e.preventDefault()}>
                      {(() => {
-
                         const lines = selectedRecipe.content.split(/\r?\n/);
                         const groups = [];
                         let currentGroup = null;
 
-                        // 1. הפונקציה המקורית שלך לעיצוב טקסט (קו תחתון ובולד) - ללא שינוי
+                        // פונקציה שמפרקת גם לפי # (קו תחתון) וגם לפי * (בולד)
                         const renderFormattedText = (txt) => {
+                          // 1. פירוק לפי סולמיות לקו תחתון
                           const underlineParts = txt.split('#');
                           return underlineParts.map((uPart, uIndex) => {
+                            // אם האינדקס אי זוגי, זה טקסט שהיה בין סולמיות
                             const isUnderline = uIndex % 2 === 1;
+                            
+                            // 2. פירוק לפי כוכביות לבולד (בתוך כל חלק)
                             const boldParts = uPart.split('*');
                             const renderedContent = boldParts.map((bPart, bIndex) => {
                               const isBold = bIndex % 2 === 1;
@@ -5432,51 +5446,9 @@ onClick={() => {
                           });
                         };
 
-                        // 2. פונקציה מעודכנת: תומכת גם ב-YouTube וגם ב-MP4
-                        const processContent = (text) => {
-                            // א. בדיקת יוטיוב
-                            const ytMatch = text.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
-                            if (ytMatch && ytMatch[1]) {
-                                return (
-                                    <div className="w-full aspect-video my-4 rounded-xl overflow-hidden shadow-lg bg-black border border-slate-700 relative z-10" onClick={(e) => e.stopPropagation()}>
-                                        <iframe
-                                            width="100%"
-                                            height="100%"
-                                            src={`https://www.youtube.com/embed/${ytMatch[1]}`}
-                                            title="YouTube video player"
-                                            frameBorder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowFullScreen
-                                        ></iframe>
-                                    </div>
-                                );
-                            }
-
-                            // ב. בדיקת קובץ MP4 ישיר (חדש!)
-                            // מחפש קישור שמתחיל ב-http ומסתיים ב-.mp4 (לא רגיש לאותיות גדולות/קטנות)
-                            const mp4Match = text.match(/(https?:\/\/[^\s]+\.mp4)/i);
-                            if (mp4Match && mp4Match[1]) {
-                                return (
-                                    <div className="w-full aspect-video my-4 rounded-xl overflow-hidden shadow-lg bg-black border border-slate-700 relative z-10" onClick={(e) => e.stopPropagation()}>
-                                        <video 
-                                            controls 
-                                            playsInline 
-                                            className="w-full h-full object-contain"
-                                            src={mp4Match[1]}
-                                        >
-                                            הדפדפן שלך לא תומך בתגית וידאו.
-                                        </video>
-                                    </div>
-                                );
-                            }
-
-                            // ג. אם זה לא וידאו - מחזיר טקסט רגיל מעוצב
-                            return renderFormattedText(text);
-                        };
-
-                        // 3. לוגיקת זיהוי השלבים המקורית שלך
                         lines.forEach((line) => {
                           const trimmed = line.trim();
+                          // זיהוי אם זו שורת שלב (מספר ואחריו נקודה/סוגריים)
                           const isNewStep = /^[^\w\u0590-\u05FF]*\d+[\.\)\-\:]/.test(trimmed);
 
                           if (trimmed === "") {
@@ -5496,14 +5468,13 @@ onClick={() => {
                         });
                         if (currentGroup) groups.push(currentGroup);
 
-                        // 4. רינדור סופי
                         return groups.map((group, idx) => {
                           if (group.type === 'empty') return <div key={idx} className="h-4" />;
                           
                           const isStep = group.type === 'step';
                           
-                          // שולח לפונקציה החדשה שבודקת וידאו
-                          const content = processContent(group.text);
+                          // שליחה לפונקציית העיצוב החדשה
+                          const content = renderFormattedText(group.text);
 
                           if (isMarkingSteps && isStep) {
                             const stepKey = `${selectedRecipe.id}-${idx}`;
@@ -5524,7 +5495,7 @@ onClick={() => {
                           return <div key={idx} className="mb-2 whitespace-pre-wrap">{content}</div>;
                         });
                      })()}
-  </div>
+                  </div>
 
                 </div>
              </div>
@@ -6031,6 +6002,52 @@ onClick={() => {
       >
         סגור פירוט
       </button>
+    </div>
+  </div>
+)}
+
+{/* חלונית תיאור מוצר - גרסה כהה */}
+{descModalProduct && (
+  <div 
+    className="fixed inset-0 z-[2000] flex items-center justify-center px-6 bg-black/80 backdrop-blur-sm animate-in fade-in duration-300" 
+    onClick={() => setDescModalProduct(null)}
+  >
+    <div 
+      className="bg-[#1e293b] border-2 border-amber-500/50 p-8 rounded-[2.5rem] shadow-[0_0_50px_rgba(0,0,0,0.5)] max-w-sm w-full animate-in zoom-in duration-300 relative"
+      onClick={e => e.stopPropagation()}
+    >
+      {/* כפתור סגירה */}
+      <button 
+        onClick={() => setDescModalProduct(null)} 
+        className="absolute top-6 left-6 text-slate-400 hover:text-white transition-colors"
+      >
+        <X size={20}/>
+      </button>
+      
+      <div className="text-center">
+        {/* תמונה עם הילה כתומה */}
+        <div className="w-24 h-24 mx-auto mb-4 rounded-2xl overflow-hidden border-2 border-amber-500/20 shadow-[0_0_20px_rgba(245,158,11,0.1)] bg-[#0f172a]">
+          <img src={descModalProduct.image} className="w-full h-full object-cover" alt={descModalProduct.name} />
+        </div>
+
+        <h3 className="text-xl font-black text-white mb-1">{descModalProduct.name}</h3>
+        <p className="text-amber-500 font-black text-sm mb-4 tracking-widest">₪{descModalProduct.price}</p>
+        
+        <div className="h-px bg-slate-700 w-full mb-6 opacity-50"></div>
+        
+        {/* תוכן התיאור - טקסט לבן קריא */}
+        <p className="text-slate-200 font-medium leading-relaxed text-right whitespace-pre-wrap text-sm md:text-base">
+          {descModalProduct.description}
+        </p>
+
+        {/* כפתור סגירה בסטייל האתר שלך */}
+        <button 
+          onClick={() => setDescModalProduct(null)}
+          className="w-full mt-8 bg-amber-600 text-[#0f172a] py-4 rounded-2xl font-black shadow-lg shadow-amber-600/10 active:scale-95 transition-all"
+        >
+          הבנתי, תודה!
+        </button>
+      </div>
     </div>
   </div>
 )}
